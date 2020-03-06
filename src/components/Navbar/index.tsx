@@ -11,7 +11,6 @@ interface IState {
 }
 
 const Root = styled.div `
-height: 100%;
 min-height: 140px;
 width: 100%;
 max-width: 1070px;
@@ -48,18 +47,14 @@ flex-direction: row;
 align-items: center;
 width: auto;
 margin-left: 3.644%;
-font-family: sans-serif;
+/* font-family: 'GothamProBlack'; */
 font-weight: bold;
-/* font-size: 12.164%; */
 `
 
 const Search = styled.div `
 width: 85px;
-/* width: 8.23%; */
 height: 28px;
-/* height: 20%; */
 margin-left: 2.03125vw;
-/* margin-top: 2.917vw; */
 background-image: url(${search});
 background-size: cover;
 `
@@ -70,8 +65,8 @@ width: 72px;
 height: 40px;
 left: 92%;
 top: 50px;
-/* margin-top: 2.5vw; */
 background-image: url(${cart});
+z-index: 2;
 `
 export default class Navbar extends React.Component<IProps, IState> {
     render() {

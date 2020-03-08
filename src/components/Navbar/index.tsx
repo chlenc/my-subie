@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import logoMain from '../../icons/logoMain.svg'
 import search from '../../icons/search.svg'
 import cart from '../../icons/CART.svg'
-import { mainPadding } from '../../vars'
+import '../../vars'
 
 interface IProps {
 }
@@ -18,7 +18,6 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-border: 1px solid red;
 `
 
 const Logo = styled.div`
@@ -47,7 +46,7 @@ flex-direction: row;
 align-items: center;
 width: auto;
 margin-left: 3.644%;
-/* font-family: 'GothamProBlack'; */
+font-family: 'GothamPro-Black';
 font-weight: bold;
 `
 
@@ -60,11 +59,10 @@ background-size: cover;
 `
 
 const Cart = styled.div`
-position: sticky;
 width: 72px;
 height: 40px;
-left: 92%;
-top: 50px;
+margin-left: 21px;
+margin-top: -5px;
 background-image: url(${cart});
 z-index: 2;
 `

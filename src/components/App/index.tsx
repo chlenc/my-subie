@@ -3,9 +3,10 @@ import styled from '@emotion/styled'
 import Navbar from '../Navbar'
 import ContentBox from '../ContentBox'
 import Menu from '../Menu'
+
 const Root = styled.div`
 display: flex;
-font-family: sans-serif;
+font-family: GothamPro_Black;
 flex-direction: row;
 justify-content: center;
 align-items: center;

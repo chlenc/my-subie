@@ -7,35 +7,35 @@ const Root = styled.div `
 width: 100%;
 max-width: 1070px;
 height: 320px;
-/* border: 1px solid green; */
 background-image: url(${bg});
 background-size: cover;
 display: flex;
 flex-direction: row;
 justify-content: left;
-
+font-family: 'GothamPro-Black';
+font-weight: normal;
+color: white;
 `
 const Content = styled.div `
 height: auto;
-width: 375px;
+width: 380px;
 margin-left: 134px;
 display: flex;
 flex-direction: column;
 align-items: center;
+text-align: center;
 `
 const Text1 = styled.div `
 margin-top: 95px;
 font-size: 20px;
-font-family: sans-serif;
-font-weight: bold;
-color: white;
+
 `
 const Text2 = styled.div `
 margin-top: 8px;
 font-size: 32px;
-font-family: sans-serif;
 font-weight: bold;
-line-height: 45px;
+line-height: 42px;
+font-weight: 900;
 color: white;
 `
 

@@ -12,14 +12,18 @@
     "@types/node": "^12.12.28",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
+    "@types/react-slick": "^0.23.4",
     "axios": "^0.19.2",
     "emotion": "^10.0.27",
     "gh-pages": "^2.2.0",
+    "jquery": "^3.4.1",
     "mobx": "^5.15.4",
     "mobx-react": "^6.1.8",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0",
+    "react-slick": "^0.25.2",
+    "slick-carousel": "^1.8.1",
     "typescript": "^3.7.5"
   },
   "scripts": {
@@ -44,5 +48,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-slider": "^1.0.0",
+    "@types/slick-carousel": "^1.6.34",
+    "file-loader": "^5.1.0"
   }
 }

@@ -1,8 +1,8 @@
 import React from 'react'
 import Slider from 'react-slick'
 import styled from '@emotion/styled'
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
+// import css from '@emotion/core'
+import './styles.css'
 const Div = styled.div` 
 width: 1070px;
 `

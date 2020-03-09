@@ -2,6 +2,7 @@ import {css} from "@emotion/core";
 import GothamPro_Medium from "./assets/font/GothamPro-Medium.woff";
 import GothamPro_Black from "./assets/font/GothamPro-Black.woff";
 import GothamPro_Bold from "./assets/font/GothamPro-Bold.woff";
+import GothamPro_Light from "./assets/font/GothamPro-Light.woff";
 import {injectGlobal} from 'emotion';
 
 injectGlobal`
@@ -16,5 +17,9 @@ injectGlobal`
   @font-face {
     font-family: "GothamPro-Bold";
     src: url('${GothamPro_Bold}') format('woff');
+  }
+  @font-face {
+    font-family: "GothamPro-Light";
+    src: url('${GothamPro_Light}') format('woff');
   }
 `;

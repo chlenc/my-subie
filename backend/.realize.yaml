@@ -29,3 +29,15 @@ schema:
     - .git
     - .realize
     - vendor
+- name: backend
+  path: /Users/alexey/WebstormProjects/my-subie/backend
+  commands: {}
+  watcher:
+    extensions:
+    - go
+    paths:
+    - /
+    ignored_paths:
+    - .git
+    - .realize
+    - vendor

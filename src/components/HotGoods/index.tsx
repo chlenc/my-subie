@@ -3,8 +3,27 @@ import Slider from 'react-slick'
 import styled from '@emotion/styled'
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+
 const Div = styled.div` 
 width: 1070px;
+.slick-dots{
+    button{
+        ::before{
+            opacity: unset;
+            font-size: 22px;
+            line-height: 0;
+            color: rgba(157, 153, 142, 0.5);
+        }
+    }
+    .slick-active{
+        button{
+            ::before{
+                color: #9D998E;
+            }
+        }
+    }
+}
+
 `
 
 export default class HotGoods extends React.Component {

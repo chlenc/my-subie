@@ -230,5 +230,7 @@ line-height: 17px;
 text-align: center;
 color: #000000;
 padding: 0;
+margin-bottom: 44px;
+box-shadow: 5px;
 `
 

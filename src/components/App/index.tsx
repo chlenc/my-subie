@@ -6,6 +6,7 @@ import Menu from '../Menu'
 import HotGoods from '../HotGoods'
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import Reasons from '../Reasons';
 
 const Root = styled.div`
 display: flex;
@@ -42,6 +43,7 @@ export default class App extends React.Component<IProps, IState> {
         <Div>
           <HotGoods />
         </Div>
+        <Reasons/>
       </SubRoot>
     </Root>
   }

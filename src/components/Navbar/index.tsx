@@ -13,7 +13,7 @@ interface IState {
 const Root = styled.div`
 min-height: 140px;
 width: 100%;
-min-width: 1070px;
+max-width: 1070px;
 display: flex;
 flex-direction: row;
 justify-content: center;
@@ -53,7 +53,7 @@ font-weight: bold;
 const Search = styled.div`
 width: 85px;
 height: 28px;
-margin-left: 2.03125vw;
+margin-left: 35px;
 background-image: url(${search});
 background-size: cover;
 `

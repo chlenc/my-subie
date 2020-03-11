@@ -23,3 +23,5 @@ injectGlobal`
     src: url('${GothamPro_Light}') format('woff');
   }
 `;
+
+export const mainPadding = css``

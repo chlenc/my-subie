@@ -4,8 +4,6 @@ import Navbar from '../Navbar'
 import ContentBox from '../ContentBox'
 import Menu from '../Menu'
 import HotGoods from '../HotGoods'
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
 import Reasons from '../Reasons';
 
 const Root = styled.div`

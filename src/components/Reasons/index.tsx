@@ -4,7 +4,7 @@ import IconBox from '../../icons/4Reasons/IconBox.svg'
 import IconDollar from '../../icons/4Reasons/IconDollar.svg'
 import IconHeart from '../../icons/4Reasons/IconHeart.svg'
 import IconStar from '../../icons/4Reasons/IconStar.svg'
-import Content from './ReasonsContent'
+import ReasonsContent from './ReasonsContent'
 
 const Root = styled.div`
 width: 1070px;
@@ -47,15 +47,12 @@ color: #000000;
 const Title = styled.div`
 width: 440px;
 height: 96px;
-
 font-family: 'GothamPro-Medium', sans-serif;
 font-style: normal;
 font-weight: bold;
 font-size: 100px;
 line-height: 96px;
-
 text-align: center;
-
 color: #000000;
 `
 

@@ -12,7 +12,7 @@ interface IState {
 }
 
 
-export default class Content extends React.Component<IProps, IState> {
+export default class ReasonsContent extends React.Component<IProps, IState> {
     render() {
         const Image = styled.div`
         width: 110px;

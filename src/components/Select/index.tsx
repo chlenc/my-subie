@@ -56,7 +56,8 @@ export default class Select extends React.Component<IProps, IState> {
         const {css: style, children, value, onChange} = this.props;
         return (
             <Root css={style}>
-                <RCSelect value={value} onChange={onChange} inputIcon={<Arrow/>}>{children}</RCSelect>
+                null
+                <RCSelect value={value} onChange={onChange} >{children}</RCSelect>
             </Root>
         );
     }

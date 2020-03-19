@@ -22,10 +22,10 @@ export default class Reasons extends React.Component {
             <Title>Reasons</Title>
             <SubTitle>Why people love to have a business with MySubie</SubTitle>
             <RootContent>
-                <Content imageURL={IconStar} header='Customer service' text={<>You’ll get what you expect.<br/><br/>Our credo is to be honest with you and ourselfs. We provide tons of pictures and video about the condition of the items to give you as much info as possible.</>} tags="#partswithlove" />
-                <Content imageURL={IconBox} header='Safely packed goodies' text={<>Nobody would love to get a damaged stuff right?<br/><br/>We’ve sent a tons of parcels and got some really nice experience how to pack your lovely goodies to keep them safe and beautiful!</>} tags="#fragile" />
-                <Content imageURL={IconHeart} header='Passion' text={<>We love those cars and we would like to give you the opportunity to see how beautiful they could be with right parts from the motherland!</>} tags="#savethe2ndgens" />
-                <Content imageURL={IconDollar} header='Pricing' text={<>You’ll save a few tens of dollars dealing with us instead eBay sellers! Plus you will save hundreds on bumper shipping vs japan auctions as well.</>} tags="Feel free to contact us to get your package deal!" />
+                <ReasonsContent imageURL={IconStar} header='Customer service' text={<>You’ll get what you expect.<br/><br/>Our credo is to be honest with you and ourselfs. We provide tons of pictures and video about the condition of the items to give you as much info as possible.</>} tags="#partswithlove" />
+                <ReasonsContent imageURL={IconBox} header='Safely packed goodies' text={<>Nobody would love to get a damaged stuff right?<br/><br/>We’ve sent a tons of parcels and got some really nice experience how to pack your lovely goodies to keep them safe and beautiful!</>} tags="#fragile" />
+                <ReasonsContent imageURL={IconHeart} header='Passion' text={<>We love those cars and we would like to give you the opportunity to see how beautiful they could be with right parts from the motherland!</>} tags="#savethe2ndgens" />
+                <ReasonsContent imageURL={IconDollar} header='Pricing' text={<>You’ll save a few tens of dollars dealing with us instead eBay sellers! Plus you will save hundreds on bumper shipping vs japan auctions as well.</>} tags="Feel free to contact us to get your package deal!" />
             </RootContent>
         </Root>
     }

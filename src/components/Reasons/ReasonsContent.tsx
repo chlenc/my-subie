@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
+
 interface IProps {
     imageURL: string
     header: string
@@ -14,18 +15,13 @@ interface IState {
 
 export default class ReasonsContent extends React.Component<IProps, IState> {
     render() {
-        const Image = styled.div`
-        width: 110px;
-        height: 110px;
-        background-image: url(${this.props.imageURL});
-        background-size: cover;
-        `
+
         return <Root>
-            <Image />
+            <Image style={{backgroundImage: "url(" + this.props.imageURL + ")"}}/>
             <TextContainer>
                 <Header>{this.props.header}</Header>
-                <Text> <br/> {this.props.text}</Text>
-                <Tags> <br/> {this.props.tags} </Tags>
+                <Text> <br /> {this.props.text}</Text>
+                <Tags> <br /> {this.props.tags} </Tags>
             </TextContainer>
         </Root>
     }
@@ -37,6 +33,12 @@ height: 50%;
 display: flex;
 flex-direction: row;
 justify-content: flex-start;
+`
+
+const Image = styled.div`
+width: 110px;
+ height: 110px;
+background-size: cover;
 `
 const TextContainer = styled.div`
 width: 234px;
@@ -73,3 +75,4 @@ font-size: 12px;
 line-height: 11px;
 color: #000000;
 `
+

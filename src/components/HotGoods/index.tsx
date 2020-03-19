@@ -24,7 +24,6 @@ align-items: center;
     align-items: center;
 }
 .slick-prev {
-    /* margin-right: 60px; */
     left: -86px;
     width: 66px;
     height: 66px;

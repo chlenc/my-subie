@@ -5,6 +5,9 @@ import ContentBox from '../ContentBox'
 import Menu from '../Menu'
 import HotGoods from '../HotGoods'
 import Reasons from '../Reasons';
+import HowToBuy from '../HowToBuy'
+import CustomCars from '../CustomCars'
+import ReplyForm from '../ReplyForm'
 
 const Root = styled.div`
 display: flex;
@@ -16,6 +19,7 @@ align-items: center;
 const SubRoot = styled.div`
 display: flex;
 flex-direction: column;
+align-items: center;
 flex: 0.443;
 `
 
@@ -41,7 +45,10 @@ export default class App extends React.Component<IProps, IState> {
         <Div>
           <HotGoods />
         </Div>
-        <Reasons/>
+        <Reasons />
+        <HowToBuy />
+        <CustomCars />
+        <ReplyForm />
       </SubRoot>
     </Root>
   }

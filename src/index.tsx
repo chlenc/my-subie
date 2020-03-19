@@ -9,7 +9,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 
-// Store init
 const initState = loadState();
 const mobXStore = new RootStore(initState);
 autorun(() => {

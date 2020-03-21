@@ -11,16 +11,8 @@ import ReplyForm from '../ReplyForm'
 
 const Root = styled.div`
 display: flex;
-font-family: GothamPro_Black;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-`
-const SubRoot = styled.div`
-display: flex;
 flex-direction: column;
 align-items: center;
-flex: 0.443;
 `
 
 const Div = styled.div`
@@ -38,7 +30,7 @@ interface IState {
 export default class App extends React.Component<IProps, IState> {
   render() {
     return <Root>
-      <SubRoot>
+      {/* <SubRoot> */}
         <Navbar />
         <ContentBox />
         <Menu />
@@ -49,7 +41,7 @@ export default class App extends React.Component<IProps, IState> {
         <HowToBuy />
         <CustomCars />
         <ReplyForm />
-      </SubRoot>
+      {/* </SubRoot> */}
     </Root>
   }
 };

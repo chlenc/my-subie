@@ -10,10 +10,34 @@ interface IProps {
 interface IState {
 }
 
+export default class Navbar extends React.Component<IProps, IState> {
+    render() {
+        return <Root>
+            <Body>
+                <Logo />
+                <Menu>
+                    <Text>PARTS</Text>
+                    <Text>SHIPPING</Text>
+                    <Text>JDM GUIDE</Text>
+                    <Text>FEEDBACK</Text>
+                    <Text>CONTACT US</Text>
+                </Menu>
+                <Search />
+                <Cart />
+            </Body>
+        </Root>
+    }
+}
+
 const Root = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: center;
+`
+
+const Body = styled.div`
 min-height: 140px;
-width: 100%;
-max-width: 1070px;
+width: 1070px;
 display: flex;
 flex-direction: row;
 justify-content: center;
@@ -66,19 +90,3 @@ margin-top: -5px;
 background-image: url(${cart});
 z-index: 2;
 `
-export default class Navbar extends React.Component<IProps, IState> {
-    render() {
-        return <Root>
-            <Logo />
-            <Menu>
-                <Text>PARTS</Text>
-                <Text>SHIPPING</Text>
-                <Text>JDM GUIDE</Text>
-                <Text>FEEDBACK</Text>
-                <Text>CONTACT US</Text>
-            </Menu>
-            <Search />
-            <Cart />
-        </Root>
-    }
-}

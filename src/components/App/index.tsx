@@ -30,7 +30,6 @@ interface IState {
 export default class App extends React.Component<IProps, IState> {
   render() {
     return <Root>
-      {/* <SubRoot> */}
         <Navbar />
         <ContentBox />
         <Menu />
@@ -41,7 +40,6 @@ export default class App extends React.Component<IProps, IState> {
         <HowToBuy />
         <CustomCars />
         <ReplyForm />
-      {/* </SubRoot> */}
     </Root>
   }
 };

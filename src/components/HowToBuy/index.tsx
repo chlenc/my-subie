@@ -5,6 +5,7 @@ import steps from '../../icons/StepsRounds.svg'
 export default class HowToBuy extends React.Component {
     render (){
         return <Root>
+        <Body>
             <Title>HOW TO BUY A GOODIES?
                 <SubTitle>It’s simple;)</SubTitle>
             </Title>
@@ -17,11 +18,18 @@ export default class HowToBuy extends React.Component {
                 <Point>Get your tracking #<br/>and await for a parcel;) </Point>
             </Description>
             <Footer>Click here for a detailed instruction</Footer>
+        </Body>
         </Root>
     }
 }
-
 const Root = styled.div `
+display: flex;
+flex-direction: row;
+justify-content: center;
+background: #FAFAFA;
+width: 100%;
+`
+const Body = styled.div `
 display: flex;
 flex-direction: column;
 align-items: center;

@@ -7,8 +7,39 @@ import car4 from '../../images/car4.png'
 import car5 from '../../images/car5.png'
 import car6 from '../../images/car6.png'
 
+
+export default class Menu extends React.Component {
+    render() {
+        return <Root>
+            <Body>
+                <Content1>
+                    <Text1>SHOW ALL PARTS</Text1>
+                </Content1>
+                <Content2>
+                    <Content3>
+                        <Car2><Text1>FRONT END <br /> PARTS</Text1></Car2>
+                        <Car3><Text1>REAR END <br /> PARTS</Text1></Car3>
+                        <Car4><Text1>MERCH</Text1></Car4>
+                    </Content3>
+                    <Content4>
+                        <Car5><Text1>INTERIOR PARTS</Text1></Car5>
+                        <Car6><Text1>SIDE PARTS</Text1></Car6>
+                    </Content4>
+                </Content2>
+            </Body>
+        </Root>
+    }
+
+}
+
 const Root = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: center;
+background: #FAFAFA;
 width: 100%;
+`
+const Body = styled.div`
 height: 253px;
 margin-top: 80px;
 display: flex;
@@ -32,7 +63,7 @@ justify-content: center;
 align-items: center;
 `
 
-const Text1 = styled.div `
+const Text1 = styled.div`
 color: #FFFFFF;
 text-align: center;
 `
@@ -106,24 +137,3 @@ flex-direction: row;
 justify-content: center;
 align-items: center;
 `
-export default class Menu extends React.Component {
-    render() {
-        return <Root>
-            <Content1>
-                <Text1>SHOW ALL PARTS</Text1>
-            </Content1>
-            <Content2>
-                <Content3>
-                    <Car2><Text1>FRONT END <br/> PARTS</Text1></Car2>
-                    <Car3><Text1>REAR END <br/> PARTS</Text1></Car3>
-                    <Car4><Text1>MERCH</Text1></Car4>
-                </Content3>
-                <Content4>
-                    <Car5><Text1>INTERIOR PARTS</Text1></Car5>
-                    <Car6><Text1>SIDE PARTS</Text1></Car6>
-                </Content4>
-            </Content2>
-        </Root>
-    }
-
-}

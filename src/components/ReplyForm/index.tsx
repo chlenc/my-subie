@@ -48,11 +48,13 @@ export default class ReplyForm extends React.Component<{}, IState> {
     }
 }
 
-const Root = styled.div`
+const Root = styled.div `
 display: flex;
 flex-direction: column;
-align-items: center;
 justify-content: center;
+align-items: center;
+background: #FAFAFA;
+width: 100%;
 `
 
 const Body = styled.div`

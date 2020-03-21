@@ -3,47 +3,37 @@ import React from "react";
 import { css, jsx } from '@emotion/core';
 import styled from "@emotion/styled";
 import RCSelect from 'rc-select';
-import Arrow from '../../icons/dropdownIcon.svg'
+import 'rc-select/assets/index.css'
+
 
 const Root = styled.div`
-display: flex;
 width: 100%;
-font-family: Roboto;
-font-size: 14px;
-line-height: 16px;
-color: #6F7582;
+
 .rc-select{
-  width: 100%;
- 
-  .rc-select-selection{
-      background: #F4F6FA;
-      border-radius: 4px;
-      border: none;
-      box-shadow: none !important;
-      height: 40px;
-      
-      &__rendered, &-selected-value, .rc-select-search__field{
-        height: 40px;
-        display: flex !important;
-        align-items: center;
-        color: #6F7582;
-      }
-      
-      .rc-select-arrow{
-        height: 40px;
-        margin-right: 8px;
-        display: flex;
-        align-items: center;
-      } 
-  }
+width: 85%;
+margin-left: 5px;
+font-family: 'GothamPro-Medium';
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 138.2%;
+}
+.rc-select-selection{
+border-color: #FAFAFA;
+background: #FAFAFA;
+}
+.rc-select-selection__rendered{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 `;
 
 interface IProps {
     value?: string
+    placeholder?: string
     onChange?: (e: string) => void
     css?: any
-
 }
 
 interface IState {
@@ -53,12 +43,29 @@ interface IState {
 export default class Select extends React.Component<IProps, IState> {
 
     render() {
-        const {css: style, children, value, onChange} = this.props;
+        const { css: style, children, value, onChange, placeholder } = this.props;
         return (
             <Root css={style}>
-                null
-                <RCSelect value={value} onChange={onChange} >{children}</RCSelect>
-            </Root>
+                <RCSelect
+                    value={value}
+                    onChange={onChange}
+                    placeholder={placeholder && <Placeholder>{placeholder}</Placeholder>}
+                    showArrow={false}
+                >
+                    {children}
+                </RCSelect>
+            </Root >
         );
     }
 }
+
+const Placeholder = styled.div`
+margin-top: 3.5px;
+font-family: 'GothamPro-Medium';
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 138.2%;
+color: #9D998E;
+`
+

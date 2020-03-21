@@ -3,19 +3,19 @@ import styled from '@emotion/styled'
 import Navbar from '../Navbar'
 import ContentBox from '../ContentBox'
 import Menu from '../Menu'
+import HotGoods from '../HotGoods'
+import Reasons from '../Reasons';
+import HowToBuy from '../HowToBuy'
+import CustomCars from '../CustomCars'
+import ReplyForm from '../ReplyForm'
+
 const Root = styled.div`
 display: flex;
-font-family: sans-serif;
-flex-direction: row;
-justify-content: center;
+flex-direction: column;
 align-items: center;
 `
-const SubRoot = styled.div`
-display: flex;
-flex-direction: column;
-flex: 0.443;
 
-`
+
 interface IProps {
 }
 
@@ -26,11 +26,14 @@ interface IState {
 export default class App extends React.Component<IProps, IState> {
   render() {
     return <Root>
-      <SubRoot>
-        <Navbar/>
-        <ContentBox/>
-        <Menu/>
-      </SubRoot>
+      <Navbar />
+      <ContentBox />
+      <Menu />
+      <HotGoods />
+      <Reasons />
+      <HowToBuy />
+      <CustomCars />
+      <ReplyForm />
     </Root>
   }
 };

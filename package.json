@@ -8,18 +8,20 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^24.9.1",
-    "@types/node": "^12.12.28",
-    "@types/react": "^16.9.23",
-    "@types/react-dom": "^16.9.5",
     "axios": "^0.19.2",
     "emotion": "^10.0.27",
     "gh-pages": "^2.2.0",
+    "jquery": "^3.4.1",
     "mobx": "^5.15.4",
     "mobx-react": "^6.1.8",
+    "normalize.css": "^8.0.1",
+    "rc-select": "^9.2.2",
     "react": "^16.13.0",
+    "react-datepicker": "^2.14.0",
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0",
+    "react-slick": "^0.25.2",
+    "slick-carousel": "^1.8.1",
     "typescript": "^3.7.5"
   },
   "scripts": {
@@ -44,5 +46,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/jest": "^24.9.1",
+    "@types/node": "^12.12.28",
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5",
+    "@types/react-slick": "^0.23.4",
+    "@types/react-slider": "^1.0.0",
+    "@types/slick-carousel": "^1.6.34",
+    "file-loader": "^5.1.0"
   }
 }

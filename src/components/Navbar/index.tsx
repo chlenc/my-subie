@@ -3,22 +3,45 @@ import styled from '@emotion/styled'
 import logoMain from '../../icons/logoMain.svg'
 import search from '../../icons/search.svg'
 import cart from '../../icons/CART.svg'
-import { mainPadding } from '../../vars'
+import '../../vars'
 
 interface IProps {
 }
 interface IState {
 }
 
+export default class Navbar extends React.Component<IProps, IState> {
+    render() {
+        return <Root>
+            <Body>
+                <Logo />
+                <Menu>
+                    <Text>PARTS</Text>
+                    <Text>SHIPPING</Text>
+                    <Text>JDM GUIDE</Text>
+                    <Text>FEEDBACK</Text>
+                    <Text>CONTACT US</Text>
+                </Menu>
+                <Search />
+                <Cart />
+            </Body>
+        </Root>
+    }
+}
+
 const Root = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: center;
+`
+
+const Body = styled.div`
 min-height: 140px;
-width: 100%;
-min-width: 1070px;
+width: 1070px;
 display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-border: 1px solid red;
 `
 
 const Logo = styled.div`
@@ -47,40 +70,23 @@ flex-direction: row;
 align-items: center;
 width: auto;
 margin-left: 3.644%;
-/* font-family: 'GothamProBlack'; */
+font-family: 'GothamPro-Black';
 font-weight: bold;
 `
 
 const Search = styled.div`
 width: 85px;
 height: 28px;
-margin-left: 2.03125vw;
+margin-left: 35px;
 background-image: url(${search});
 background-size: cover;
 `
 
 const Cart = styled.div`
-position: sticky;
 width: 72px;
 height: 40px;
-left: 92%;
-top: 50px;
+margin-left: 21px;
+margin-top: -5px;
 background-image: url(${cart});
 z-index: 2;
 `
-export default class Navbar extends React.Component<IProps, IState> {
-    render() {
-        return <Root>
-            <Logo />
-            <Menu>
-                <Text>PARTS</Text>
-                <Text>SHIPPING</Text>
-                <Text>JDM GUIDE</Text>
-                <Text>FEEDBACK</Text>
-                <Text>CONTACT US</Text>
-            </Menu>
-            <Search />
-            <Cart />
-        </Root>
-    }
-}

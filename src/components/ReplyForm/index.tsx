@@ -10,9 +10,7 @@ interface IState {
 
 export default class ReplyForm extends React.Component<{}, IState> {
 
-    state = {
-        model: undefined
-    }
+    state: IState = {}
 
     handleChangeModel = (model: string) => this.setState({ model });
 
@@ -48,7 +46,7 @@ export default class ReplyForm extends React.Component<{}, IState> {
     }
 }
 
-const Root = styled.div `
+const Root = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -93,7 +91,6 @@ const Number = styled.div`
 width: 30px;
 text-align: right;
 font-family: 'GothamPro-Medium';
-font-style: normal;
 font-weight: normal;
 font-size: 14px;
 line-height: 138.2%;
@@ -117,7 +114,6 @@ const Name = styled.input`
 width: 220px;
 margin-left: 13px;
 font-family: 'GothamPro-Medium';
-font-style: normal;
 font-weight: normal;
 font-size: 14px;
 line-height: 138.2%;
@@ -134,7 +130,6 @@ width: 212px;
 height: 92px;
 margin-left: 13px;
 font-family: 'GothamPro-Medium';
-font-style: normal;
 font-weight: normal;
 font-size: 14px;
 line-height: 138.2%;

@@ -87,7 +87,6 @@ height: 17px;
 margin-top: 25px;
 padding-bottom: 44px;
 font-family: 'GothamPro-Medium';
-font-style: normal;
 font-weight: bold;
 font-size: 18px;
 line-height: 17px;

@@ -24,4 +24,3 @@ injectGlobal`
   }
 `;
 
-export const mainPadding = css``

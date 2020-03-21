@@ -85,7 +85,6 @@ const Title = styled.div`
 width: 250px;
 height: 35px;
 font-family: 'GothamPro-Medium';
-font-style: normal;
 font-weight: bold;
 font-size: 18px;
 line-height: 17px;
@@ -93,7 +92,7 @@ text-align: center;
 `
 
 const Button = styled.div`
-margin-top: 36px;
+/* margin-top: 36px; */
 width: 190px;
 height: 32px;
 background-image: url(${ButtonShowMeMore});
@@ -103,7 +102,6 @@ flex-direction: row;
 justify-content: center;
 align-items: center;
 font-family: 'GothamPro-Medium';
-font-style: normal;
 font-weight: bold;
 font-size: 18px;
 line-height: 17px;

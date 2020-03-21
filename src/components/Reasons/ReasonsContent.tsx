@@ -17,7 +17,7 @@ export default class ReasonsContent extends React.Component<IProps, IState> {
     render() {
 
         return <Root>
-            <Image style={{backgroundImage: "url(" + this.props.imageURL + ")"}}/>
+            <Image style={{backgroundImage: `url(${this.props.imageURL})`}}/>
             <TextContainer>
                 <Header>{this.props.header}</Header>
                 <Text> <br /> {this.props.text}</Text>
@@ -50,7 +50,6 @@ align-items: flex-start;
 const Header = styled.div`
 height: 17px;
 font-family: 'GothamPro-Medium';
-font-style: normal;
 font-weight: 900;
 font-size: 18px;
 line-height: 17px;
@@ -60,7 +59,6 @@ color: #000000;
 const Text = styled.div`
 width: 219px;
 font-family: 'GothamPro-Medium';
-font-style: normal;
 font-weight: normal;
 font-size: 12px;
 line-height: 11px;
@@ -69,7 +67,6 @@ color: #000000;
 const Tags = styled.div`
 width: 219px;
 font-family: 'GothamPro-Medium';
-font-style: normal;
 font-weight: bold;
 font-size: 12px;
 line-height: 11px;

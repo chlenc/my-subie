@@ -35,7 +35,6 @@ const Four = styled.div`
 width: 320px;
 height: 199px;
 font-family: 'GothamPro-Medium', sans-serif;
-font-style: normal;
 margin-top: 30px;
 font-weight: bold;
 font-size: 220px;
@@ -48,7 +47,6 @@ const Title = styled.div`
 width: 440px;
 height: 96px;
 font-family: 'GothamPro-Medium', sans-serif;
-font-style: normal;
 font-weight: bold;
 font-size: 100px;
 line-height: 96px;
@@ -60,7 +58,6 @@ const SubTitle = styled.div`
 width: 440px;
 height: 15px;
 font-family: 'GothamPro-Medium', sans-serif;
-font-style: normal;
 font-weight: bold;
 font-size: 16px;
 line-height: 15px;

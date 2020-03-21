@@ -11,7 +11,6 @@ width: 100%;
 width: 85%;
 margin-left: 5px;
 font-family: 'GothamPro-Medium';
-font-style: normal;
 font-weight: normal;
 font-size: 14px;
 line-height: 138.2%;
@@ -60,7 +59,6 @@ export default class Select extends React.Component<IProps, IState> {
 const Placeholder = styled.div`
 margin-top: 3.5px;
 font-family: 'GothamPro-Medium';
-font-style: normal;
 font-weight: normal;
 font-size: 14px;
 line-height: 138.2%;

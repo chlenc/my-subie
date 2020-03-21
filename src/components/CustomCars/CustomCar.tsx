@@ -33,7 +33,6 @@ height: 158px;
 const Nickname = styled.div `
 margin-top: 11px;
 font-family: 'GothamPro-Medium';
-font-style: normal;
 font-weight: bold;
 font-size: 12px;
 line-height: 11px;
@@ -41,7 +40,6 @@ line-height: 11px;
 const Login = styled.div `
 margin-top: 8px;
 font-family: 'GothamPro-Medium';
-font-style: normal;
 font-weight: bold;
 font-size: 12px;
 line-height: 11px;

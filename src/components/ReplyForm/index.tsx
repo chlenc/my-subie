@@ -108,7 +108,6 @@ display: flex;
 align-items: center;
 text-align: center;
 color: #73B289;
-/* background: #fff; */
 `
 const Name = styled.input`
 width: 220px;

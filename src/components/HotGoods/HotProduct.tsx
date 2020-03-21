@@ -11,7 +11,6 @@ interface IProps {
 export default class HotProduct extends React.Component<IProps, {}> {
     render() {
         return <Root> 
-            {/* <Image style={backgroundImage: `url(${this.props.imageURL})`} /> */}
             <Image style={{backgroundImage: `url(${this.props.imageURL})`}} />
             <ProductTitle>{this.props.title}</ProductTitle>
             <Cost>{this.props.cost}</Cost>
@@ -36,7 +35,7 @@ background-size: cover;
 const ProductTitle = styled.div`
 width: 190px;
 height: 10px;
-font-family: Jura, sans-serif;
+font-family: 'GothamPro-Medium';
 font-weight: 600;
 font-size: 10px;
 line-height: 12px;

@@ -37,8 +37,6 @@ export default class HotGoods extends React.Component {
     }
 }
 
-// const Div = styled.div`
-// `
 
 const Root = styled.div`
 max-height: 500px;
@@ -92,7 +90,6 @@ text-align: center;
 `
 
 const Button = styled.div`
-/* margin-top: 36px; */
 width: 190px;
 height: 32px;
 background-image: url(${ButtonShowMeMore});

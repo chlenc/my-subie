@@ -10,14 +10,14 @@ interface IProps {
 
 export default class HotProduct extends React.Component<IProps, {}> {
     render() {
-        return <Root>
-            <Image style={{ backgroundImage: "url(" + this.props.imageURL + ")" }} />
+        return <Root> 
+            <Image style={{backgroundImage: `url(${this.props.imageURL})`}} />
             <ProductTitle>{this.props.title}</ProductTitle>
             <Cost>{this.props.cost}</Cost>
             <Label>{this.props.label}</Label>
         </Root>
     }
-}
+} 
 
 const Root = styled.div`
 width: 190px;

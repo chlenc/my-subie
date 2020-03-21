@@ -1,6 +1,4 @@
-/** @jsx jsx  **/
 import React from "react";
-import { css, jsx } from '@emotion/core';
 import styled from "@emotion/styled";
 import RCSelect from 'rc-select';
 import 'rc-select/assets/index.css'

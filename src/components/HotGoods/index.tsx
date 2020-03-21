@@ -3,42 +3,47 @@ import Slider from 'react-slick'
 import styled from '@emotion/styled'
 import leftArrow from '../../icons/LEFTARROW.svg'
 import rightArrow from '../../icons/RIGHTARROW.svg'
-import {prod1, prod2, prod3, prod4, prod5} from './goods'
+import { prod1, prod2, prod3, prod4, prod5 } from './goods'
 import ButtonShowMeMore from '../../icons/ShowMeMoreButton.svg'
 import HotProduct from './HotProduct'
 
 export default class HotGoods extends React.Component {
     render() {
-        const settings = {
-            arrows: true,
-            centerMode: false,
-            dots: false,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 5,
-            slidesToScroll: 5
-        };
         return <Root>
-                <Body>
+            <Body>
                 <Title>Featured parts</Title>
-                <Slider {...settings}>
-                    <HotProduct imageURL={prod1} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)"/>
-                    <HotProduct imageURL={prod2} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)"/>
-                    <HotProduct imageURL={prod3} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)"/>
-                    <HotProduct imageURL={prod4} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)"/>
-                    <HotProduct imageURL={prod5} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)"/>
-                    <HotProduct imageURL={prod1} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)"/>
-                    <HotProduct imageURL={prod2} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)"/>
-                    <HotProduct imageURL={prod3} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)"/>
-                    <HotProduct imageURL={prod4} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)"/>
-                    <HotProduct imageURL={prod5} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)"/>
+                <Slider
+                    centerMode={false}
+                    dots={false}
+                    slidesToShow={5}
+                    slidesToScroll={5}
+                    infinite
+                    arrows
+                >
+                    <HotProduct imageURL={prod1} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                    <HotProduct imageURL={prod2} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                    <HotProduct imageURL={prod3} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                    <HotProduct imageURL={prod4} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                    <HotProduct imageURL={prod5} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                    <HotProduct imageURL={prod1} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                    <HotProduct imageURL={prod2} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                    <HotProduct imageURL={prod3} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                    <HotProduct imageURL={prod4} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                    <HotProduct imageURL={prod5} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
                 </Slider>
                 <Button>SHOW ME MORE</Button>
             </Body>
-            </Root>
+        </Root>
     }
 }
-const Root = styled.div `
+
+// const Div = styled.div`
+// `
+
+const Root = styled.div`
+max-height: 500px;
+width: 100%;
+z-index: 0;
 display: flex;
 flex-direction: row;
 justify-content: center;
@@ -76,7 +81,7 @@ align-items: center;
 }
 `
 
-const Title = styled.div `
+const Title = styled.div`
 width: 250px;
 height: 35px;
 font-family: 'GothamPro-Medium';
@@ -87,7 +92,7 @@ line-height: 17px;
 text-align: center;
 `
 
-const Button= styled.div `
+const Button = styled.div`
 margin-top: 36px;
 width: 190px;
 height: 32px;

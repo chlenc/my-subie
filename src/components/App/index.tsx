@@ -15,11 +15,7 @@ flex-direction: column;
 align-items: center;
 `
 
-const Div = styled.div`
-max-height: 500px;
-width: 100%;
-z-index: 0;
-`
+
 interface IProps {
 }
 
@@ -30,16 +26,14 @@ interface IState {
 export default class App extends React.Component<IProps, IState> {
   render() {
     return <Root>
-        <Navbar />
-        <ContentBox />
-        <Menu />
-        <Div>
-          <HotGoods />
-        </Div>
-        <Reasons />
-        <HowToBuy />
-        <CustomCars />
-        <ReplyForm />
+      <Navbar />
+      <ContentBox />
+      <Menu />
+      <HotGoods />
+      <Reasons />
+      <HowToBuy />
+      <CustomCars />
+      <ReplyForm />
     </Root>
   }
 };

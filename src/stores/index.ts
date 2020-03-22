@@ -1,3 +1,4 @@
 import { DataStore } from "./DataStore";
 import { RootStore } from "./RootStore";
-export { DataStore, RootStore};
+import HistoryStore  from "./HistoryStore";
+export { DataStore, RootStore, HistoryStore};

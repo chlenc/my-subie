@@ -1,45 +1,89 @@
+/** @jsx jsx */
 import React from 'react';
-import styled from '@emotion/styled'
-import Navbar from '../Navbar'
-import ContentBox from '../ContentBox'
-import Menu from '../Menu'
-import HotGoods from '../HotGoods'
-import Reasons from '../Reasons';
-import HowToBuy from '../HowToBuy'
-import CustomCars from '../CustomCars'
-import ReplyForm from '../ReplyForm'
+import {Layout, Menu} from 'antd';
+import {css, jsx} from "@emotion/core";
+import styled from "@emotion/styled";
+import {Route, Router, Switch} from 'react-router-dom';
+import HistoryStore from "../../stores/HistoryStore";
+import {inject, observer} from "mobx-react";
+import AddForm from "../AddForm";
+import logo from './logoMain.svg'
+
+const {Header, Content, Footer} = Layout;
 
 const Root = styled.div`
 display: flex;
 flex-direction: column;
-align-items: center;
+min-height: 100vh;
 `
 
-const Div = styled.div`
-max-height: 500px;
-width: 100%;
-z-index: 0;
+const Body = styled.div`
+background: #fff;
+padding: 24px;
+min-height: 280px;
 `
+
+const Logo = styled.div`
+  width: 120px;
+  height: 50px;
+  margin: 5px 24px 5px 0;
+  float: left;
+  background: url(${logo}) center no-repeat;
+  background-size: contain;
+`
+
+const layoutStyle = css`
+flex: 1;
+`
+
 interface IProps {
+    historyStore?: HistoryStore
 }
 
-interface IState {
-}
+@inject('historyStore')
+@observer
+export default class App extends React.Component<IProps> {
 
+    redirect = (path: string) => () => this.props.historyStore!.history.push(path)
 
-export default class App extends React.Component<IProps, IState> {
-  render() {
-    return <Root>
-        <Navbar />
-        <ContentBox />
-        <Menu />
-        <Div>
-          <HotGoods />
-        </Div>
-        <Reasons />
-        <HowToBuy />
-        <CustomCars />
-        <ReplyForm />
-    </Root>
-  }
+    get getSelectedKeys() {
+        switch (this.props.historyStore!.currentPath) {
+            case 'add':
+                return ['add'];
+            default:
+                return ['list']
+        }
+    }
+
+    render() {
+        return <Root>
+            <Layout css={layoutStyle}>
+                <Header>
+                    <Logo/>
+                    <Menu
+                        theme="dark"
+                        mode="horizontal"
+                        style={{lineHeight: '64px'}}
+                        selectedKeys={this.getSelectedKeys}
+                    >
+                        <Menu.Item onClick={this.redirect('/')} key="list">Список</Menu.Item>
+                        <Menu.Item onClick={this.redirect('/add')} key="add">Добавить</Menu.Item>
+                    </Menu>
+                </Header>
+                <Content style={{padding: '30px 50px'}}>
+                    <Body>
+                        <Router history={this.props.historyStore!.history}>
+                            <Switch>
+                                <Route path="/add" component={AddForm}/>
+                                <Route component={Table}/>
+                            </Switch>
+                        </Router>
+                    </Body>
+                </Content>
+                <Footer style={{textAlign: 'center'}}>Chlenc incorporated ©2020 Created by drunk guys</Footer>
+            </Layout>
+        </Root>
+    }
 };
+
+const Table = () => <div>Table</div>

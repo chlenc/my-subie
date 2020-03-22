@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import logoMain from '../../icons/logoMain.svg'
-import search from '../../icons/search.svg'
-import cart from '../../icons/CART.svg'
+import logoMain from '../../icons/Navbar/logoMain.svg'
+import search from '../../icons/Navbar/search.svg'
+import search768 from '../../icons/Navbar/SEARCH768.svg'
+import cart from '../../icons/Navbar/CART.svg'
 import '../../vars'
 
 interface IProps {
@@ -42,6 +43,10 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
+@media screen and (max-width: 1024px) {
+    height: 100px;
+    width: 768px;
+}
 `
 
 const Logo = styled.div`
@@ -50,18 +55,25 @@ height: 81px;
 background-image: url(${logoMain});
 background-size: cover;
 margin-top: -1.4%;
+@media screen and (max-width: 1024px) {
+    height: 40px;
+    width: 81px;
+}
 `
 
 const Menu = styled.div`
-width: 59.5%;
-min-width: 637px;
-height: 100%;
 display: flex;
 flex-direction: row;
 justify-content: space-between;
 align-items: center;
-margin-left: 5.14%;
-margin-top: 4px;
+    width: 637px;
+    margin-left: 55px;
+/* margin-left: 5.14%; */
+/* margin-top: 4px; */
+@media  screen and (max-width: 1024px) {
+    margin-left: 15px;
+    width: 455px;
+}
 `
 
 const Text = styled.div`
@@ -69,17 +81,28 @@ display: flex;
 flex-direction: row;
 align-items: center;
 width: auto;
-margin-left: 3.644%;
 font-family: 'GothamPro-Black';
 font-weight: bold;
+    font-size: 18px;
+    line-height: 17px;
+@media screen and (max-width: 1024px){
+    font-size: 14px;
+    line-height: 13px;
+}
 `
 
 const Search = styled.div`
+background-size: cover;
 width: 85px;
 height: 28px;
 margin-left: 35px;
 background-image: url(${search});
-background-size: cover;
+@media  screen and (max-width: 1024px){
+    background-image: url(${search768});
+    margin-left: 13px;
+    height: 36px;
+    width: 36px;
+}
 `
 
 const Cart = styled.div`
@@ -88,5 +111,11 @@ height: 40px;
 margin-left: 21px;
 margin-top: -5px;
 background-image: url(${cart});
+background-size: cover;
 z-index: 2;
+@media  screen and (max-width: 1024px) {
+    margin-left: 18px;
+    height: 40px;
+    width: 72px;
+}
 `

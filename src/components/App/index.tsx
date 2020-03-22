@@ -8,6 +8,8 @@ import Reasons from '../Reasons';
 import HowToBuy from '../HowToBuy'
 import CustomCars from '../CustomCars'
 import ReplyForm from '../ReplyForm'
+import Footer from '../Footer'
+import SubFooter from '../SubFooter'
 
 const Root = styled.div`
 display: flex;
@@ -34,6 +36,8 @@ export default class App extends React.Component<IProps, IState> {
       <HowToBuy />
       <CustomCars />
       <ReplyForm />
+      <Footer />
+      <SubFooter />
     </Root>
   }
 };

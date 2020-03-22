@@ -144,6 +144,7 @@ resize: none;
 const ContactButton = styled.div`
 width: 250px;
 height: 55px;
+margin-bottom: 51px;
 background: #FFAE00;
 border-radius: 24px;
 outline: none;

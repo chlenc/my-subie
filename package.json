@@ -60,6 +60,8 @@
     "@types/react-slick": "^0.23.4",
     "@types/react-slider": "^1.0.0",
     "@types/slick-carousel": "^1.6.34",
+    "electron-builder": "^22.4.1",
+    "electron": "^8.2.0",
     "file-loader": "^5.1.0"
   }
 }

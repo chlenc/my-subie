@@ -6,8 +6,10 @@ import styled from "@emotion/styled";
 import {Route, Router, Switch} from 'react-router-dom';
 import HistoryStore from "../../stores/HistoryStore";
 import {inject, observer} from "mobx-react";
-import AddForm from "../AddForm";
 import logo from './logoMain.svg'
+import List from "../List";
+import AddForm from "../AddForm";
+import UpdateForm from "../UpdateForm";
 
 const {Header, Content, Footer} = Layout;
 
@@ -21,6 +23,7 @@ const Body = styled.div`
 background: #fff;
 padding: 24px;
 min-height: 280px;
+overflow: scroll;
 `
 
 const Logo = styled.div`
@@ -75,7 +78,8 @@ export default class App extends React.Component<IProps> {
                         <Router history={this.props.historyStore!.history}>
                             <Switch>
                                 <Route path="/add" component={AddForm}/>
-                                <Route component={Table}/>
+                                <Route path="/change/:string" component={UpdateForm}/>
+                                <Route component={List}/>
                             </Switch>
                         </Router>
                     </Body>
@@ -85,5 +89,3 @@ export default class App extends React.Component<IProps> {
         </Root>
     }
 };
-
-const Table = () => <div>Table</div>

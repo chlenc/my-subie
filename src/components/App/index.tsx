@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled'
 import Navbar from '../Navbar'
-import ContentBox from '../ContentBox'
+import Title from '../Title'
 import Menu from '../Menu'
 import HotGoods from '../HotGoods'
 import Reasons from '../Reasons';
@@ -29,7 +29,7 @@ export default class App extends React.Component<IProps, IState> {
   render() {
     return <Root>
       <Navbar />
-      <ContentBox />
+      <Title />
       <Menu />
       <HotGoods />
       <Reasons />

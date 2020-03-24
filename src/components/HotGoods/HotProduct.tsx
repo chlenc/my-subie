@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-
+import addButton from '../../icons/HotGoods/addButton.svg'
 interface IProps {
     imageURL: string
     title: string
@@ -14,6 +14,7 @@ export default class HotProduct extends React.Component<IProps, {}> {
             <Image style={{backgroundImage: `url(${this.props.imageURL})`}} />
             <ProductTitle>{this.props.title}</ProductTitle>
             <Cost>{this.props.cost}</Cost>
+            <AddButton/>
             <Label>{this.props.label}</Label>
         </Root>
     }
@@ -21,16 +22,24 @@ export default class HotProduct extends React.Component<IProps, {}> {
 
 const Root = styled.div`
 width: 190px;
-height: 282px;
 display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+margin-bottom: 40px;
+@media screen and (max-width: 768px){
+    /* width: 162px; */
+    width: 50%;
+}
 `
 const Image = styled.div`
 width: 190px;
 height: 190px;
 background-size: cover;
+@media screen and (max-width: 768px){
+    width: 162px;
+    height: 162px;
+}
 `
 const ProductTitle = styled.div`
 width: 190px;
@@ -63,4 +72,12 @@ font-size: 14px;
 line-height: 13px;
 text-align: center;
 color: #000000;
+`
+const AddButton = styled.div `
+width: 105.64px;
+height: 30.67px;
+margin-top: 5px;
+margin-bottom: -5px;
+background-image: url(${addButton});
+background-size: cover;
 `

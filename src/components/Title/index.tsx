@@ -41,6 +41,11 @@ color: white;
     width: 690px;
     height: 206px;
 }
+@media  screen and (max-width: 768px) {
+    width: 375px;
+    height: 159px;
+    justify-content: center;
+}
 `
 const Content = styled.div`
 height: auto;
@@ -56,6 +61,12 @@ text-align: center;
     margin-left: 30px;
     text-align: left;
 }
+@media  screen and (max-width: 768px) {
+    width: 343px;
+    align-items: center;
+    margin-left: 0px;
+    text-align: left;
+}
 `
 const Text1 = styled.div`
 margin-top: 95px;
@@ -63,6 +74,10 @@ font-size: 20px;
 @media  screen and (max-width: 1024px) {
     margin-top: 30px;
     font-size: 14px;
+}
+@media  screen and (max-width: 1024px) {
+    margin-top: 16px;
+    font-size: 18px;
 }
 `
 const Text2 = styled.div`
@@ -77,6 +92,12 @@ color: white;
     font-size: 24px;
     line-height: 33px;
 }
+@media  screen and (max-width: 768px) {
+    margin-top: 20px;
+    font-size: 24px;
+    line-height: 23px;
+    text-align: center;
+}
 `
 
 const Button = styled.div`
@@ -90,5 +111,11 @@ margin-left: 200px;
     line-height: 23px;
     margin-left: -10px;
     margin-top: 7px;
+}
+@media  screen and (max-width: 768px) {
+    font-size: 24px;
+    line-height: 23px;
+    margin-left: -10px;
+    margin-top: 0px;
 }
 `

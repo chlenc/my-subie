@@ -1,5 +1,5 @@
 import React from 'react'
-import {useWindowDimensions} from './dimensions';
+import {useWindowDimensions} from '../../utils/dimensions'
 import MenuDesktop from './MenuDesktop'
 import MenuMobile from './MenuMobile'
 

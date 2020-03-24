@@ -1,73 +1,16 @@
 /** @jsx jsx */
 import React from "react";
-import {Form, Select, InputNumber, Switch, Button, Upload, message, Input} from 'antd';
+import {Form, Select, InputNumber, Switch, Button, Input, notification} from 'antd';
 import ReactMarkdown from 'react-markdown';
-import {QuestionCircleOutlined, UploadOutlined} from '@ant-design/icons';
+import {QuestionCircleOutlined} from '@ant-design/icons';
 import {css, jsx} from "@emotion/core";
-import axios from 'axios'
 import {inject, observer} from "mobx-react";
 import {DataStore} from "../../stores";
-import {log} from "util";
+import styled from "@emotion/styled";
+import { FormInstance } from "antd/lib/form";
+import {gens, models, tags} from "../../vars";
 
 const {Option} = Select;
-
-const models = [
-    'LEGACY & OUTBACK',
-    'IMPREZA',
-    'FORESTER',
-    'MERCH',
-    'MISC',
-]
-const gens = [
-    '2GEN (BG/BD/BK) 1993-1999',
-    '3GEN (BE/BH) 1999-2004',
-    '4GEN (BP/BL) 2003-2009',
-    'OTHER LEGACY & OB)',
-    'MEANEYE (GC/GF/GM) 1992-2000',
-    'BUGEYE (GD/GG) 2000-2004',
-    'BLOBEYE  (GD/GG) 2003-2005',
-    'OTHER IMPREZA',
-    'SF 1997-2002',
-    'SG 2002-2007',
-    'OTHER FORESTER',
-    'STICKERS',
-    'SHIRTS',
-    'POSTERS',
-    'OTHER STUFF',
-]
-const tags = [
-    '#FRONT',
-    '#REAR',
-    '#SIDE',
-    '#INTERIOR',
-    '#SEDAN',
-    '#WAGON',
-    '#HOT',
-    '#RARE',
-    '#EXTRARARE',
-    '#BRANDNEW',
-    '#DISCOUNTED',
-    '#NEWARRIVALS',
-    '#BRANDED',
-    '#BYMYSUBIE',
-    '#UNDER100',
-]
-
-interface IData {
-    title: string
-    model: string
-    gen: string
-    tags: string[]
-    weight: number
-    price: number
-    oldPrice?: number
-    description: string
-    attachments?: string[]
-}
-
-interface IFormData extends Omit<IData, 'attachments'> {
-    attachments?: { thumbUrl: string, name: string }[]
-}
 
 
 interface IProps {
@@ -76,17 +19,9 @@ interface IProps {
 
 interface IState {
     description?: string
+    attachments?: string[]
     test?: any
 }
-
-
-const normFile = (e: any) => {
-    console.log('Upload event:', e);
-    if (Array.isArray(e)) {
-        return e;
-    }
-    return e && e.fileList;
-};
 
 const numStyle = css`
 .ant-input-number{
@@ -98,116 +33,110 @@ width: 100%;
 @observer
 class AddForm extends React.Component<IProps, IState> {
 
-
     constructor(props: IProps) {
         super(props);
         this.state = {};
-        // const [form] = Form.useForm();
-        // this.form = form
     }
 
-    onFinish = async (formData: any) => {
-        const data: IData = {...formData, attachments: []}
-        const {attachments} = (formData as IFormData)
-        if (attachments) {
-            // await Promise.all()
-            attachments.map(async ({name, thumbUrl}) => {
-                    this.props.dataStore!.uploadImage(name, thumbUrl)
-                }
-            )
-        }
+    formRef: React.RefObject<FormInstance> = React.createRef();
 
+
+    onFinish = async (data: any) => {
+        data.attachments = this.state.attachments
+        Object.keys(data).forEach(key => data[key] === undefined && delete data[key])
+        const res = await this.props.dataStore!.addItem(data) === null
+        const type = res ? 'success' : 'error'
+        const description = res ? 'Success' : JSON.stringify(res)
+        notification[type]({message: type, description})
+        type === 'success' && this.resetForm();
     };
+
+    resetForm = () => {
+        this.formRef.current!.resetFields();
+        this.setState({})
+    }
 
     handleChangeDescription = ({target: {value: description}}: React.ChangeEvent<HTMLTextAreaElement>) =>
         this.setState({description});
 
+    handleChangeAttachments = ({target: {value: attachments}}: React.ChangeEvent<HTMLTextAreaElement>) =>
+        this.setState({attachments: attachments.split('\n').filter(v => validURL(v))});
+
     handleClickMDInfo = () => window.open('https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet')
 
-    render() {
-        const {description} = this.state;
-        return <Form {...formItemLayout} onFinish={this.onFinish}>
+    handleClickUploadInfo = () => window.open('https://imgbb.com/')
 
-            <Form.Item label="Название" name="title"
-                //rules={inputRules}
-            >
+    render() {
+        const {description, attachments} = this.state;
+        return <Form {...formItemLayout} ref={this.formRef} onFinish={this.onFinish}>
+
+            <Form.Item label="Название" name="title" rules={inputRules}>
                 <Input placeholder="Название детали"/>
             </Form.Item>
 
-            <Form.Item label="Модель" name="model"
-                //rules={inputRules}
-            >
+            <Form.Item label="Модель" name="model" rules={inputRules}>
                 <Select placeholder="Модель">
                     {models.map((model, i) => <Option key={i} value={model}>{model}</Option>)}
                 </Select>
             </Form.Item>
 
-            <Form.Item label="Gen" name="gen"
-                //rules={inputRules}
-            >
+            <Form.Item label="Gen" name="gen" rules={inputRules}>
                 <Select placeholder="Поколение">
                     {gens.map((gen, i) => <Option key={i} value={gen}>{gen}</Option>)}
                 </Select>
             </Form.Item>
 
-            <Form.Item label="Теги" name="tags"
-                //           rules={[...inputRules, {type: 'array'}]}
-            >
+            <Form.Item label="Теги" name="tags" rules={[...inputRules, {type: 'array'}]}>
                 <Select mode="multiple" placeholder="Теги">
                     {tags.map((tag, i) => <Option key={i} value={tag}>{tag}</Option>)}
                 </Select>
             </Form.Item
             >
 
-            <Form.Item label="Вес" name="weight"
-                //rules={[...inputRules, {type: 'number', min: 0}]}
-                       css={numStyle}>
+            <Form.Item label="Вес" name="weight" rules={[...inputRules, {type: 'number', min: 0}]} css={numStyle}>
                 <InputNumber placeholder="Вес"/>
             </Form.Item>
 
-            <Form.Item label="Цена" name="price"
-                // rules={[...inputRules, {type: 'number', min: 0}]}
-                       css={numStyle}>
+            <Form.Item label="Цена" name="price" rules={[...inputRules, {type: 'number', min: 0}]} css={numStyle}>
                 <InputNumber placeholder="Цена"/>
             </Form.Item>
 
-            <Form.Item label="Старая цена" name="oldPrice"
-                // rules={[{type: 'number', min: 0}]}
-                       css={numStyle}>
+            <Form.Item label="Старая цена" name="oldPrice" rules={[{type: 'number', min: 0}]} css={numStyle}>
                 <InputNumber placeholder="Старая Цена"/>
             </Form.Item>
 
             <Form.Item label="Есть на складе" name="stock">
-                <Switch/>
+                <Switch defaultChecked/>
             </Form.Item>
 
             <Form.Item
                 label={<span>Описание&nbsp;<QuestionCircleOutlined onClick={this.handleClickMDInfo}/></span>}
                 name="description"
-                // rules={inputRules}
+                rules={inputRules}
             >
                 <Input.TextArea onChange={this.handleChangeDescription}/>
-                <ReactMarkdown source={description}/>
             </Form.Item>
+            <ItemLayout> <ReactMarkdown source={description}/></ItemLayout>
 
             <Form.Item
+                label={<span>Загрузка&nbsp;<QuestionCircleOutlined onClick={this.handleClickUploadInfo}/></span>}
                 name="attachments"
-                label="Загрузить фото"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
             >
-                <Upload
-                    customRequest={({onSuccess}: any) => {
-                        setTimeout(() => {
-                            onSuccess('ok')
-                        }, 0)
-                    }}
-                    listType="picture" name="image">
-                    <Button><UploadOutlined/> Загрузить фото</Button>
-                </Upload>
+                <Input.TextArea
+                    onChange={this.handleChangeAttachments}
+                />
             </Form.Item>
-
-            <Button type="primary" htmlType="submit">Добавить</Button>
+            <ItemLayout>
+                {(attachments || [])!.map((url, key) =>
+                    <ImgWrapper key={key}>
+                        <Image css={css`background-image: url(${url})`}/>{url}
+                    </ImgWrapper>) as any
+                }
+            </ItemLayout>
+            <ItemLayout >
+                <Button type="primary" htmlType="submit">Добавить</Button>&nbsp;
+                <Button onClick={() => this.resetForm()}>Сбросить</Button>
+            </ItemLayout>
 
         </Form>
 
@@ -215,6 +144,36 @@ class AddForm extends React.Component<IProps, IState> {
 
 };
 export default AddForm
+
+const ItemLayout: React.FC = ({children}) =>
+    <div css={css`display: flex`}>
+        <div css={css`flex: 1`}/>
+        <div css={css`flex: 3`}>{children}</div>
+    </div>
+
+const ImgWrapper = styled.div`
+display: flex;
+align-items: center;
+`
+
+const Image = styled.div`
+height: 50px;
+min-width: 50px;
+margin: 10px 30px 10px 0;
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+`
+
+function validURL(str: string) {
+    const pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+        '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+    return !!pattern.test(str);
+}
 
 const formItemLayout = {
     labelCol: {span: 6},

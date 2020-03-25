@@ -14,7 +14,7 @@ export default class HotProduct extends React.Component<IProps, {}> {
             <Image style={{backgroundImage: `url(${this.props.imageURL})`}} />
             <ProductTitle>{this.props.title}</ProductTitle>
             <Cost>{this.props.cost}</Cost>
-            <AddButton/>
+            <AddButton>Add to cart</AddButton>
             <Label>{this.props.label}</Label>
         </Root>
     }
@@ -28,7 +28,6 @@ align-items: center;
 justify-content: center;
 margin-bottom: 40px;
 @media screen and (max-width: 768px){
-    /* width: 162px; */
     width: 50%;
 }
 `
@@ -74,10 +73,18 @@ text-align: center;
 color: #000000;
 `
 const AddButton = styled.div `
-width: 105.64px;
-height: 30.67px;
+width: 101.64px;
+height: 25.67px;
 margin-top: 5px;
 margin-bottom: -5px;
-background-image: url(${addButton});
-background-size: cover;
+background: #FFAE00;
+border-radius: 54px;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: 'GothamPro-Medium';
+font-weight: 900;
+font-size: 10px;
+line-height: 10px;
+text-align: center;
 `

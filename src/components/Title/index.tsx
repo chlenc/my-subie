@@ -37,7 +37,7 @@ justify-content: left;
 font-family: 'GothamPro-Black';
 font-weight: normal;
 color: white;
-@media  screen and (max-width: 1024px) {
+@media  screen and (max-width: 1280px) {
     width: 690px;
     height: 206px;
 }
@@ -55,7 +55,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 text-align: center;
-@media  screen and (max-width: 1024px) {
+@media  screen and (max-width: 1280px) {
     width: 315px;
     align-items: flex-start;
     margin-left: 30px;
@@ -71,11 +71,11 @@ text-align: center;
 const Text1 = styled.div`
 margin-top: 95px;
 font-size: 20px;
-@media  screen and (max-width: 1024px) {
+@media  screen and (max-width: 1280px) {
     margin-top: 30px;
     font-size: 14px;
 }
-@media  screen and (max-width: 1024px) {
+@media  screen and (max-width: 768px) {
     margin-top: 16px;
     font-size: 18px;
 }
@@ -87,7 +87,7 @@ font-weight: bold;
 line-height: 42px;
 font-weight: 900;
 color: white;
-@media  screen and (max-width: 1024px) {
+@media  screen and (max-width: 1280px) {
     margin-top: 15px;
     font-size: 24px;
     line-height: 33px;
@@ -106,7 +106,7 @@ height: 44px;
 background-image: url(${buttonbg});
 background-size: cover;
 margin-left: 200px;
-@media  screen and (max-width: 1024px) {
+@media  screen and (max-width: 1280px) {
     font-size: 24px;
     line-height: 23px;
     margin-left: -10px;

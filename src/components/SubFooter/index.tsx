@@ -18,6 +18,9 @@ display: flex;
 justify-content: center;
 align-items: center;
 background: #FAFAFA;
+@media (max-width: 768px){
+    flex-direction: column;
+}
 `
 const Body = styled.div`
 width: 1070px;
@@ -25,6 +28,11 @@ height: 78px;
 display: flex;
 justify-content: space-between;
 align-items: center;
+@media (max-width: 768px){
+    width: 375px;
+    height: auto;
+    flex-direction: column;
+}
 `
 const Description = styled.div`
 font-family: 'GothamPro-Medium';
@@ -33,6 +41,13 @@ line-height: 138.2%;
 color: #9D998E;
 b{
 font-weight: bold;
+}
+@media (max-width: 768px){
+    margin-top: 20px;
+    font-size: 14px;
+    b{
+    font-weight: bold;
+    }
 }
 `
 
@@ -43,4 +58,8 @@ font-weight: bold;
 font-size: 12px;
 line-height: 138.2%;
 color: #9D998E;
+@media (max-width: 768px){
+    margin-top: 9px;
+    margin-bottom: 13px;
+}
 `

@@ -20,7 +20,7 @@ export default class CustomCar extends React.Component<IProps> {
 const Root = styled.div`
 width: 190px;
 height: 200px;
-margin-top: 26px;
+margin: 26px 15px 0 15px;
 display: flex;
 flex-direction: column;
 align-items: flex-end;

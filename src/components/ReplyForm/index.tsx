@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import React from 'react'
 import styled from '@emotion/styled'
+import { css, jsx } from '@emotion/core'
 import { Option } from 'rc-select'
 import Select from '../Select'
-import { css, jsx } from '@emotion/core'
 interface IState {
     model?: string
 }
@@ -17,8 +17,12 @@ export default class ReplyForm extends React.Component<{}, IState> {
     render() {
         const { model } = this.state;
         return <Root>
+            <Title>
+                    <p>Struggling to choose a goodies?</p>
+                    <p>Let us help you!</p>
+            </Title>
             <Body>
-                <Title>Please fill in the fields, we will contact you!</Title>
+                <TitleForm>Please fill in the fields, we will contact you!</TitleForm>
                 <Item css={css`border-top: 2px solid #9D998E;`}>
                     <Number>1.</Number>
                     <Name placeholder="Your Name" />
@@ -47,6 +51,7 @@ export default class ReplyForm extends React.Component<{}, IState> {
 }
 
 const Root = styled.div`
+margin-top: 43px;
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -65,6 +70,33 @@ box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 display: flex;
 flex-direction: column;
 align-items: center;
+`
+const Title = styled.div`
+border-top: 2px solid #9D998E;
+border-bottom: 2px solid #9D998E;
+display: flex;
+flex-direction: column;
+align-items: center;
+font-family: 'GothamPro-Medium';
+font-weight: bold;
+justify-content: center;
+font-size: 18px;
+text-align: center;
+@media (min-width: 768px){
+    width: 440px;
+    height: 77px;
+    justify-content: center;
+    p {
+        margin: 5px 0;
+    }
+}
+@media (max-width: 768px){
+    width: 375px;
+    height: 79px;
+    p {
+        margin: 5px 0;
+    }
+}
 `
 const Item = styled.div`
 display: flex;
@@ -96,7 +128,7 @@ font-size: 14px;
 line-height: 138.2%;
 color: #9D998E;
 `
-const Title = styled.div`
+const TitleForm = styled.div`
 height: 49px;
 top: 1.78%;
 bottom: 85.5%;

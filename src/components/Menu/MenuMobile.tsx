@@ -2,7 +2,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
-
 import front from '../../icons/MenuMobile/front.svg'
 import side from '../../icons/MenuMobile/side.svg'
 import allparts from '../../icons/MenuMobile/allparts.svg'
@@ -13,6 +12,7 @@ import merch from '../../icons/MenuMobile/merch.svg'
 export default class MenuMobile extends React.Component {
     render() {
         return <Root>
+            <Body>
             <Title>SHOW ME</Title>
             <Menu>
                 <MenuColumn css={css`padding-left: 16px;`}>
@@ -44,16 +44,22 @@ export default class MenuMobile extends React.Component {
                     </MenuElement>
                 </MenuColumn>
             </Menu>
+            </Body>
         </Root>
     }
 }
 
 const Root = styled.div`
-margin-top: 13px;
 width: 100%;
+display: flex;
+justify-content: center;
+background: #FAFAFA;
+`
+const Body = styled.div `
+width: 375px;
+margin-top: 13px;
 justify-content: center;
 align-items: center;
-/* height: 133px; */
 `
 const Title = styled.div`
 font-family: 'GothamPro-Medium';

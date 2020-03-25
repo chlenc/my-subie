@@ -1,3 +1,4 @@
+/** @jsx jsx */
 import React from 'react'
 import Slider from 'react-slick'
 import styled from '@emotion/styled'
@@ -6,40 +7,44 @@ import rightArrow from '../../icons/RIGHTARROW.svg'
 import { prod1, prod2, prod3, prod4, prod5 } from './goods'
 import ButtonShowMeMore from '../../icons/ShowMeMoreButton.svg'
 import HotProduct from './HotProduct'
+import { useWindowDimensions } from '../../utils/dimensions'
+import { css, jsx } from '@emotion/core'
 
-export default class HotGoods extends React.Component {
-    render() {
-        return <Root>
-            <Body>
-                <Title>Featured parts</Title>
-                <Slider
-                    centerMode={false}
-                    dots={false}
-                    slidesToShow={5}
-                    slidesToScroll={5}
-                    infinite
-                    arrows
-                >
-                    <HotProduct imageURL={prod1} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                    <HotProduct imageURL={prod2} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                    <HotProduct imageURL={prod3} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                    <HotProduct imageURL={prod4} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                    <HotProduct imageURL={prod5} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                    <HotProduct imageURL={prod1} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                    <HotProduct imageURL={prod2} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                    <HotProduct imageURL={prod3} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                    <HotProduct imageURL={prod4} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                    <HotProduct imageURL={prod5} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                </Slider>
-                <Button>SHOW ME MORE</Button>
-            </Body>
-        </Root>
-    }
+
+const HotGoods: React.FC = () => {
+    const { width } = useWindowDimensions();
+    let amount: number = 5;
+    width > 1280 ? amount = 5 : amount = 3;
+    return <Root>
+        <Body>
+            <Title>Featured parts</Title>
+            <Slider
+                centerMode={false}
+                dots={false}
+                slidesToShow={amount}
+                slidesToScroll={amount}
+                infinite
+                arrows
+            >
+                <HotProduct imageURL={prod1} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                <HotProduct imageURL={prod2} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                <HotProduct imageURL={prod3} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                <HotProduct imageURL={prod4} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                <HotProduct imageURL={prod5} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                <HotProduct imageURL={prod1} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                <HotProduct imageURL={prod2} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                <HotProduct imageURL={prod3} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                <HotProduct imageURL={prod4} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+                <HotProduct imageURL={prod5} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
+            </Slider>
+            <Button>SHOW ME MORE</Button>
+        </Body>
+    </Root>
 }
+export default HotGoods
 
 
 const Root = styled.div`
-/* max-height: 500px; */
 width: 100%;
 z-index: 0;
 display: flex;
@@ -54,6 +59,7 @@ margin-top: 93px;
 width: 1070px;
 display: flex;
 flex-direction: column;
+justify-content: space-between;
 align-items: center;
 .slick-slider {
     width: 1070px;
@@ -75,7 +81,30 @@ align-items: center;
     right: -86px;
     width: 66px;
     height: 66px;
-    background-image: url(${rightArrow})
+    background-image: url(${rightArrow});
+    background-size: cover;
+}
+@media (max-width: 1280px){
+    width: 768px;
+    height: auto;
+    .slick-slider {
+    width: 630px;
+    display: flex;
+    .slick-prev {
+        top: 95px;
+        left: -40px;
+        width: 46px;
+        height: 46px;
+    }   
+    .slick-next {
+        top: 95px;
+        right: -40px;
+        width: 46px;
+        height: 46px;
+        background-image: url(${rightArrow});
+        background-size: cover;
+    }
+}
 }
 `
 

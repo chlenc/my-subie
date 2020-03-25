@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from "react";
-import {Form, Select, InputNumber, Switch, Button, Input, notification} from 'antd';
+import {Form, Select, InputNumber, Switch, Button, Input, notification, Tooltip} from 'antd';
 import ReactMarkdown from 'react-markdown';
 import {QuestionCircleOutlined} from '@ant-design/icons';
 import {css, jsx} from "@emotion/core";
@@ -97,7 +97,13 @@ class InputForm extends React.Component<IProps, IState> {
                 </Select>
             </Form.Item>
 
-            <Form.Item label="Теги" name="tags" rules={[...inputRules, {type: 'array'}]}>
+            <Form.Item
+                label={<span>Теги&nbsp;
+                    <Tooltip title="Последний тэг - главный для картинки">
+                        <QuestionCircleOutlined onClick={this.handleClickMDInfo}/>
+                    </Tooltip>
+                </span>}
+                name="tags" rules={[...inputRules, {type: 'array'}]}>
                 <Select mode="multiple" placeholder="Теги">
                     {tags.map((tag, i) => <Option key={i} value={tag}>{tag}</Option>)}
                 </Select>
@@ -125,7 +131,7 @@ class InputForm extends React.Component<IProps, IState> {
                 name="description"
                 rules={inputRules}
             >
-                <Input.TextArea onChange={this.handleChangeDescription}/>
+                <Input.TextArea onChange={this.handleChangeDescription} rows={22}/>
             </Form.Item>
 
             <ItemLayout> <ReactMarkdown source={description}/></ItemLayout>
@@ -134,9 +140,7 @@ class InputForm extends React.Component<IProps, IState> {
                 label={<span>Загрузка&nbsp;<QuestionCircleOutlined onClick={this.handleClickUploadInfo}/></span>}
                 name="attachments"
             >
-                <Input.TextArea
-                    onChange={this.handleChangeAttachments}
-                />
+                <Input.TextArea onChange={this.handleChangeAttachments}/>
             </Form.Item>
 
             <ItemLayout><ImageList attachments={attachments}/></ItemLayout>

@@ -12,6 +12,7 @@ export interface IItem {
     weight: number
     price: number
     oldPrice?: number
+    stock: boolean
     description: string
     attachments?: string[]
     key?: string

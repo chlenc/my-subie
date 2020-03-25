@@ -10,17 +10,17 @@ interface IProps {
 export default class CustomCar extends React.Component<IProps> {
     render() {
         return <Root>
-            <Image style={{backgroundImage: "url(" + this.props.imageURL + ")"}}/>
+            <Image style={{ backgroundImage: `url(${this.props.imageURL})` }} />
             <Nickname>{this.props.nickname}</Nickname>
             <Login>{this.props.login}</Login>
         </Root>
     }
 }
 
-const Root = styled.div `
+const Root = styled.div`
 width: 190px;
 height: 200px;
-margin-top: 26px;
+margin: 26px 15px 0 15px;
 display: flex;
 flex-direction: column;
 align-items: flex-end;
@@ -30,14 +30,14 @@ background-size: cover;
 width: 190px;
 height: 158px;
 `
-const Nickname = styled.div `
+const Nickname = styled.div`
 margin-top: 11px;
 font-family: 'GothamPro-Medium';
 font-weight: bold;
 font-size: 12px;
 line-height: 11px;
 `
-const Login = styled.div `
+const Login = styled.div`
 margin-top: 8px;
 font-family: 'GothamPro-Medium';
 font-weight: bold;

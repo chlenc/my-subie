@@ -10,6 +10,7 @@ import logo from './logoMain.svg'
 import List from "../List";
 import AddForm from "../AddForm";
 import UpdateForm from "../UpdateForm";
+import { DataStore } from '../../stores';
 
 const {Header, Content, Footer} = Layout;
 
@@ -41,20 +42,21 @@ flex: 1;
 
 interface IProps {
     historyStore?: HistoryStore
+    dataStore?: DataStore
 }
 
-@inject('historyStore')
+@inject('historyStore', 'dataStore')
 @observer
 export default class App extends React.Component<IProps> {
 
     redirect = (path: string) => () => this.props.historyStore!.history.push(path)
 
     get getSelectedKeys() {
-        switch (this.props.historyStore!.currentPath) {
-            case 'add':
-                return ['add'];
-            default:
-                return ['list']
+        const {currentPath} = this.props.historyStore!;
+        if (currentPath === 'add' || currentPath.includes('change')) {
+            return ['add'];
+        } else {
+            return ['list']
         }
     }
 
@@ -71,6 +73,7 @@ export default class App extends React.Component<IProps> {
                     >
                         <Menu.Item onClick={this.redirect('/')} key="list">Список</Menu.Item>
                         <Menu.Item onClick={this.redirect('/add')} key="add">Добавить</Menu.Item>
+                        <Menu.Item onClick={this.props.dataStore!.syncGoods}  key="refresh" unselectable="on" >Обновить</Menu.Item>
                     </Menu>
                 </Header>
                 <Content style={{padding: '30px 50px'}}>

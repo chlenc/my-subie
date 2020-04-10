@@ -1,24 +1,62 @@
+/**@jsx jsx*/
 import React from 'react'
 import styled from '@emotion/styled'
-import addButton from '../../icons/HotGoods/addButton.svg'
+import {css, jsx} from '@emotion/core'
+import { IItem } from '../../stores/DataStore'
+import NOPICYET from '../../icons/HotGoods/NOPICYET.svg'
 interface IProps {
-    imageURL: string
-    title: string
-    cost: string
-    label: string
+    good: IItem
 }
 
 export default class HotProduct extends React.Component<IProps, {}> {
     render() {
-        return <Root> 
-            <Image style={{backgroundImage: `url(${this.props.imageURL})`}} />
-            <ProductTitle>{this.props.title}</ProductTitle>
-            <Cost>{this.props.cost}</Cost>
+        return <Root>
+            <Image good={this.props.good}/>
+            <Gen>{this.props.good.gen}</Gen>
+            <Cost cost={this.props.good.price} lastCost={this.props.good.oldPrice} />
             <AddButton>Add to cart</AddButton>
-            <Label>{this.props.label}</Label>
+            <Title>{this.props.good.title}</Title>
         </Root>
     }
-} 
+}
+
+
+interface ICostProps {
+    cost: number
+    lastCost?: number
+}
+
+const Cost: React.FC<ICostProps> = (props) => {
+    const { cost, lastCost } = props
+    return (lastCost !== undefined)
+        ? (<CostWrapper>
+            <p className='lastCost'>{`$${lastCost}`}</p>
+            <p className='newCost'>{`$${cost}`}</p>
+        </CostWrapper>)
+        : (<CostWrapper>
+            <p className='cost'>{`$${cost}`}</p>
+        </CostWrapper>
+        )
+}
+
+interface IImageProps {
+    good: IItem
+}
+
+const Image: React.FC<IImageProps> = (props) => {
+    const Root = styled.div`
+    width: 190px;
+    height: 190px;
+    background-size: cover;
+    @media screen and (max-width: 768px){
+        width: 162px;
+        height: 162px;
+    }`
+    const imageURLs = props.good.attachments
+    return (imageURLs === undefined) 
+    ?   <Root css={css` background-image: url(${NOPICYET}); background-size: cover;` } />
+    :   <Root css={css` background-image: url(${props.good.attachments![0]}); background-size: contain; background-repeat: no-repeat; background-position: center;` } />
+}
 
 const Root = styled.div`
 width: 190px;
@@ -31,16 +69,8 @@ margin-bottom: 40px;
     width: 50%;
 }
 `
-const Image = styled.div`
-width: 190px;
-height: 190px;
-background-size: cover;
-@media screen and (max-width: 768px){
-    width: 162px;
-    height: 162px;
-}
-`
-const ProductTitle = styled.div`
+
+const Gen = styled.div`
 width: 190px;
 height: 10px;
 font-family: 'GothamPro-Medium';
@@ -50,18 +80,37 @@ line-height: 12px;
 text-align: center;
 color: #9D998E;
 `
-const Cost = styled.div`
+const CostWrapper = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: center;
 width: 190px;
-height: 16px;
 margin-top: 8px;
 font-family: 'GothamPro-Light';
 font-weight: 100;
 font-size: 18px;
 line-height: 17px;
-text-align: center;
-color: #214C73;
+.cost {
+    margin: 0;
+    color: #214C73;
+}
+.lastCost {
+    width: 45px;
+    text-align: right;
+    margin: 0;
+    margin-left: -60px;
+    margin-right: 7px;
+    text-decoration: line-through;
+    color: #214C73;
+}
+.newCost {
+    text-align: center;
+    width: 45px;
+    margin: 0;
+    color: #CF4B4B;
+}
 `
-const Label = styled.div `
+const Title = styled.div`
 width: 190px;
 height: 39px;
 margin-top: 12px;
@@ -72,7 +121,7 @@ line-height: 13px;
 text-align: center;
 color: #000000;
 `
-const AddButton = styled.div `
+const AddButton = styled.div`
 width: 101.64px;
 height: 25.67px;
 margin-top: 5px;

@@ -1,4 +1,3 @@
-import {css} from "@emotion/core";
 import GothamPro_Medium from "./assets/font/GothamPro-Medium.woff";
 import GothamPro_Black from "./assets/font/GothamPro-Black.woff";
 import GothamPro_Bold from "./assets/font/GothamPro-Bold.woff";

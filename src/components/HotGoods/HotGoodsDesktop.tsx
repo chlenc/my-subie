@@ -1,17 +1,19 @@
-/** @jsx jsx */
 import React from 'react'
 import Slider from 'react-slick'
 import styled from '@emotion/styled'
 import leftArrow from '../../icons/LEFTARROW.svg'
 import rightArrow from '../../icons/RIGHTARROW.svg'
-import { prod1, prod2, prod3, prod4, prod5 } from './goods'
 import ButtonShowMeMore from '../../icons/ShowMeMoreButton.svg'
 import HotProduct from './HotProduct'
 import { useWindowDimensions } from '../../utils/dimensions'
-import { css, jsx } from '@emotion/core'
+import { IItem } from '../../stores/DataStore'
+import { IOptProps } from 'rc-select/lib/Option'
 
+interface IProps {
+    goods: Array<IItem>
+}
 
-const HotGoods: React.FC = () => {
+const HotGoods: React.FC<IProps> = (props) => {
     const { width } = useWindowDimensions();
     let amount: number = 5;
     width > 1280 ? amount = 5 : amount = 3;
@@ -26,23 +28,13 @@ const HotGoods: React.FC = () => {
                 infinite
                 arrows
             >
-                <HotProduct imageURL={prod1} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod2} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod3} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod4} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod5} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod1} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod2} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod3} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod4} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod5} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-            </Slider>
+                {props.goods.map(good => <HotProduct good={good}/>)}
+                </Slider>
             <Button>SHOW ME MORE</Button>
         </Body>
     </Root>
 }
 export default HotGoods
-
 
 const Root = styled.div`
 width: 100%;

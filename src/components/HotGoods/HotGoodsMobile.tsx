@@ -3,27 +3,24 @@ import styled from '@emotion/styled'
 import { prod1, prod2, prod3, prod4, prod5 } from './goods'
 import goShopButton from '../../icons/HotGoods/goShopButton.svg'
 import HotProduct from './HotProduct'
+import { IItem } from '../../stores/DataStore'
 
-export default class HotGoods extends React.Component {
+interface IProps {
+    goods: Array<IItem>
+}
+
+export default class HotGoods extends React.Component<IProps, {}>{
     render() {
         return <Root>
             <Body>
                 <Title>Featured parts</Title>
-                <HotProduct imageURL={prod1} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod2} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod3} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod4} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod5} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod1} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod2} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod3} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod4} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <HotProduct imageURL={prod5} title="3GEN BH BE (99-04)" cost="$75" label="JDM L7 GRILLE LEGACY 99-02 BH BE (PREFACE)" />
-                <Button>GO SHOP</Button>
+                {this.props.goods.map(good => <HotProduct good={good}/>)}
             </Body>
         </Root>
     }
 }
+
+
 
 const Root = styled.div`
 width: 100%;

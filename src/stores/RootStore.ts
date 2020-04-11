@@ -1,4 +1,5 @@
 import { DataStore } from "./index";
+import { BasketStore } from "./index";
 
 class RootStore {
   public dataStore: DataStore;

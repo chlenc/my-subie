@@ -18,7 +18,7 @@ const HotGoods: React.FC<IProps> = inject('dataStore')(observer(
         const hotGoods = randomGoods(goods)
         const { width } = useWindowDimensions();
         if (!(goods && goods.length)) {
-            return <div css={css` margin: 10% auto; `}>
+            return <div css={css` margin: 17% auto; `}>
                 <Loader
                     type="TailSpin"
                     color="#00BFFF"
@@ -36,7 +36,7 @@ const HotGoods: React.FC<IProps> = inject('dataStore')(observer(
 
 function randomGoods(goods: Array<IItem>) {
     const hotGoods: Array<IItem> = []
-    const filterGoods = goods.filter(item => !item.tags.toString().includes('HOT'))
+    const filterGoods = goods.filter(item => item.tags.toString().includes('HOT' || 'RARE' || 'EXTRARARE' || 'BRANDED' || 'NEWARRIVALS'))
     const N = filterGoods.length
     console.log('N=', N)
     let rand: number = 0
@@ -44,7 +44,7 @@ function randomGoods(goods: Array<IItem>) {
         rand = Math.floor(Math.random() * N)
         hotGoods.push(filterGoods[rand])
     }
-    console.log(filterGoods)
+    // console.log(filterGoods)
     return hotGoods
 }
 export default HotGoods

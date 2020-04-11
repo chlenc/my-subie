@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { prod1, prod2, prod3, prod4, prod5 } from './goods'
 import goShopButton from '../../icons/HotGoods/goShopButton.svg'
 import HotProduct from './HotProduct'
 import { IItem } from '../../stores/DataStore'

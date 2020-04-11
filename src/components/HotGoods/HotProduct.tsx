@@ -1,9 +1,11 @@
 /**@jsx jsx*/
 import React from 'react'
 import styled from '@emotion/styled'
-import {css, jsx} from '@emotion/core'
+import { css, jsx } from '@emotion/core'
 import { IItem } from '../../stores/DataStore'
 import NOPICYET from '../../icons/HotGoods/NOPICYET.svg'
+import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS } from './icons'
+import { url } from 'inspector'
 interface IProps {
     good: IItem
 }
@@ -11,11 +13,13 @@ interface IProps {
 export default class HotProduct extends React.Component<IProps, {}> {
     render() {
         return <Root>
-            <Image good={this.props.good}/>
+            <Image good={this.props.good} />
+            <TagsIcon tags={this.props.good.tags} />
             <Gen>{this.props.good.gen}</Gen>
             <Cost cost={this.props.good.price} lastCost={this.props.good.oldPrice} />
             <AddButton>Add to cart</AddButton>
             <Title>{this.props.good.title}</Title>
+
         </Root>
     }
 }
@@ -53,12 +57,42 @@ const Image: React.FC<IImageProps> = (props) => {
         height: 162px;
     }`
     const imageURLs = props.good.attachments
-    return (imageURLs === undefined) 
-    ?   <Root css={css` background-image: url(${NOPICYET}); background-size: cover;` } />
-    :   <Root css={css` background-image: url(${props.good.attachments![0]}); background-size: contain; background-repeat: no-repeat; background-position: center;` } />
+    return (imageURLs === undefined)
+        ? <Root css={css` background-image: url(${NOPICYET}); background-size: cover;`} />
+        : <Root css={css` background-image: url(${props.good.attachments![0]}); background-size: contain; background-repeat: no-repeat; background-position: center;`} />
 }
 
+interface ITagsProps {
+    tags: string[]
+}
+
+const TagsIcon: React.FC<ITagsProps> = (props) => {
+    const tags = props.tags
+    const Root = styled.div`
+    width: 26px;
+    height: 26px;
+    background-size: cover;
+    border-radius: 50%;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    `
+    // console.log(typeof(tags))
+    if (tags.toString().includes('EXTRARARE')) {
+        return <Root css={css`background-image: url(${EXTRARARE});`} />
+    } else if (tags.toString().includes('RARE')) {
+        console.log('RARE')
+        return <Root css={css`background-image: url(${RARE});`} />
+    } else if (tags.toString().includes('HOT')) {
+        return <Root css={css`background-image: url(${HOT});`} />
+    } else if (tags.toString().includes('BRANDED')) {
+        return <Root css={css`background-image: url(${BRANDED});`} />
+    } else if (tags.toString().includes('NEWARRIVALS')) {
+        return <Root css={css`background-image: url(${NEWARRIVALS});`} />
+    } else return <Root css={css`background-image: url(${HOT});`} />
+}
 const Root = styled.div`
+position: relative;
 width: 190px;
 display: flex;
 flex-direction: column;

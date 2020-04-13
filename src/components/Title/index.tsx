@@ -11,14 +11,14 @@ export default class ContentBox extends React.Component {
                 <Content>
                     <Text1>WELCOME TO MYSUBIE-PARTS.COM</Text1>
                     <Text2>WE SHIP JDM PARTS<br /> AROUND THE WORLD.</Text2>
-                    <Button></Button>
+                    <Button href='/products'/>
                 </Content>
             </Body>
         </Root>
     }
 }
 
-const Root = styled.div `
+const Root = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: center;
@@ -100,11 +100,11 @@ color: white;
 }
 `
 
-const Button = styled.div`
+const Button = styled.a`
 width: 172px;
 height: 44px;
 background-image: url(${buttonbg});
-background-size: cover;
+background-position: 50% 30%;
 margin-left: 200px;
 @media  screen and (max-width: 1280px) {
     font-size: 24px;

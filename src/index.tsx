@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import App from './components/MainPage';
 import { autorun } from 'mobx';
 import { RootStore } from './stores';
 import { loadState, saveState } from './utils/localStore';

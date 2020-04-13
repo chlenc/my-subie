@@ -4,20 +4,6 @@ import {database} from "../utils/firebase";
 import {action, observable} from "mobx";
 
 
-export interface IItem {
-    title: string
-    model: string
-    gen: string
-    tags: string[]
-    weight: number
-    price: number
-    oldPrice?: number
-    stock: boolean
-    description: string
-    attachments?: string[]
-    key?: string
-}
-
 export interface IBasketItems {
     id: string
     count: number
@@ -25,7 +11,7 @@ export interface IBasketItems {
 
 export class BasketStore extends SubStore {
 
-    @observable goods: { [key: string]: IItem } = {};
+    // @observable goods: { [key: string]: IItem } = {};
 
     constructor(rootStore: RootStore, initState: any) {
         super(rootStore);

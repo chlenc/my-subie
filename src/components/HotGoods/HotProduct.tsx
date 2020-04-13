@@ -5,7 +5,7 @@ import { css, jsx } from '@emotion/core'
 import { IItem } from '../../stores/DataStore'
 import NOPICYET from '../../icons/HotGoods/NOPICYET.svg'
 import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS } from './icons'
-import { url } from 'inspector'
+// import { url } from 'inspector'
 interface IProps {
     good: IItem
 }
@@ -89,7 +89,9 @@ const TagsIcon: React.FC<ITagsProps> = (props) => {
         return <Root css={css`background-image: url(${BRANDED});`} />
     } else if (tags.toString().includes('NEWARRIVALS')) {
         return <Root css={css`background-image: url(${NEWARRIVALS});`} />
-    } else return <Root css={css`background-image: url(${HOT});`} />
+    } else if (tags.toString().includes('BRANDNEW')) {
+        return <Root css={css`background-image: url(${BRANDNEW});`} />
+    } else return <Root css={css`background-image: url(${RARE});`} />
 }
 const Root = styled.div`
 position: relative;

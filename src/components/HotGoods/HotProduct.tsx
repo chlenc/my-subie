@@ -5,7 +5,7 @@ import { css, jsx } from '@emotion/core'
 import { IItem } from '../../stores/DataStore'
 import NOPICYET from '../../icons/HotGoods/NOPICYET.svg'
 import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS } from './icons'
-// import { url } from 'inspector'
+
 interface IProps {
     good: IItem
 }

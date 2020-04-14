@@ -2,7 +2,10 @@ import React from 'react';
 import styled from '@emotion/styled'
 import MainPage from '../MainPage';
 import ShopPage from '../ShopPage';
-import { Route, Router, Switch, BrowserRouter} from 'react-router-dom';
+import Navbar from '../Navbar'
+import Footer from '../Footer'
+import SubFooter from '../SubFooter'
+import { Route, Router, Switch } from 'react-router-dom';
 import { History } from 'history';
 
 interface IProps {
@@ -12,17 +15,26 @@ interface IProps {
 interface IState {
 }
 
+const Root = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+`
 
 export default class App extends React.Component<IProps, IState>{
-
     render() {
-        return <BrowserRouter >
-            <Switch>
-                <Route exact path="/" component={MainPage} />
-                <Route exact path="/products" component={ShopPage}/>
-                {/* <Route component={Form404}/> */}
-            </Switch>
-        </BrowserRouter>
+        return <Router history={this.props.history}>
+            <Root>
+                <Navbar />
+                <Switch>
+                    <Route exact path="/" component={MainPage} />
+                    <Route exact path="/products" component={ShopPage} />
+                    <Route component={ShopPage} />
+                </Switch>
+                <SubFooter />
+                <Footer />
+            </Root>
+        </Router>
     }
 
 };

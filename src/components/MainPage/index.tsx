@@ -26,10 +26,9 @@ interface IState {
 }
 
 
-export default class MainPage extends React.Component<IProps, IState> {
+export default class ShopPage extends React.Component<IProps, IState> {
   render() {
     return <Root>
-      <Navbar />
       <Title />
       <Menu />
       <HotGoods />
@@ -37,8 +36,6 @@ export default class MainPage extends React.Component<IProps, IState> {
       <HowToBuy />
       <CustomCars />
       <ReplyForm />
-      <Footer />
-      <SubFooter />
     </Root>
   }
 };

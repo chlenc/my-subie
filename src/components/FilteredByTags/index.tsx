@@ -6,8 +6,9 @@ import deleteIcon from '../../icons/DELETETAGICON.svg'
 import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS, FRONT, INTERIOR, SEDAN, SIDE, WAGON, REAR, DISCOUNTED } from '../HotGoods/icons'
 
 interface IProps {
-    tags: string[]
-    handleDeleteTag: (tag: string, tagsArray: string[]) => void
+    selectedTags: string[]
+    handleDeleteTag: (tag: string) => void
+    handleDeleteAllTags: () => void
 }
 interface IState {
 
@@ -17,17 +18,25 @@ interface IState {
 export default class FilteredByTags extends React.Component<IProps, IState> {
     render() {
         return <Root>
-            <p>FILTERED BY #TAGS :</p>
-            {this.props.tags.map(tag => <Tag tag={tag} handleDeleteTag={this.props.handleDeleteTag} tagsArray={this.props.tags}/>)}
+            <Wrapper>
+                <p>FILTERED BY #TAGS :</p>
+                {this.props.selectedTags.map(tag => <Tag tag={tag} handleDeleteTag={this.props.handleDeleteTag} selectedTags={this.props.selectedTags} />)}
+            </Wrapper>
+            <DeleteAllTags>
+                <TextClearAll>CLEAR ALL</TextClearAll>
+                <TagDeleteBtn onClick={() => this.props.handleDeleteAllTags()}/>
+            </DeleteAllTags>
         </Root>
     }
 }
 
 const Root = styled.div`
+position: relative;
 width: 1070px;
 height: 50px;
 display: flex;
 align-items: center;
+justify-content: space-between;
 border-radius: 10px;
 border: 2px solid #9D998E;
 text-align: left;
@@ -40,19 +49,21 @@ p{
     color: #9D998E;
 }
 `
-
+const Wrapper = styled.div`
+display: flex;
+`
 interface ITagProps {
     tag: string
-    handleDeleteTag: (tag: string, tagsArray: string[]) => void
-    tagsArray: string[]
+    handleDeleteTag: (tag: string) => void
+    selectedTags: string[]
 }
 class Tag extends React.Component<ITagProps, {}> {
     render() {
         const tag = this.props.tag
-        return <TagRoot>
+        return <TagRoot >
             <TagIcon tag={tag} />
             <TagTitle>{`#${this.props.tag}`}</TagTitle>
-            <TagDeleteBtn onClick={() => this.props.handleDeleteTag(tag, this.props.tagsArray)} />
+            <TagDeleteBtn onClick={() => this.props.handleDeleteTag(tag)} />
         </TagRoot>
     }
 }
@@ -93,6 +104,22 @@ background-image: url(${deleteIcon});
 cursor: pointer;
 `
 
+const DeleteAllTags = styled.div`
+position: relative;
+display: flex;
+align-items: center;
+height: 100%;
+right: 13px;
+`
+const TextClearAll = styled.div`
+font-family: inherit;
+font-weight: bold;
+margin-top: 2px;
+font-size: 14px;
+display: flex;
+align-items: center;
+color: #9D998E;
+`
 const tagIconsMap: { [key: string]: string } = {
     RARE: RARE,
     EXTRARARE: EXTRARARE,

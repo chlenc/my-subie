@@ -19,10 +19,14 @@ export default class SortByTag extends React.Component<IProps, {}> {
             <Title>SORT BY #TAG</Title>
             <Line />
             <FirstSection>
-                <Tag tag={'FRONT'} handleAddTag={this.props.handleAddTag} handleDeleteTag={this.props.handleDeleteTag} selectedTags={this.props.selectedTags} />
-                <Tag tag={'REAR'} handleAddTag={this.props.handleAddTag} handleDeleteTag={this.props.handleDeleteTag} selectedTags={this.props.selectedTags} />
-                <Tag tag={'SIDE'} handleAddTag={this.props.handleAddTag} handleDeleteTag={this.props.handleDeleteTag} selectedTags={this.props.selectedTags} />
-                <Tag tag={'INTERIOR'} handleAddTag={this.props.handleAddTag} handleDeleteTag={this.props.handleDeleteTag} selectedTags={this.props.selectedTags} />
+                {['FRONT', 'REAR', 'SIDE', 'INTERIOR'].map((tag, key) =>
+                    <Tag
+                        tag={tag} key={key}
+                        handleAddTag={this.props.handleAddTag}
+                        handleDeleteTag={this.props.handleDeleteTag}
+                        selectedTags={this.props.selectedTags}
+                    />
+                )}
             </FirstSection>
             <Line />
             <SecondSection>
@@ -31,13 +35,14 @@ export default class SortByTag extends React.Component<IProps, {}> {
             </SecondSection>
             <Line />
             <ThirdSection>
-                <Tag tag={'HOT'} handleAddTag={this.props.handleAddTag} handleDeleteTag={this.props.handleDeleteTag} selectedTags={this.props.selectedTags} />
-                <Tag tag={'RARE'} handleAddTag={this.props.handleAddTag} handleDeleteTag={this.props.handleDeleteTag} selectedTags={this.props.selectedTags} />
-                <Tag tag={'EXTRARARE'} handleAddTag={this.props.handleAddTag} handleDeleteTag={this.props.handleDeleteTag} selectedTags={this.props.selectedTags} />
-                <Tag tag={'BRANDNEW'} handleAddTag={this.props.handleAddTag} handleDeleteTag={this.props.handleDeleteTag} selectedTags={this.props.selectedTags} />
-                <Tag tag={'DISCOUNTED'} handleAddTag={this.props.handleAddTag} handleDeleteTag={this.props.handleDeleteTag} selectedTags={this.props.selectedTags} />
-                <Tag tag={'NEWARRIVALS'} handleAddTag={this.props.handleAddTag} handleDeleteTag={this.props.handleDeleteTag} selectedTags={this.props.selectedTags} />
-                <Tag tag={'BRANDED'} handleAddTag={this.props.handleAddTag} handleDeleteTag={this.props.handleDeleteTag} selectedTags={this.props.selectedTags} />
+                {['HOT', 'RARE', 'EXTRARARE', 'BRANDNEW', 'DISCOUNTED', 'NEWARRIVALS', 'BRANDED'].map((tag, key) =>
+                    <Tag
+                        tag={tag} key={key}
+                        handleAddTag={this.props.handleAddTag}
+                        handleDeleteTag={this.props.handleDeleteTag}
+                        selectedTags={this.props.selectedTags}
+                    />
+                )}
             </ThirdSection>
             <DeleteAllTags>
                 <TextClearAll>CLEAR ALL</TextClearAll>
@@ -68,7 +73,7 @@ color: #9D998E;
 const Line = styled.div`
 width: 169px;
 height: 0px;
-margin-top: 10px;
+/* margin-top: 10px; */
 border: 1px solid #9D998E;
 `
 const FirstSection = styled.div`

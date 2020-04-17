@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import goShopButton from '../../icons/HotGoods/goShopButton.svg'
-import HotProduct from './HotProduct'
+import Product from './Product'
 import { IItem } from '../../stores/DataStore'
 
 interface IProps {
@@ -13,7 +13,7 @@ export default class HotGoods extends React.Component<IProps, {}>{
         return <Root>
             <Body>
                 <Title>Featured parts</Title>
-                {this.props.goods.map(good => <HotProduct good={good}/>)}
+                {this.props.goods.map(good => <Product good={good}/>)}
             </Body>
         </Root>
     }

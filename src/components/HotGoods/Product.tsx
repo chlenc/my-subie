@@ -4,13 +4,14 @@ import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 import { IItem } from '../../stores/DataStore'
 import NOPICYET from '../../icons/HotGoods/NOPICYET.svg'
-import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS } from './icons'
+// import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS } from './icons'
+import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS, FRONT, INTERIOR, SEDAN, SIDE, WAGON, REAR, DISCOUNTED } from './icons'
 
 interface IProps {
     good: IItem
 }
 
-export default class HotProduct extends React.Component<IProps, {}> {
+export default class Product extends React.Component<IProps, {}> {
     render() {
         return <Root>
             <Image good={this.props.good} />
@@ -19,7 +20,6 @@ export default class HotProduct extends React.Component<IProps, {}> {
             <Cost cost={this.props.good.price} lastCost={this.props.good.oldPrice} />
             <AddButton>Add to cart</AddButton>
             <Title>{this.props.good.title}</Title>
-
         </Root>
     }
 }
@@ -52,6 +52,7 @@ const Image: React.FC<IImageProps> = (props) => {
     width: 190px;
     height: 190px;
     background-size: cover;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
     @media screen and (max-width: 768px){
         width: 162px;
         height: 162px;
@@ -68,7 +69,16 @@ interface ITagsProps {
 
 const TagsIcon: React.FC<ITagsProps> = (props) => {
     const tags = props.tags
-    const Root = styled.div`
+    let lastTag = tags[tags.length - 1]
+
+    if (lastTag.includes('UNDER100')){
+        lastTag = tags[tags.length - 1]
+    }
+    else if (lastTag.includes('BYMYSUBIE')) {
+        lastTag = tags[tags.length - 2]
+    } else lastTag = tags[tags.length - 3]
+
+    const Root = styled.img`
     width: 26px;
     height: 26px;
     background-size: cover;
@@ -77,21 +87,11 @@ const TagsIcon: React.FC<ITagsProps> = (props) => {
     right: 12px;
     top: 12px;
     `
-    // console.log(typeof(tags))
-    if (tags.toString().includes('EXTRARARE')) {
-        return <Root css={css`background-image: url(${EXTRARARE});`} />
-    } else if (tags.toString().includes('RARE')) {
-        console.log('RARE')
-        return <Root css={css`background-image: url(${RARE});`} />
-    } else if (tags.toString().includes('HOT')) {
-        return <Root css={css`background-image: url(${HOT});`} />
-    } else if (tags.toString().includes('BRANDED')) {
-        return <Root css={css`background-image: url(${BRANDED});`} />
-    } else if (tags.toString().includes('NEWARRIVALS')) {
-        return <Root css={css`background-image: url(${NEWARRIVALS});`} />
-    } else if (tags.toString().includes('BRANDNEW')) {
-        return <Root css={css`background-image: url(${BRANDNEW});`} />
-    } else return <Root css={css`background-image: url(${RARE});`} />
+    console.log('lastTag=', lastTag)
+    
+    return lastTag && lastTag.length
+        ? <Root src={tagIconsMap[lastTag!]} />
+        : null
 }
 const Root = styled.div`
 position: relative;
@@ -173,3 +173,19 @@ font-size: 10px;
 line-height: 10px;
 text-align: center;
 `
+
+const tagIconsMap: { [key: string]: string } = {
+    "#RARE": RARE,
+    "#EXTRARARE": EXTRARARE,
+    "#HOT": HOT,
+    "#BRANDED": BRANDED,
+    "#BRANDNEW": BRANDNEW,
+    "#NEWARRIVALS": NEWARRIVALS,
+    "#FRONT": FRONT,
+    "#INTERIOR": INTERIOR,
+    "#SEDAN": SEDAN,
+    "#SIDE": SIDE,
+    "#WAGON": WAGON,
+    "#REAR": REAR,
+    "#DISCOUNTED": DISCOUNTED
+}

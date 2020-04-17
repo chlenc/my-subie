@@ -4,10 +4,9 @@ import styled from '@emotion/styled'
 import leftArrow from '../../icons/LEFTARROW.svg'
 import rightArrow from '../../icons/RIGHTARROW.svg'
 import ButtonShowMeMore from '../../icons/ShowMeMoreButton.svg'
-import HotProduct from './HotProduct'
+import Product from './Product'
 import { useWindowDimensions } from '../../utils/dimensions'
 import { IItem } from '../../stores/DataStore'
-import { IOptProps } from 'rc-select/lib/Option'
 
 interface IProps {
     goods: Array<IItem>
@@ -28,7 +27,7 @@ const HotGoods: React.FC<IProps> = (props) => {
                 infinite
                 arrows
             >
-                {props.goods.map(good => <HotProduct good={good}/>)}
+                {props.goods.map(good => <Product good={good}/>)}
                 </Slider>
             <Button>SHOW ME MORE</Button>
         </Body>

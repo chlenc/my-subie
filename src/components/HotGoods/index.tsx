@@ -36,7 +36,7 @@ const HotGoods: React.FC<IProps> = inject('dataStore')(observer(
 
 function randomGoods(goods: Array<IItem>) {
     const hotGoods: Array<IItem> = []
-    const filterGoods = goods.filter(item => item.tags.toString().includes('HOT' || 'RARE' || 'EXTRARARE' || 'BRANDED' || 'NEWARRIVALS'))
+    const filterGoods = goods.filter(item => item.tags.indexOf('#DISCOUNTED' || '#UNDER100') == -1 && item.tags[item.tags.length - 1] != undefined)
     const N = filterGoods.length
     console.log('N=', N)
     let rand: number = 0
@@ -44,7 +44,6 @@ function randomGoods(goods: Array<IItem>) {
         rand = Math.floor(Math.random() * N)
         hotGoods.push(filterGoods[rand])
     }
-    // console.log(filterGoods)
     return hotGoods
 }
 export default HotGoods

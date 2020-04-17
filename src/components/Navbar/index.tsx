@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
             <div css={css`@media (max-width: 768px){margin-left: 15px; margin-top: 15px;}`}>
                 <OpenMenuBtn onClick={handleOpenMenu} />
             </div>
-            <Logo />
+            <Logo href='/'/>
             {(width > 768 || isOpen) && <Layout>
                 <div css={css`display: none; @media (max-width: 768px){ display: flex; justify-content: flex-end; margin-top: 12px; margin-right: 15.35px;}`}>
                     <CloseBtn onClick={handleCloseMenu} />
@@ -113,7 +113,7 @@ align-items: center;
 }
 `
 
-const Logo = styled.div`
+const Logo = styled.a`
 width: 165px;
 height: 81px;
 background-image: url(${logoMain});

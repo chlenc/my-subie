@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
-import deleteIcon from '../../icons/DELETETAGICON.svg'
+import deleteIcon from '../../icons/DELETETAGICONBLACK.svg'
 import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS, FRONT, INTERIOR, SEDAN, SIDE, WAGON, REAR, DISCOUNTED } from '../HotGoods/icons'
 
 
@@ -27,10 +27,12 @@ export default class Tag extends React.Component<ITagProps, {}> {
 
         return <Wrapper>
             <TagRoot className={classNameTagRoot}>
-                <TagIcon tag={this.props.tag} />
-                <TagTitle onClick={() => this.props.handleAddTag(this.props.tag)}>
-                    {`#${this.props.tag}`}
-                </TagTitle>
+                <TagSubRoot>
+                    <TagIcon tag={this.props.tag} />
+                    <TagTitle onClick={() => this.props.handleAddTag(this.props.tag)}>
+                        {`#${this.props.tag}`}
+                    </TagTitle>
+                </TagSubRoot>
                 <TagDeleteBtn className={classNameDltBtn} onClick={() => this.props.handleDeleteTag(this.props.tag)} />
             </TagRoot>
         </Wrapper>
@@ -38,6 +40,7 @@ export default class Tag extends React.Component<ITagProps, {}> {
 }
 
 const Wrapper = styled.div`
+margin-top: 10px;
 .tagSelected{
     height: 22px;
     border: 2px solid black;
@@ -52,13 +55,16 @@ const TagRoot = styled.div`
 height: 26px;
 position: relative;
 display: flex;
-justify-content: flex-start;
+justify-content: space-between;
 align-items: center;
 margin: 5px 0;
 margin-left: 17px;
 width: calc(100% - 19px);
 `
-
+const TagSubRoot = styled.div`
+display: flex;
+align-items: center;
+`
 interface ITagIconProps {
     tag: string
 }
@@ -67,8 +73,8 @@ const TagIcon: React.FC<ITagIconProps> = props => {
     return <IconWrapper src={tagIconsMap[tag]} />
 }
 const IconWrapper = styled.img`
-width: 26px;
-height: 26px;
+width: 26.5px;
+height: 26.5px;
 margin-left: -2px;
 border-radius: 50%;
 cursor: pointer;
@@ -91,6 +97,7 @@ width: 14px;
 height: 14px;
 margin-left: 10px;
 margin-top: -2px;
+margin-right: 5px;
 background-image: url(${deleteIcon});
 cursor: pointer;
 `

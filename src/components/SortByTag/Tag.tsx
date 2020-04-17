@@ -90,6 +90,7 @@ font-size: 14px;
 line-height: 13px;
 color: #000000;
 cursor: pointer;
+user-select: none;
 `
 
 const TagDeleteBtn = styled.div`

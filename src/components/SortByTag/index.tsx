@@ -53,6 +53,7 @@ export default class SortByTag extends React.Component<IProps, {}> {
 }
 
 const Root = styled.div`
+/* position: fixed; */
 width: 205px;
 height: 586px;
 margin-top: 40px;
@@ -87,11 +88,10 @@ width: 100%;
 `
 
 const DeleteAllTags = styled.div`
-position: relative;
 display: flex;
 align-items: center;
 height: 100%;
-right: 13px;
+right: 10px;
 `
 const TextClearAll = styled.div`
 font-family: inherit;

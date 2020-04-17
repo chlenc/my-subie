@@ -8,7 +8,8 @@ import FilteredGoods from '../FilteredGoods'
 import { IItem, DataStore } from '../../stores/DataStore'
 import { inject, observer } from 'mobx-react'
 import ReactLoaderSpinner from 'react-loader-spinner'
-
+import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import GOHEADERBUTTON from '../../icons/GOHEADERBUTTON.svg'
 const Loader = () => <div css={css` margin: 17% auto; `}>
     <ReactLoaderSpinner type="TailSpin" color="#00BFFF" height={100} width={100} />
 </div>
@@ -32,7 +33,9 @@ export default class MainPage extends React.Component<IProps, IState> {
     handleAddTag = (tag: string) => this.state.selectedTags.indexOf(tag) == -1 &&
         this.setState({ selectedTags: this.state.selectedTags.concat(tag) })
 
-
+    scrollToTop() {
+        scroll.scrollToTop();
+    }
     render() {
         const goods = Object.values(this.props.dataStore!.goods);
         const { selectedTags } = this.state
@@ -43,7 +46,7 @@ export default class MainPage extends React.Component<IProps, IState> {
                     handleDeleteTag={this.handleDeleteTag}
                     handleDeleteAllTags={this.handleDeleteAllTags}
                 />
-                <div css={css`display: flex; flex-direction: row;`}>
+                <div css={css`display: flex; justify-content: space-between;`}>
                     <SortByTag selectedTags={selectedTags}
                         handleAddTag={this.handleAddTag}
                         handleDeleteTag={this.handleDeleteTag}
@@ -51,6 +54,7 @@ export default class MainPage extends React.Component<IProps, IState> {
                     />
                     <FilteredGoods goods={filter(goods, selectedTags)} />
                 </div>
+                <GoTopButton src={GOHEADERBUTTON} onClick={this.scrollToTop}/>
             </Root>
             : <Loader />
     }
@@ -58,6 +62,15 @@ export default class MainPage extends React.Component<IProps, IState> {
 }
 
 const Root = styled.div`
+`
+const GoTopButton = styled.img`
+position: fixed;
+left: 5%;
+bottom: 50px;
+width: 56px;
+height: 56px;
+border-radius: 50%;
+cursor: pointer;
 `
 function deleteTag(word: string, wordsArr: string[]) {
     const N = wordsArr.length

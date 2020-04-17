@@ -4,7 +4,6 @@ import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 import { IItem } from '../../stores/DataStore'
 import NOPICYET from '../../icons/HotGoods/NOPICYET.svg'
-// import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS } from './icons'
 import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS, FRONT, INTERIOR, SEDAN, SIDE, WAGON, REAR, DISCOUNTED } from './icons'
 
 interface IProps {
@@ -68,15 +67,6 @@ interface ITagsProps {
 }
 
 const TagsIcon: React.FC<ITagsProps> = (props) => {
-    const tags = props.tags
-    let lastTag = tags[tags.length - 1]
-
-    if (lastTag.includes('UNDER100')){
-        lastTag = tags[tags.length - 1]
-    }
-    else if (lastTag.includes('BYMYSUBIE')) {
-        lastTag = tags[tags.length - 2]
-    } else lastTag = tags[tags.length - 3]
 
     const Root = styled.img`
     width: 26px;
@@ -87,8 +77,18 @@ const TagsIcon: React.FC<ITagsProps> = (props) => {
     right: 12px;
     top: 12px;
     `
+    const tags = props.tags
+    let index = tags.indexOf('#UNDER100');
+    if (index > -1) {
+        tags.splice(index, 1);
+    }
+    index = tags.indexOf('#BYMYSUBIE');
+    if (index > -1) {
+        tags.splice(index, 1);
+    }
+
+    const lastTag = tags[tags.length - 1]
     console.log('lastTag=', lastTag)
-    
     return lastTag && lastTag.length
         ? <Root src={tagIconsMap[lastTag!]} />
         : null
@@ -109,6 +109,7 @@ margin-bottom: 40px;
 const Gen = styled.div`
 width: 190px;
 height: 10px;
+margin-top: 7px;
 font-family: 'GothamPro-Medium';
 font-weight: 600;
 font-size: 10px;

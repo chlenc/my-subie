@@ -31,15 +31,16 @@ export default class MainPage extends React.Component<IProps, IState> {
     handleDeleteAllTags = () => this.setState({ selectedTags: [] })
 
     handleAddTag = (tag: string) => this.state.selectedTags.indexOf(tag) == -1 &&
-        this.setState({ selectedTags: this.state.selectedTags.concat(tag) })
+        this.setState({ selectedTags: this.state.selectedTags.concat(tag) }) &&
+        sessionStorage.setIem('selectedTags', this.state.selectedTags.toString())
 
     scrollToTop() {
         scroll.scrollToTop();
     }
     render() {
         const goods = Object.values(this.props.dataStore!.goods);
-        const { selectedTags } = this.state
-
+        const selectedTags: string[] = sessionStorage.getItem('selectedTags')!.split(',')
+        !sessionStorage.getItem('selectedTags') && sessionStorage.setItem('selectedTags', '')
         return goods && goods.length
             ? <Root>
                 <FilteredByTags selectedTags={selectedTags}
@@ -54,7 +55,7 @@ export default class MainPage extends React.Component<IProps, IState> {
                     />
                     <FilteredGoods goods={filter(goods, selectedTags)} />
                 </div>
-                <GoTopButton src={GOHEADERBUTTON} onClick={this.scrollToTop}/>
+                <GoTopButton src={GOHEADERBUTTON} onClick={this.scrollToTop} />
             </Root>
             : <Loader />
     }

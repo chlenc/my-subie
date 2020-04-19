@@ -53,7 +53,6 @@ export default class SortByTag extends React.Component<IProps, {}> {
 }
 
 const Root = styled.div`
-/* position: fixed; */
 width: 205px;
 height: 586px;
 margin-top: 40px;
@@ -74,7 +73,6 @@ color: #9D998E;
 const Line = styled.div`
 width: 169px;
 height: 0px;
-/* margin-top: 10px; */
 border: 1px solid #9D998E;
 `
 const FirstSection = styled.div`

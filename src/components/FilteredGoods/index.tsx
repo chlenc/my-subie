@@ -12,6 +12,7 @@ interface IProps {
 interface IState {
     page: number
 }
+
 export default class FilteredGoods extends React.Component<IProps, {}> {
     state: IState = { page: 1 }
     handleChangePage = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, page: number) => this.setState({ page })
@@ -29,7 +30,9 @@ export default class FilteredGoods extends React.Component<IProps, {}> {
             )
             }
             <PageRoot>
-                {pagesArray.map((page, key) => <PageButton onClick={() => this.setState({ page })} key={key} href={`${page}`}>{page}</PageButton>)}
+                {pagesArray.map((page, key) => <PageButton onClick={() => {
+                    this.setState({ page });
+                }} key={key} href={`${page}`}>{page}</PageButton>)}
             </PageRoot>
         </Root>
     }

@@ -24,6 +24,7 @@ align-items: center;
 export default class App extends React.Component<IProps, IState>{
     render() {
         return <Router history={this.props.history}>
+            {sessionStorage.setItem('selectedTags', '')}
             <Root>
                 <Navbar />
                 <Switch>

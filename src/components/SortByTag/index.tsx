@@ -2,19 +2,17 @@ import React from 'react'
 import styled from '@emotion/styled'
 import deleteIcon from '../../icons/DELETETAGICON.svg'
 import Tag from './Tag'
+import { inject, observer } from 'mobx-react'
+import { TagsStore } from '../../stores/TagsStore'
+
 
 interface IProps {
-    selectedTags: string[]
-    handleDeleteTag: (tag: string) => void
-    handleDeleteAllTags: () => void
-    handleAddTag: (tag: string) => void
-}
-interface IState {
-
+    tagsStore: TagsStore
 }
 
 export default class SortByTag extends React.Component<IProps, {}> {
     render() {
+        let selectedTags: string[] = this.props.tagsStore.selectedTags
         return <Root>
             <Title>SORT BY #TAG</Title>
             <Line />
@@ -22,31 +20,31 @@ export default class SortByTag extends React.Component<IProps, {}> {
                 {['FRONT', 'REAR', 'SIDE', 'INTERIOR'].map((tag, key) =>
                     <Tag
                         tag={tag} key={key}
-                        handleAddTag={this.props.handleAddTag}
-                        handleDeleteTag={this.props.handleDeleteTag}
-                        selectedTags={this.props.selectedTags}
+                        handleAddTag={this.props.tagsStore.addTag}
+                        handleDeleteTag={this.props.tagsStore.deleteTag}
+                        selectedTags={selectedTags}
                     />
                 )}
             </FirstSection>
             <Line />
             <SecondSection>
-                <Tag tag={'SEDAN'} handleAddTag={this.props.handleAddTag} handleDeleteTag={this.props.handleDeleteTag} selectedTags={this.props.selectedTags} />
-                <Tag tag={'WAGON'} handleAddTag={this.props.handleAddTag} handleDeleteTag={this.props.handleDeleteTag} selectedTags={this.props.selectedTags} />
+                <Tag tag={'SEDAN'} handleAddTag={this.props.tagsStore.addTag} handleDeleteTag={this.props.tagsStore.deleteTag} selectedTags={this.props.tagsStore.selectedTags} />
+                <Tag tag={'WAGON'} handleAddTag={this.props.tagsStore.addTag} handleDeleteTag={this.props.tagsStore.deleteTag} selectedTags={this.props.tagsStore.selectedTags} />
             </SecondSection>
             <Line />
             <ThirdSection>
                 {['HOT', 'RARE', 'EXTRARARE', 'BRANDNEW', 'DISCOUNTED', 'NEWARRIVALS', 'BRANDED'].map((tag, key) =>
                     <Tag
                         tag={tag} key={key}
-                        handleAddTag={this.props.handleAddTag}
-                        handleDeleteTag={this.props.handleDeleteTag}
-                        selectedTags={this.props.selectedTags}
+                        handleAddTag={this.props.tagsStore.addTag}
+                        handleDeleteTag={this.props.tagsStore.deleteTag}
+                        selectedTags={this.props.tagsStore.selectedTags}
                     />
                 )}
             </ThirdSection>
             <DeleteAllTags>
                 <TextClearAll>CLEAR ALL</TextClearAll>
-                <TagDeleteBtn onClick={() => this.props.handleDeleteAllTags()} />
+                <TagDeleteBtn onClick={() => this.props.tagsStore.deleteAllTags()} />
             </DeleteAllTags>
         </Root>
     }

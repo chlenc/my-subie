@@ -8,51 +8,41 @@ import FilteredGoods from '../FilteredGoods'
 import { IItem, DataStore } from '../../stores/DataStore'
 import { inject, observer } from 'mobx-react'
 import ReactLoaderSpinner from 'react-loader-spinner'
-import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import { animateScroll as scroll } from 'react-scroll'
 import GOHEADERBUTTON from '../../icons/GOHEADERBUTTON.svg'
+import { TagsStore } from '../../stores/TagsStore'
 const Loader = () => <div css={css` margin: 17% auto; `}>
     <ReactLoaderSpinner type="TailSpin" color="#00BFFF" height={100} width={100} />
 </div>
 
 interface IProps {
     dataStore?: DataStore
-}
-interface IState {
-    selectedTags: string[]
+    tagsStore: TagsStore
 }
 
-@inject('dataStore')
+
+@inject('dataStore', 'tagsStore')
 @observer
-export default class MainPage extends React.Component<IProps, IState> {
-    state: IState = { selectedTags: [] }
+export default class MainPage extends React.Component<IProps, {}> {
+    handleDeleteTag = (tag: string) => this.props.tagsStore.deleteTag(tag)
 
-    handleDeleteTag = (tag: string) => this.setState({ selectedTags: deleteTag(tag, this.state.selectedTags) })
+    handleDeleteAllTags = () => this.props.tagsStore.deleteAllTags()
 
-    handleDeleteAllTags = () => this.setState({ selectedTags: [] })
+    handleAddTag = (tag: string) => this.props.tagsStore.addTag(tag)
 
-    handleAddTag = (tag: string) => this.state.selectedTags.indexOf(tag) == -1 &&
-        this.setState({ selectedTags: this.state.selectedTags.concat(tag) }) &&
-        sessionStorage.setIem('selectedTags', this.state.selectedTags.toString())
+    scrollToTop() { scroll.scrollToTop() }
 
-    scrollToTop() {
-        scroll.scrollToTop();
-    }
     render() {
         const goods = Object.values(this.props.dataStore!.goods);
-        const selectedTags: string[] = sessionStorage.getItem('selectedTags')!.split(',')
-        !sessionStorage.getItem('selectedTags') && sessionStorage.setItem('selectedTags', '')
+        let selectedTags: string[] = []
+        localStorage.getItem('selectedTags')
+            ? selectedTags = localStorage.getItem('selectedTags')!.split(',')
+            : selectedTags = []
         return goods && goods.length
             ? <Root>
-                <FilteredByTags selectedTags={selectedTags}
-                    handleDeleteTag={this.handleDeleteTag}
-                    handleDeleteAllTags={this.handleDeleteAllTags}
-                />
+                <FilteredByTags tagsStore={this.props.tagsStore} />
                 <div css={css`display: flex; justify-content: space-between;`}>
-                    <SortByTag selectedTags={selectedTags}
-                        handleAddTag={this.handleAddTag}
-                        handleDeleteTag={this.handleDeleteTag}
-                        handleDeleteAllTags={this.handleDeleteAllTags}
-                    />
+                    <SortByTag tagsStore={this.props.tagsStore} />
                     <FilteredGoods goods={filter(goods, selectedTags)} />
                 </div>
                 <GoTopButton src={GOHEADERBUTTON} onClick={this.scrollToTop} />
@@ -73,16 +63,6 @@ height: 56px;
 border-radius: 50%;
 cursor: pointer;
 `
-function deleteTag(word: string, wordsArr: string[]) {
-    const N = wordsArr.length
-    const newArr: string[] = []
-    for (let i = 0; i <= (N - 1); i++) {
-        if (wordsArr[i] !== word) {
-            newArr.push(wordsArr[i])
-        }
-    }
-    return newArr
-}
 
 function filter(goods: IItem[], selectedTags: string[]) {
     const filteredGoods: IItem[] = []

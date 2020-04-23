@@ -4,27 +4,26 @@ import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 import deleteIcon from '../../icons/DELETETAGICON.svg'
 import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS, FRONT, INTERIOR, SEDAN, SIDE, WAGON, REAR, DISCOUNTED } from '../HotGoods/icons'
+import { inject, observer } from 'mobx-react'
+import { TagsStore } from '../../stores/TagsStore'
+
 
 interface IProps {
-    selectedTags: string[]
-    handleDeleteTag: (tag: string) => void
-    handleDeleteAllTags: () => void
-}
-interface IState {
-
+    tagsStore: TagsStore
 }
 
-
-export default class FilteredByTags extends React.Component<IProps, IState> {
+// @inject('tagsStore')
+// @observer
+export default class FilteredByTags extends React.Component<IProps, {}> {
     render() {
         return <Root>
             <Wrapper>
                 <p>FILTERED BY #TAGS :</p>
-                {this.props.selectedTags.map(tag => <Tag tag={tag} handleDeleteTag={this.props.handleDeleteTag} selectedTags={this.props.selectedTags} />)}
+                {this.props.tagsStore.selectedTags.map(tag => <Tag tag={tag} handleDeleteTag={this.props.tagsStore.deleteTag} selectedTags={this.props.tagsStore.selectedTags} />)}
             </Wrapper>
             <DeleteAllTags>
                 <TextClearAll>CLEAR ALL</TextClearAll>
-                <TagDeleteBtn onClick={() => this.props.handleDeleteAllTags()}/>
+                <TagDeleteBtn onClick={() => this.props.tagsStore.deleteAllTags}/>
             </DeleteAllTags>
         </Root>
     }

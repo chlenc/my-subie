@@ -11,8 +11,6 @@ export interface IBasketItems {
 
 export class BasketStore extends SubStore {
 
-    // @observable goods: { [key: string]: IItem } = {};
-
     constructor(rootStore: RootStore, initState: any) {
         super(rootStore);
     }

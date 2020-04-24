@@ -12,8 +12,6 @@ interface IProps {
     tagsStore: TagsStore
 }
 
-// @inject('tagsStore')
-// @observer
 export default class FilteredByTags extends React.Component<IProps, {}> {
     render() {
         return <Root>

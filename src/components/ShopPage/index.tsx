@@ -34,10 +34,7 @@ export default class MainPage extends React.Component<IProps, {}> {
 
     render() {
         const goods = Object.values(this.props.dataStore!.goods);
-        let selectedTags: string[] = []
-        localStorage.getItem('selectedTags')
-            ? selectedTags = localStorage.getItem('selectedTags')!.split(',')
-            : selectedTags = []
+        let selectedTags: string[] = this.props.tagsStore.selectedTags
         return goods && goods.length
             ? <Root>
                 <FilteredByTags tagsStore={this.props.tagsStore} />

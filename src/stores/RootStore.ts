@@ -1,5 +1,4 @@
 import { DataStore } from "./index";
-// import { BasketStore } from "./index";
 import { BasketStore } from "./BasketStore";
 import { TagsStore } from "./TagsStore";
 

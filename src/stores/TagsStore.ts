@@ -1,6 +1,5 @@
 import { RootStore } from "./index";
 import { SubStore } from "./SubStore";
-// import { database } from "../utils/firebase";
 import { action, observable } from "mobx";
 
 export class TagsStore extends SubStore {
@@ -8,13 +7,12 @@ export class TagsStore extends SubStore {
     super(rootStore);
   }
 
-  @observable selectedTags: string[] = localStorage.getItem('selectedTags')!.split(',') || [];
+  @observable selectedTags: string[] = [];
 
   @action addTag = (tag: string) => {
     console.log("Added:", tag);
     if (this.selectedTags.indexOf(tag) == -1) {
       this.selectedTags = this.selectedTags.concat(tag);
-      localStorage.setItem("selectedTags", this.selectedTags.toString());
       console.log(this.selectedTags.toString());
     }
   };
@@ -27,10 +25,8 @@ export class TagsStore extends SubStore {
       }
     }
     this.selectedTags = newArr;
-    localStorage.setItem("selectedTags", this.selectedTags.toString());
   };
   @action deleteAllTags = () => {
     this.selectedTags = [];
-    localStorage.removeItem('selectedTags')
   };
 }

@@ -4,7 +4,6 @@ import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 import deleteIcon from '../../icons/DELETETAGICON.svg'
 import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS, FRONT, INTERIOR, SEDAN, SIDE, WAGON, REAR, DISCOUNTED } from '../HotGoods/icons'
-import { inject, observer } from 'mobx-react'
 import { TagsStore } from '../../stores/TagsStore'
 
 

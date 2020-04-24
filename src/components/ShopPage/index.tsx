@@ -3,6 +3,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 import SortByTag from '../SortByTag'
+import SortByMerch from '../SortByMerch'
 import FilteredByTags from '../FilteredByTags'
 import FilteredGoods from '../FilteredGoods'
 import { IItem, DataStore } from '../../stores/DataStore'
@@ -39,7 +40,10 @@ export default class MainPage extends React.Component<IProps, {}> {
             ? <Root>
                 <FilteredByTags tagsStore={this.props.tagsStore} />
                 <div css={css`display: flex; justify-content: space-between;`}>
-                    <SortByTag tagsStore={this.props.tagsStore} />
+                    <div css={css`display: flex; flex-direction: column; justify-content: flex-start;`}>
+                        <SortByTag tagsStore={this.props.tagsStore} />
+                        <SortByMerch/>
+                    </div>
                     <FilteredGoods goods={filter(goods, selectedTags)} />
                 </div>
                 <GoTopButton src={GOHEADERBUTTON} onClick={this.scrollToTop} />

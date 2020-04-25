@@ -2,24 +2,19 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
-import { SelectorsStore } from '../../stores/SelectorsStore'
 
 interface IProps {
-    selectorsStore: SelectorsStore
+
 }
 export default class SortByMerch extends React.Component<IProps, {}> {
     render() {
         return <Root>
-            <Title onClick={() => this.props.selectorsStore.selectModelAndGen('MERCH', '')}>MERCH</Title>
+            <Title>MERCH</Title>
             <Line />
             <VarietiesOfMerch>
-                <Label onClick={() => this.props.selectorsStore.selectModelAndGen('MERCH', 'STICKERS')}
-                    css={css`margin-top: 18px;`}>STICKERS</Label>
-                <Label onClick={() => this.props.selectorsStore.selectModelAndGen('MERCH', 'SHIRTS')}
-
-                >SHIRTS</Label>
-                <Label onClick={() => this.props.selectorsStore.selectModelAndGen('MERCH', 'POSTERS')}
-                >POSTERS</Label>
+                <Label css={css`margin-top: 18px;`}>STICKERS</Label>
+                <Label>SHIRTS</Label>
+                <Label>POSTERS</Label>
             </VarietiesOfMerch>
         </Root>
     }
@@ -37,7 +32,7 @@ flex-direction: column;
 justify-content: flex-start;
 align-items: center;
 `
-const Title = styled.div`
+const Title = styled.div `
 margin-top: 17px;
 margin-bottom: 10px;
 font-family: 'GothamPro-Medium';

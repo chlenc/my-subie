@@ -19,7 +19,7 @@ export default class Footer extends React.Component {
                     <Text>ABOUT US</Text>
                     <Text>SHIPPING</Text>
                     <Text>RETURNS</Text>
-                    <Text>FEEDBACK</Text>
+                    <Text>BLOG</Text>
                     <Text>CONTACT US</Text>
                 </Menu>
             </Body>

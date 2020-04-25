@@ -11,40 +11,42 @@ import { inject, observer } from 'mobx-react'
 import ReactLoaderSpinner from 'react-loader-spinner'
 import { animateScroll as scroll } from 'react-scroll'
 import GOHEADERBUTTON from '../../icons/GOHEADERBUTTON.svg'
-import { TagsStore } from '../../stores/TagsStore'
+import { SelectorsStore } from '../../stores/SelectorsStore'
 const Loader = () => <div css={css` margin: 17% auto; `}>
     <ReactLoaderSpinner type="TailSpin" color="#00BFFF" height={100} width={100} />
 </div>
 
 interface IProps {
     dataStore?: DataStore
-    tagsStore: TagsStore
+    selectorsStore: SelectorsStore
 }
 
 
-@inject('dataStore', 'tagsStore')
+@inject('dataStore', 'selectorsStore')
 @observer
 export default class MainPage extends React.Component<IProps, {}> {
-    handleDeleteTag = (tag: string) => this.props.tagsStore.deleteTag(tag)
+    handleDeleteTag = (tag: string) => this.props.selectorsStore.deleteTag(tag)
 
-    handleDeleteAllTags = () => this.props.tagsStore.deleteAllTags()
+    handleDeleteAllTags = () => this.props.selectorsStore.deleteAllTags()
 
-    handleAddTag = (tag: string) => this.props.tagsStore.addTag(tag)
+    handleAddTag = (tag: string) => this.props.selectorsStore.addTag(tag)
 
     scrollToTop() { scroll.scrollToTop() }
 
     render() {
         const goods = Object.values(this.props.dataStore!.goods);
-        let selectedTags: string[] = this.props.tagsStore.selectedTags
+        let selectedTags: string[] = this.props.selectorsStore.selectedTags
+        let selectedModel: string = this.props.selectorsStore.selectedModel
+        let selectedGen: string = this.props.selectorsStore.selectedGen
         return goods && goods.length
             ? <Root>
-                <FilteredByTags tagsStore={this.props.tagsStore} />
+                <FilteredByTags selectorsStore={this.props.selectorsStore} />
                 <div css={css`display: flex; justify-content: space-between;`}>
                     <div css={css`display: flex; flex-direction: column; justify-content: flex-start;`}>
-                        <SortByTag tagsStore={this.props.tagsStore} />
-                        <SortByMerch/>
+                        <SortByTag selectorsStore={this.props.selectorsStore} />
+                        <SortByMerch selectorsStore={this.props.selectorsStore} />
                     </div>
-                    <FilteredGoods goods={filter(goods, selectedTags)} />
+                    <FilteredGoods goods={filter(goods, selectedTags, selectedModel, selectedGen)} />
                 </div>
                 <GoTopButton src={GOHEADERBUTTON} onClick={this.scrollToTop} />
             </Root>
@@ -65,24 +67,39 @@ border-radius: 50%;
 cursor: pointer;
 `
 
-function filter(goods: IItem[], selectedTags: string[]) {
-    const filteredGoods: IItem[] = []
-    const N = selectedTags.length
-    console.log('N=', N)
 
-    goods.forEach(item => {
+function filter(goods: IItem[], selectedTags: string[], selectedModel: string = '', selectedGen: string = '') {
+    let filteredGoods: IItem[] = []
+    const N = selectedTags.length
+    selectedModel = selectedModel.toUpperCase()
+    selectedGen = selectedGen.toUpperCase()
+
+    selectedModel === '' && selectedGen === ''
+        ? filteredGoods = goods
+        : selectedGen === '' && selectedModel !== ''
+            ? goods.forEach(item => {
+                if (item.model.toUpperCase().indexOf(selectedModel) !== -1)
+                    filteredGoods.push(item)
+            })
+            : goods.forEach(item => {
+                if (item.model.toUpperCase().indexOf(selectedModel) !== -1 &&
+                    item.gen.toUpperCase().indexOf(selectedGen) !== -1)
+                    filteredGoods.push(item)
+            })
+
+    filteredGoods.forEach(item => {
         let count = 0
         for (let i = 0; i < N; i++) {
-            if (item.tags.indexOf(`#${selectedTags[i]}`) != -1) {
+            if (item.tags.indexOf(`#${selectedTags[i]}`) !== -1) {
                 count += 1
             }
         }
-        if (count == N) {
+        if (count === N) {
             filteredGoods.push(item)
         }
     })
     filteredGoods.forEach(item => {
-        console.log('tags=', item.tags.toString())
+        // console.log('tags=', item.tags.toString())
     })
     return filteredGoods
 }

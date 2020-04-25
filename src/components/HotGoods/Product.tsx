@@ -88,7 +88,7 @@ const TagsIcon: React.FC<ITagsProps> = (props) => {
     }
 
     const lastTag = tags[tags.length - 1]
-    console.log('lastTag=', lastTag)
+    // console.log('lastTag=', lastTag)
     return lastTag && lastTag.length
         ? <Root src={tagIconsMap[lastTag!]} />
         : null

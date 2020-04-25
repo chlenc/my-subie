@@ -38,7 +38,7 @@ function randomGoods(goods: Array<IItem>) {
     const hotGoods: Array<IItem> = []
     const filterGoods = goods.filter(item => item.tags.indexOf('#DISCOUNTED' || '#UNDER100') == -1 && item.tags[item.tags.length - 1] != undefined)
     const N = filterGoods.length
-    console.log('N=', N)
+    // console.log('N=', N)
     let rand: number = 0
     while (hotGoods.length < 10) {
         rand = Math.floor(Math.random() * N)

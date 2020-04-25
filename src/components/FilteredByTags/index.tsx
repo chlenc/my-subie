@@ -4,11 +4,11 @@ import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 import deleteIcon from '../../icons/DELETETAGICON.svg'
 import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS, FRONT, INTERIOR, SEDAN, SIDE, WAGON, REAR, DISCOUNTED } from '../HotGoods/icons'
-import { TagsStore } from '../../stores/TagsStore'
+import { SelectorsStore } from '../../stores/SelectorsStore'
 
 
 interface IProps {
-    tagsStore: TagsStore
+    selectorsStore: SelectorsStore
 }
 
 export default class FilteredByTags extends React.Component<IProps, {}> {
@@ -16,11 +16,11 @@ export default class FilteredByTags extends React.Component<IProps, {}> {
         return <Root>
             <Wrapper>
                 <p>FILTERED BY #TAGS :</p>
-                {this.props.tagsStore.selectedTags.map(tag => <Tag tag={tag} handleDeleteTag={this.props.tagsStore.deleteTag} selectedTags={this.props.tagsStore.selectedTags} />)}
+                {this.props.selectorsStore.selectedTags.map(tag => <Tag tag={tag} handleDeleteTag={this.props.selectorsStore.deleteTag} selectedTags={this.props.selectorsStore.selectedTags} />)}
             </Wrapper>
             <DeleteAllTags>
                 <TextClearAll>CLEAR ALL</TextClearAll>
-                <TagDeleteBtn onClick={() => this.props.tagsStore.deleteAllTags}/>
+                <TagDeleteBtn onClick={() => this.props.selectorsStore.deleteAllTags}/>
             </DeleteAllTags>
         </Root>
     }

@@ -22,7 +22,7 @@ export default class Footer extends React.Component {
                 <Text css={css`margin-top: 0px;`}>ABOUT US</Text>
                 <Text>SHIPPING</Text>
                 <Text>RETURNS</Text>
-                <Text>FEEDBACK</Text>
+                <Text>BLOG</Text>
                 <Text>CONTACT US</Text>
             </Menu>
         </Root>

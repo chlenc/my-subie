@@ -10,11 +10,6 @@ import { useWindowDimensions } from '../../utils/dimensions'
 import IG from '../../icons/Footer/IG.svg'
 import FB from '../../icons/Footer/FB.svg'
 
-interface IProps {
-}
-interface IState {
-    isOpen: boolean
-}
 
 const Layout = styled.div`
 @media (max-width: 769px) {
@@ -38,7 +33,7 @@ const Navbar: React.FC = () => {
             <div css={css`@media (max-width: 768px){margin-left: 15px; margin-top: 15px;}`}>
                 <OpenMenuBtn onClick={handleOpenMenu} />
             </div>
-            <Logo href='/'/>
+            <Logo href='/' />
             {(width > 768 || isOpen) && <Layout>
                 <div css={css`display: none; @media (max-width: 768px){ display: flex; justify-content: flex-end; margin-top: 12px; margin-right: 15.35px;}`}>
                     <CloseBtn onClick={handleCloseMenu} />

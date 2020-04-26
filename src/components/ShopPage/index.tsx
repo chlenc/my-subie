@@ -2,6 +2,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
+import SortByModel from '../SortByModel'
 import SortByTag from '../SortByTag'
 import SortByMerch from '../SortByMerch'
 import FilteredByTags from '../FilteredByTags'
@@ -43,6 +44,7 @@ export default class MainPage extends React.Component<IProps, {}> {
                 <FilteredByTags selectorsStore={this.props.selectorsStore} />
                 <div css={css`display: flex; justify-content: space-between;`}>
                     <div css={css`display: flex; flex-direction: column; justify-content: flex-start;`}>
+                        <SortByModel selectorsStore={this.props.selectorsStore}/>
                         <SortByTag selectorsStore={this.props.selectorsStore} />
                         <SortByMerch selectorsStore={this.props.selectorsStore} />
                     </div>

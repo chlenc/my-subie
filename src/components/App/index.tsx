@@ -28,8 +28,8 @@ export default class App extends React.Component<IProps, IState>{
             <Root>
                 <Navbar />
                 <Switch>
-                    {/* <Route exact path="/" component={MainPage} />
-                    <Route exact path="/products" component={ShopPage} /> */}
+                    <Route exact path="/" component={MainPage} />
+                    <Route exact path="/products" component={ShopPage} />
                     <Route component={ShopPage} />
                 </Switch>
                 <SubFooter />

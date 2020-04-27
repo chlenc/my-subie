@@ -22,25 +22,32 @@ export default class SortByModel extends React.Component<IProps, IState> {
         isOpenForester: false
     }
     toggleIsOpenLegacy() {
+        this.state.isOpenImpreza && this.setState({ isOpenImpreza: false })
+        this.state.isOpenForester && this.setState({ isOpenForester: false })
         const currentState = this.state.isOpenLegacy;
         this.setState({ isOpenLegacy: !currentState });
     }
     toggleIsOpenImpreza() {
+        this.state.isOpenLegacy && this.setState({ isOpenLegacy: false })
+        this.state.isOpenForester && this.setState({ isOpenForester: false })
         const currentState = this.state.isOpenImpreza;
         this.setState({ isOpenImpreza: !currentState });
     }
     toggleIsOpenForester() {
+        this.state.isOpenLegacy && this.setState({ isOpenLegacy: false })
+        this.state.isOpenImpreza && this.setState({ isOpenImpreza: false })
         const currentState = this.state.isOpenForester;
         this.setState({ isOpenForester: !currentState });
     }
     render() {
+
         return <Root>
             <Title onClick={() => this.props.selectorsStore.selectModelAndGen('', '')}>MODEL</Title>
             <Line />
             <Legacy>
                 <Wrapper>
                     <ModelName>{'LEGACY'} <br /> {'& OUTBACK'}</ModelName>
-                    <Arrow src={ARROW} onClick={() => this.toggleIsOpenLegacy()} />
+                    <Arrow src={ARROW} onClick={() => this.toggleIsOpenLegacy()} className={this.state.isOpenLegacy ? 'activeArrow' : ''} />
                 </Wrapper>
                 <LegacyList isOpen={this.state.isOpenLegacy} selectModelAndGen={this.props.selectorsStore.selectModelAndGen} />
             </Legacy>
@@ -48,7 +55,7 @@ export default class SortByModel extends React.Component<IProps, IState> {
             <Impreza>
                 <Wrapper>
                     <ModelName>IMPREZA</ModelName>
-                    <Arrow src={ARROW} onClick={() => this.toggleIsOpenImpreza()} />
+                    <Arrow src={ARROW} onClick={() => this.toggleIsOpenImpreza()} className={this.state.isOpenImpreza ? 'activeArrow' : ''} />
                 </Wrapper>
                 <ImprezaList isOpen={this.state.isOpenImpreza} selectModelAndGen={this.props.selectorsStore.selectModelAndGen} />
             </Impreza>
@@ -56,7 +63,7 @@ export default class SortByModel extends React.Component<IProps, IState> {
             <Forester>
                 <Wrapper>
                     <ModelName>FORESTER</ModelName>
-                    <Arrow src={ARROW} onClick={() => this.toggleIsOpenForester()} />
+                    <Arrow src={ARROW} onClick={() => this.toggleIsOpenForester()} className={this.state.isOpenForester ? 'activeArrow' : ''} />
                 </Wrapper>
                 <ForesterList isOpen={this.state.isOpenForester} selectModelAndGen={this.props.selectorsStore.selectModelAndGen} />
             </Forester>
@@ -77,6 +84,24 @@ display: flex;
 flex-direction: column;
 justify-content: flex-start;
 align-items: center;
+.activeArrow{
+    transform: rotate(180deg);
+    transition: 0.5s;
+}
+.activeSelector{
+    font-style: bold;
+}
+.inactiveModel{
+    margin-top: 0px;
+    max-height:0px;
+    overflow:hidden;
+    color: white;
+    transition: all 500ms ease;
+}
+.activeModel{
+    max-height: 300px;
+    transition: all 350ms ease-in;
+}
 `
 const Title = styled.div`
 margin-top: 17px;
@@ -96,6 +121,7 @@ height: 0px;
 border: 1px solid #9D998E;
 `
 const Legacy = styled.div`
+position: relative;
 width: 81%;
 display: flex;
 flex-direction: column;
@@ -103,7 +129,6 @@ justify-content: space-between;
 align-items: center;
 margin-bottom: 20px;
 `
-
 const Impreza = styled.div`
 width: 81%;
 display: flex;
@@ -126,7 +151,6 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 `
-
 const ModelName = styled.div`
 width: 90%;
 font-family: 'GothamPro-Medium';
@@ -137,13 +161,8 @@ line-height: 19px;
 color: #000000;
 cursor: pointer;
 `
-
 const Arrow = styled.img`
 cursor: pointer;
-:hover {
-    transform: rotate(180deg);
-    transition: 0.5s;
-}
 `
 interface IListProps {
     isOpen: boolean
@@ -151,42 +170,41 @@ interface IListProps {
 }
 
 const LegacyList: React.FC<IListProps> = props => {
-    return props.isOpen
-        ? <RootList>
-            <Text onClick={() => props.selectModelAndGen('LEGACY', '2GEN')}>{'2GEN (BK BG BD)'}<br />{'1993-1999'}</Text>
-            <Text onClick={() => props.selectModelAndGen('LEGACY', '3GEN')}>{'3GEN (BH BE)'}<br />{'1999-2004'}</Text>
-            <Text onClick={() => props.selectModelAndGen('LEGACY', '4GEN')}>{'4GEN (BP BL)'}<br />{'2003-2009'}</Text>
-            <Text onClick={() => props.selectModelAndGen('LEGACY', 'OTHER')} css={css`margin-bottom: 0px;`}>{'OTHER LEGACY & OB'}</Text>
-        </RootList>
-        : null
+    let styles = ''
+    props.isOpen ? styles = 'activeModel' : styles = 'inactiveModel'
+    return <RootList className={styles}>
+        <Text onClick={() => props.selectModelAndGen('LEGACY', '2GEN')}>{'2GEN (BK BG BD)'}<br />{'1993-1999'}</Text>
+        <Text onClick={() => props.selectModelAndGen('LEGACY', '3GEN')}>{'3GEN (BH BE)'}<br />{'1999-2004'}</Text>
+        <Text onClick={() => props.selectModelAndGen('LEGACY', '4GEN')}>{'4GEN (BP BL)'}<br />{'2003-2009'}</Text>
+        <Text onClick={() => props.selectModelAndGen('LEGACY', 'OTHER')} css={css`margin-bottom: 0px;`}>{'OTHER LEGACY & OB'}</Text>
+    </RootList>
 }
 
 const ImprezaList: React.FC<IListProps> = props => {
-    return props.isOpen
-        ? <RootList>
-            <Text>{'2GEN (BK BG BD)'}<br />{'1993-1999'}</Text>
-            <Text>{'3GEN (BH BE)'}<br />{'1999-2004'}</Text>
-            <Text>{'4GEN (BP BL)'}<br />{'2003-2009'}</Text>
-            <Text css={css`margin-bottom: 0px;`}>{'OTHER LEGACY & OB'}</Text>
-        </RootList>
-        : null
+    let styles = ''
+    props.isOpen ? styles = 'activeModel' : styles = 'inactiveModel'
+    return <RootList className={styles}>
+        <Text>{'MEANEYE (GC GF GM)'}<br />{'1992-2000'}</Text>
+        <Text>{'BUGEYE (GD GG)'}<br />{'2000-2004'}</Text>
+        <Text>{'BLOBEYE (GD GG)'}<br />{'2003-2005'}</Text>
+        <Text css={css`margin-bottom: 0px;`}>{'OTHER IMPREZA'}</Text>
+    </RootList>
 }
 
 const ForesterList: React.FC<IListProps> = props => {
-    //  classes = ''
-    return props.isOpen
-        ? <RootList>
-            <Text >{'2GEN (BK BG BD)'}<br />{'1993-1999'}</Text>
-            <Text>{'3GEN (BH BE)'}<br />{'1999-2004'}</Text>
-            <Text>{'4GEN (BP BL)'}<br />{'2003-2009'}</Text>
-            <Text css={css`margin-bottom: 0px;`}>{'OTHER LEGACY & OB'}</Text>
-        </RootList>
-        : null
+    let styles = ''
+    props.isOpen ? styles = 'activeModel' : styles = 'inactiveModel'
+    return <RootList className={styles}>
+        <Text>{'SF'}<br />{'1997-2002'}</Text>
+        <Text>{'SG'}<br />{'2002'}</Text>
+        <Text css={css`margin-bottom: 0px;`}>{'OTHER FORESTER'}</Text>
+    </RootList>
 }
 
 const RootList = styled.div`
 margin-top: 20px;
 border-left: 2px solid #9D998E;
+color: #9D998E;
 `
 const Text = styled.div`
 margin-left: 10px;
@@ -196,6 +214,5 @@ font-style: normal;
 font-weight: bold;
 font-size: 14px;
 line-height: 13px;
-color: #9D998E;
 cursor: pointer;
 `

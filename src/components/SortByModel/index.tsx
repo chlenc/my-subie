@@ -43,33 +43,41 @@ export default class SortByModel extends React.Component<IProps, IState> {
 
         return <Root>
             <Title onClick={() => this.props.selectorsStore.selectModelAndGen('', '')}>MODEL</Title>
+
             <Line />
-            <Legacy>
-                <Wrapper>
+
+            <Model>
+                <Wrapper onClick={() => this.toggleIsOpenLegacy()}>
                     <ModelName>{'LEGACY'} <br /> {'& OUTBACK'}</ModelName>
-                    <Arrow src={ARROW} onClick={() => this.toggleIsOpenLegacy()} className={this.state.isOpenLegacy ? 'activeArrow' : ''} />
+                    <Arrow src={ARROW} className={this.state.isOpenLegacy ? 'activeArrow' : ''} />
                 </Wrapper>
                 <LegacyList isOpen={this.state.isOpenLegacy} selectModelAndGen={this.props.selectorsStore.selectModelAndGen} />
-            </Legacy>
+            </Model>
 
-            <Impreza>
-                <Wrapper>
+            <Model>
+                <Wrapper onClick={() => this.toggleIsOpenImpreza()}>
                     <ModelName>IMPREZA</ModelName>
-                    <Arrow src={ARROW} onClick={() => this.toggleIsOpenImpreza()} className={this.state.isOpenImpreza ? 'activeArrow' : ''} />
+                    <Arrow src={ARROW} className={this.state.isOpenImpreza ? 'activeArrow' : ''} />
                 </Wrapper>
                 <ImprezaList isOpen={this.state.isOpenImpreza} selectModelAndGen={this.props.selectorsStore.selectModelAndGen} />
-            </Impreza>
+            </Model>
 
-            <Forester>
-                <Wrapper>
+            <Model>
+                <Wrapper onClick={() => this.toggleIsOpenForester()}>
                     <ModelName>FORESTER</ModelName>
-                    <Arrow src={ARROW} onClick={() => this.toggleIsOpenForester()} className={this.state.isOpenForester ? 'activeArrow' : ''} />
+                    <Arrow src={ARROW} className={this.state.isOpenForester ? 'activeArrow' : ''} />
                 </Wrapper>
                 <ForesterList isOpen={this.state.isOpenForester} selectModelAndGen={this.props.selectorsStore.selectModelAndGen} />
-            </Forester>
-            <Forester>
-                <ModelName>MISC</ModelName>
-            </Forester>
+            </Model>
+
+            <Model >
+                <ModelName
+                    css={css`width: 100%;`}
+                    onClick={() => this.props.selectorsStore.selectModelAndGen('MISC', '')}
+                >
+                    MISC
+                </ModelName>
+            </Model>
         </Root>
     }
 }
@@ -120,24 +128,8 @@ margin-bottom: 20px;
 height: 0px;
 border: 1px solid #9D998E;
 `
-const Legacy = styled.div`
+const Model = styled.div`
 position: relative;
-width: 81%;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 20px;
-`
-const Impreza = styled.div`
-width: 81%;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 20px;
-`
-const Forester = styled.div`
 width: 81%;
 display: flex;
 flex-direction: column;
@@ -173,10 +165,10 @@ const LegacyList: React.FC<IListProps> = props => {
     let styles = ''
     props.isOpen ? styles = 'activeModel' : styles = 'inactiveModel'
     return <RootList className={styles}>
-        <Text onClick={() => props.selectModelAndGen('LEGACY', '2GEN')}>{'2GEN (BK BG BD)'}<br />{'1993-1999'}</Text>
-        <Text onClick={() => props.selectModelAndGen('LEGACY', '3GEN')}>{'3GEN (BH BE)'}<br />{'1999-2004'}</Text>
-        <Text onClick={() => props.selectModelAndGen('LEGACY', '4GEN')}>{'4GEN (BP BL)'}<br />{'2003-2009'}</Text>
-        <Text onClick={() => props.selectModelAndGen('LEGACY', 'OTHER')} css={css`margin-bottom: 0px;`}>{'OTHER LEGACY & OB'}</Text>
+        <Text onClick={() => props.selectModelAndGen('LEGACY', '2GEN (BG/BD/BK) 1993-1999')}>{'2GEN (BK BG BD)'}<br />{'1993-1999'}</Text>
+        <Text onClick={() => props.selectModelAndGen('LEGACY', '3GEN (BH/BE) 1999-2004')}>{'3GEN (BH BE)'}<br />{'1999-2004'}</Text>
+        <Text onClick={() => props.selectModelAndGen('LEGACY', '4GEN (BP/BL) 2003-2009')}>{'4GEN (BP BL)'}<br />{'2003-2009'}</Text>
+        <Text onClick={() => props.selectModelAndGen('LEGACY', 'OTHER LEGACY & OB')} css={css`margin-bottom: 0px;`}>{'OTHER LEGACY & OB'}</Text>
     </RootList>
 }
 
@@ -184,20 +176,23 @@ const ImprezaList: React.FC<IListProps> = props => {
     let styles = ''
     props.isOpen ? styles = 'activeModel' : styles = 'inactiveModel'
     return <RootList className={styles}>
-        <Text>{'MEANEYE (GC GF GM)'}<br />{'1992-2000'}</Text>
-        <Text>{'BUGEYE (GD GG)'}<br />{'2000-2004'}</Text>
-        <Text>{'BLOBEYE (GD GG)'}<br />{'2003-2005'}</Text>
-        <Text css={css`margin-bottom: 0px;`}>{'OTHER IMPREZA'}</Text>
+        <Text onClick={() => props.selectModelAndGen('IMPREZA', 'MEANEYE (GC/GF/GM) 1992-2000')}>{'MEANEYE (GC GF GM)'}<br />{'1992-2000'}</Text>
+        <Text onClick={() => props.selectModelAndGen('IMPREZA', 'BUGEYE (GD/GG) 2000-2004')}>{'BUGEYE (GD GG)'}<br />{'2000-2004'}</Text>
+        <Text onClick={() => props.selectModelAndGen('IMPREZA', 'BLOBEYE (GD/GG) 2003-2005')}>{'BLOBEYE (GD GG)'}<br />{'2003-2005'}</Text>
+        <Text onClick={() => props.selectModelAndGen('IMPREZA', 'OTHER IMPREZA')} css={css`margin-bottom: 0px;`}>{'OTHER IMPREZA'}</Text>
     </RootList>
 }
 
 const ForesterList: React.FC<IListProps> = props => {
     let styles = ''
+    let styles1 = ''
+    let styles2 = ''
+    let styles3 = ''
     props.isOpen ? styles = 'activeModel' : styles = 'inactiveModel'
     return <RootList className={styles}>
-        <Text>{'SF'}<br />{'1997-2002'}</Text>
-        <Text>{'SG'}<br />{'2002'}</Text>
-        <Text css={css`margin-bottom: 0px;`}>{'OTHER FORESTER'}</Text>
+        <Text onClick={() => props.selectModelAndGen('FORESTER', 'SF 1997-2002')} >{'SF'}<br />{'1997-2002'}</Text>
+        <Text onClick={() => props.selectModelAndGen('FORESTER', 'SG 2002-2007')}>{'SG'}<br />{'2002-2007'}</Text>
+        <Text onClick={() => props.selectModelAndGen('FORESTER', 'OTHER FORESTER')} css={css`margin-bottom: 0px;`}>{'OTHER FORESTER'}</Text>
     </RootList>
 }
 

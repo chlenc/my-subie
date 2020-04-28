@@ -5,9 +5,11 @@ import { css, jsx } from '@emotion/core'
 import { IItem } from '../../stores/DataStore'
 import NOPICYET from '../../icons/HotGoods/NOPICYET.svg'
 import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS, FRONT, INTERIOR, SEDAN, SIDE, WAGON, REAR, DISCOUNTED } from './icons'
+import { BasketStore } from '../../stores/BasketStore'
 
 interface IProps {
     good: IItem
+    basketStore: BasketStore
 }
 
 export default class Product extends React.Component<IProps, {}> {
@@ -17,7 +19,7 @@ export default class Product extends React.Component<IProps, {}> {
             <TagsIcon tags={this.props.good.tags} />
             <Gen>{this.props.good.gen}</Gen>
             <Cost cost={this.props.good.price} lastCost={this.props.good.oldPrice} />
-            <AddButton>Add to cart</AddButton>
+            <AddButton onClick={() => this.props.basketStore.increaseItem}>Add to cart</AddButton>
             <Title>{this.props.good.title}</Title>
         </Root>
     }
@@ -172,6 +174,7 @@ font-weight: 900;
 font-size: 10px;
 line-height: 10px;
 text-align: center;
+cursor: pointer;
 `
 
 const tagIconsMap: { [key: string]: string } = {

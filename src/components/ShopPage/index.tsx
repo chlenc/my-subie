@@ -7,12 +7,14 @@ import SortByTag from '../SortByTag'
 import SortByMerch from '../SortByMerch'
 import FilteredByTags from '../FilteredByTags'
 import FilteredGoods from '../FilteredGoods'
+import FilterHandler from '../FilterHandler'
 import { IItem, DataStore } from '../../stores/DataStore'
 import { inject, observer } from 'mobx-react'
 import ReactLoaderSpinner from 'react-loader-spinner'
 import { animateScroll as scroll } from 'react-scroll'
 import GOHEADERBUTTON from '../../icons/GOHEADERBUTTON.svg'
 import { SelectorsStore } from '../../stores/SelectorsStore'
+
 const Loader = () => <div css={css` margin: 17% auto; `}>
     <ReactLoaderSpinner type="TailSpin" color="#00BFFF" height={100} width={100} />
 </div>
@@ -21,7 +23,6 @@ interface IProps {
     dataStore?: DataStore
     selectorsStore: SelectorsStore
 }
-
 
 @inject('dataStore', 'selectorsStore')
 @observer
@@ -42,9 +43,10 @@ export default class MainPage extends React.Component<IProps, {}> {
         return goods && goods.length
             ? <Root>
                 <FilteredByTags selectorsStore={this.props.selectorsStore} />
+                <FilterHandler selectorsStore={this.props.selectorsStore} />
                 <div css={css`display: flex; justify-content: space-between;`}>
                     <div css={css`display: flex; flex-direction: column; justify-content: flex-start;`}>
-                        <SortByModel selectorsStore={this.props.selectorsStore}/>
+                        <SortByModel selectorsStore={this.props.selectorsStore} />
                         <SortByTag selectorsStore={this.props.selectorsStore} />
                         <SortByMerch selectorsStore={this.props.selectorsStore} />
                     </div>
@@ -101,7 +103,6 @@ function filter(goods: IItem[], selectedTags: string[], selectedModel: string = 
         }
     })
     filteredGoods.forEach(item => {
-        // console.log('tags=', item.tags.toString())
     })
     return filteredGoods
 }

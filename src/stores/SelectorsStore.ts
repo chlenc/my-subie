@@ -12,10 +12,8 @@ export class SelectorsStore extends SubStore {
   @observable selectedGen: string = "";
 
   @action addTag = (tag: string) => {
-    // console.log("Added:", tag);
     if (this.selectedTags.indexOf(tag) == -1) {
       this.selectedTags = this.selectedTags.concat(tag);
-      // console.log(this.selectedTags.toString());
     }
   };
   @action deleteTag = (tag: string) => {
@@ -36,5 +34,4 @@ export class SelectorsStore extends SubStore {
     this.selectedGen = gen;
     return null
   };
-  // @action selectAGen = (gen: string) => (this.selectedGen = gen);
 }

@@ -8,8 +8,6 @@ import Product from '../HotGoods/Product'
 interface IProps {
     goods: IItem[]
 }
-interface IState {
-}
 
 export default class FilteredGoods extends React.Component<IProps, {}> {
     handleChangePage = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, page: number) => this.setState({ page })
@@ -33,14 +31,4 @@ width: 850px;
 height: auto;
 display: flex;
 flex-wrap: wrap;
-`
-const PageButton = styled.a`
-width: 20px;
-height: 20px;
-`
-const PageRoot = styled.div`
-position: relative;
-width: calc(100% + 205px);
-display: flex;
-justify-content: center;
 `

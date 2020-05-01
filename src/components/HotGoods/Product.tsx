@@ -6,12 +6,15 @@ import { IItem } from '../../stores/DataStore'
 import NOPICYET from '../../icons/HotGoods/NOPICYET.svg'
 import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS, FRONT, INTERIOR, SEDAN, SIDE, WAGON, REAR, DISCOUNTED } from './icons'
 import { BasketStore } from '../../stores/BasketStore'
+import { observer, inject } from 'mobx-react'
 
 interface IProps {
     good: IItem
-    basketStore: BasketStore
+    basketStore?: BasketStore
 }
 
+@inject('basketStore')
+@observer
 export default class Product extends React.Component<IProps, {}> {
     render() {
         return <Root>
@@ -19,7 +22,9 @@ export default class Product extends React.Component<IProps, {}> {
             <TagsIcon tags={this.props.good.tags} />
             <Gen>{this.props.good.gen}</Gen>
             <Cost cost={this.props.good.price} lastCost={this.props.good.oldPrice} />
-            <AddButton onClick={() => this.props.basketStore.increaseItem}>Add to cart</AddButton>
+            <AddButton onClick={() => this.props.basketStore!.increaseItem(this.props.good.id)}>
+                Add to cart
+            </AddButton>
             <Title>{this.props.good.title}</Title>
         </Root>
     }

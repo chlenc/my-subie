@@ -7,10 +7,12 @@ import ButtonShowMeMore from '../../icons/ShowMeMoreButton.svg'
 import Product from './Product'
 import { useWindowDimensions } from '../../utils/dimensions'
 import { IItem } from '../../stores/DataStore'
+import { observer, inject } from 'mobx-react'
 
 interface IProps {
     goods: Array<IItem>
 }
+
 
 const HotGoods: React.FC<IProps> = (props) => {
     const { width } = useWindowDimensions();
@@ -28,7 +30,7 @@ const HotGoods: React.FC<IProps> = (props) => {
                 arrows
             >
                 {props.goods.map(good => <Product good={good}/>)}
-                </Slider>
+            </Slider>
             <Button>SHOW ME MORE</Button>
         </Body>
     </Root>

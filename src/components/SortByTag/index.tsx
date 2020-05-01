@@ -2,7 +2,6 @@ import React from 'react'
 import styled from '@emotion/styled'
 import deleteIcon from '../../icons/DELETETAGICON.svg'
 import Tag from './Tag'
-import { inject, observer } from 'mobx-react'
 import { SelectorsStore } from '../../stores/SelectorsStore'
 
 
@@ -42,9 +41,9 @@ export default class SortByTag extends React.Component<IProps, {}> {
                     />
                 )}
             </ThirdSection>
-            <DeleteAllTags>
-                <TextClearAll>CLEAR ALL</TextClearAll>
-                <TagDeleteBtn onClick={() => this.props.selectorsStore.deleteAllTags()} />
+            <DeleteAllTags >
+                <TextClearAll onClick={() => this.props.selectorsStore.deleteAllTags()}>CLEAR ALL</TextClearAll>
+                <TagDeleteBtn  onClick={() => this.props.selectorsStore.deleteAllTags()}/>
             </DeleteAllTags>
         </Root>
     }
@@ -90,6 +89,7 @@ height: 100%;
 right: 10px;
 `
 const TextClearAll = styled.div`
+cursor: pointer;
 font-family: inherit;
 font-weight: bold;
 margin-top: 2px;

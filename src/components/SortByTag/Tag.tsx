@@ -8,9 +8,9 @@ import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS, FRONT, INTERIOR, 
 
 interface ITagProps {
     tag: string
-    selectedTags: string[]
     handleDeleteTag: (tag: string) => void
     handleAddTag: (tag: string) => void
+    selectedTags: string[]
 }
 
 export default class Tag extends React.Component<ITagProps, {}> {

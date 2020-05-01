@@ -7,6 +7,7 @@ import Footer from '../Footer'
 import SubFooter from '../SubFooter'
 import { Route, Router, Switch } from 'react-router-dom';
 import { History } from 'history';
+import { BasketStore } from '../../stores/BasketStore'
 
 interface IProps {
     history: History;
@@ -26,7 +27,7 @@ export default class App extends React.Component<IProps, IState>{
         return <Router history={this.props.history}>
             {sessionStorage.setItem('selectedTags', '')}
             <Root>
-                <Navbar />
+                <Navbar/>
                 <Switch>
                     <Route exact path="/" component={MainPage} />
                     <Route exact path="/products" component={ShopPage} />

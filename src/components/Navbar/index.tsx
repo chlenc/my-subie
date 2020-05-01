@@ -9,6 +9,8 @@ import cart from '../../icons/Navbar/CART.svg'
 import { useWindowDimensions } from '../../utils/dimensions'
 import IG from '../../icons/Footer/IG.svg'
 import FB from '../../icons/Footer/FB.svg'
+import { BasketStore } from '../../stores/BasketStore'
+import { inject, observer } from 'mobx-react'
 
 
 const Layout = styled.div`
@@ -18,43 +20,50 @@ const Layout = styled.div`
     z-index:4;
 }
 `
-
-const Navbar: React.FC = () => {
-
-    const [isOpen, setIsOpen] = React.useState(false);
-
-    const handleCloseMenu = () => setIsOpen(false)
-    const handleOpenMenu = () => setIsOpen(true)
-
-    const { width } = useWindowDimensions();
-
-    return <Root>
-        <Body>
-            <div css={css`@media (max-width: 768px){margin-left: 15px; margin-top: 15px;}`}>
-                <OpenMenuBtn onClick={handleOpenMenu} />
-            </div>
-            <Logo href='/' />
-            {(width > 768 || isOpen) && <Layout>
-                <div css={css`display: none; @media (max-width: 768px){ display: flex; justify-content: flex-end; margin-top: 12px; margin-right: 15.35px;}`}>
-                    <CloseBtn onClick={handleCloseMenu} />
-                </div>
-                <Menu>
-                    <Text css={css`@media (max-width: 768px) { border-top: 2px solid #9D998E;}`}>PARTS</Text>
-                    <Text>SHIPPING</Text>
-                    <Text>JDM GUIDE</Text>
-                    <Text>FEEDBACK</Text>
-                    <Text>CONTACT US</Text>
-                    <SocialNetworks>
-                        <NetworkIcon style={{ backgroundImage: `url(${IG})` }} />
-                        <NetworkIcon style={{ backgroundImage: `url(${FB})` }} />
-                    </SocialNetworks>
-                </Menu>
-            </Layout>}
-            <Search />
-            <Cart />
-        </Body>
-    </Root>
+interface IProps {
+    basketStore?: BasketStore
 }
+const Navbar: React.FC<IProps> = inject('basketStore')(observer(
+    ({ basketStore }) => {
+
+        const [isOpen, setIsOpen] = React.useState(false);
+
+        const handleCloseMenu = () => setIsOpen(false)
+        const handleOpenMenu = () => setIsOpen(true)
+
+        const { width } = useWindowDimensions();
+
+        return <Root>
+            <Body>
+                <div css={css`@media (max-width: 768px){margin-left: 15px; margin-top: 15px;}`}>
+                    <OpenMenuBtn onClick={handleOpenMenu} />
+                </div>
+                <Logo href='/' />
+                {(width > 768 || isOpen) && <Layout>
+                    <div css={css`display: none; @media (max-width: 768px){ display: flex; justify-content: flex-end; margin-top: 12px; margin-right: 15.35px;}`}>
+                        <CloseBtn onClick={handleCloseMenu} />
+                    </div>
+                    <Menu>
+                        <Text css={css`@media (max-width: 768px) { border-top: 2px solid #9D998E;}`}>PARTS</Text>
+                        <Text>SHIPPING</Text>
+                        <Text>JDM GUIDE</Text>
+                        <Text>FEEDBACK</Text>
+                        <Text>CONTACT US</Text>
+                        <SocialNetworks>
+                            <NetworkIcon style={{ backgroundImage: `url(${IG})` }} />
+                            <NetworkIcon style={{ backgroundImage: `url(${FB})` }} />
+                        </SocialNetworks>
+                    </Menu>
+                </Layout>}
+                <Search />
+                <Cart>
+                    <Counter>
+                        {basketStore!.basketItems.length}
+                    </Counter>
+                </Cart>
+            </Body>
+        </Root>
+    }))
 
 export default Navbar
 
@@ -192,6 +201,9 @@ background-image: url(${search});
 `
 
 const Cart = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
 width: 72px;
 height: 40px;
 margin-left: 21px;
@@ -225,4 +237,17 @@ width: 44px;
 height: 44px;
 margin-left: 15px;
 background-size: cover;
+`
+const Counter = styled.div`
+margin-top: -15px;
+font-family: 'GothamPro-Medium';
+font-style: normal;
+font-weight: 900;
+font-size: 20px;
+line-height: 17px;
+color: #CF4B4B;
+text-shadow: 2px 0 2px #FFF, 
+0 2px 2px #FFF, 
+-2px 0 2px #FFF, 
+0 -2px 2px #FFF;
 `

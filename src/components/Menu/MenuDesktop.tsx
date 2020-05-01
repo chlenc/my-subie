@@ -118,7 +118,6 @@ justify-content: center;
 align-items: center;
 @media screen and (max-width: 1280px) {
     height: 100%;
-    /* width: 122px; */
     flex: 1;
 }
 `

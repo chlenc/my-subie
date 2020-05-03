@@ -22,7 +22,8 @@ export default class Product extends React.Component<IProps, {}> {
             <TagsIcon tags={this.props.good.tags} />
             <Gen>{this.props.good.gen}</Gen>
             <Cost cost={this.props.good.price} lastCost={this.props.good.oldPrice} />
-            <AddButton onClick={() => this.props.basketStore!.increaseItem(this.props.good.id)}>
+            <AddButton onClick={() => {this.props.basketStore!.increaseItem(this.props.good.id!, 1)
+            console.log(this.props.good)}}>
                 Add to cart
             </AddButton>
             <Title>{this.props.good.title}</Title>

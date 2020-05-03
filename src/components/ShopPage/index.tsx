@@ -14,7 +14,6 @@ import ReactLoaderSpinner from 'react-loader-spinner'
 import { animateScroll as scroll } from 'react-scroll'
 import GOHEADERBUTTON from '../../icons/GOHEADERBUTTON.svg'
 import { SelectorsStore } from '../../stores/SelectorsStore'
-import { keys } from 'mobx'
 
 const Loader = () => <div css={css` margin: 17% auto; `}>
     <ReactLoaderSpinner type="TailSpin" color="#00BFFF" height={100} width={100} />
@@ -38,9 +37,9 @@ export default class MainPage extends React.Component<IProps, {}> {
 
     render() {
         let goodsWithKeys = this.props.dataStore!.goods
-        Object.entries(goodsWithKeys).reduce((acc:IItem[], [key, value]) => ([...acc, {...value, id: key} ]), [])
-        let goods = Object.values(this.props.dataStore!.goods)
-        
+        let goods = Object.entries(goodsWithKeys).reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), [])
+
+
         let selectedTags: string[] = this.props.selectorsStore.selectedTags
         let selectedModel: string = this.props.selectorsStore.selectedModel
         let selectedGen: string = this.props.selectorsStore.selectedGen

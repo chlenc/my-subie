@@ -58,7 +58,7 @@ const Navbar: React.FC<IProps> = inject('basketStore')(observer(
                 <Search />
                 <Cart>
                     <Counter>
-                        {basketStore!.basketItems.length}
+                        {basketStore?.basketItems.length}
                     </Counter>
                 </Cart>
             </Body>
@@ -240,14 +240,18 @@ background-size: cover;
 `
 const Counter = styled.div`
 margin-top: -15px;
+padding: 1.5px;
 font-family: 'GothamPro-Medium';
 font-style: normal;
 font-weight: 900;
 font-size: 20px;
 line-height: 17px;
 color: #CF4B4B;
-text-shadow: 2px 0 2px #FFF, 
-0 2px 2px #FFF, 
--2px 0 2px #FFF, 
-0 -2px 2px #FFF;
+background-color: white;
+/* border: 1px solid black; */
+border-radius: 50% 50% 50% 50%;
+/* text-shadow: 4px 0 5px #FFF, 
+0 4px 5px #FFF, 
+-4px 0 5px #FFF, 
+0 -4px 5px #FFF; */
 `

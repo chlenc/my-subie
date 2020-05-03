@@ -2,27 +2,30 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
-import ARROW from '../../icons/ARROW.svg'
 import { SelectorsStore } from '../../stores/SelectorsStore'
+import { inject, observer } from 'mobx-react'
 
 
 interface IProps {
-    selectorsStore: SelectorsStore
+    selectorsStore?: SelectorsStore
 }
 interface IState {
 }
 
+@inject('selectorsStore')
+@observer
 export default class FilterHandler extends React.Component<IProps, IState> {
+    selectorsStore = this.props.selectorsStore!!
     render() {
         return <Root>
             <Link href='/'>HOME >&nbsp;</Link>
-            <Text onClick={() => this.props.selectorsStore.selectModelAndGen('', '')}>ALL PARTS</Text>
-            <Text onClick={() => this.props.selectorsStore.selectModelAndGen(this.props.selectorsStore.selectedModel, '')}>
-                {this.props.selectorsStore.selectedModel.length != 0
-                    ? ` > ${this.props.selectorsStore.selectedModel}> `
+            <Text onClick={() => this.selectorsStore.selectModelAndGen('', '')}>ALL PARTS</Text>
+            <Text onClick={() => this.selectorsStore.selectModelAndGen(this.selectorsStore.selectedModel, '')}>
+                {this.selectorsStore.selectedModel.length != 0
+                    ? ` > ${this.selectorsStore.selectedModel}> `
                     : null}
             </Text>
-            <Text>&nbsp;{this.props.selectorsStore.selectedGen}</Text>
+            <Text>&nbsp;{this.selectorsStore.selectedGen}</Text>
         </Root>
     }
 }

@@ -3,22 +3,27 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 import { SelectorsStore } from '../../stores/SelectorsStore'
+import { inject, observer } from 'mobx-react'
+
 
 interface IProps {
-    selectorsStore: SelectorsStore
+    selectorsStore?: SelectorsStore
 }
+
+@inject('selectorsStore')
+@observer
 export default class SortByMerch extends React.Component<IProps, {}> {
     render() {
         return <Root>
-            <Title onClick={() => this.props.selectorsStore.selectModelAndGen('MERCH', '')}>MERCH</Title>
+            <Title onClick={() => this.props.selectorsStore!.selectModelAndGen('MERCH', '')}>MERCH</Title>
             <Line />
             <VarietiesOfMerch>
-                <Label onClick={() => this.props.selectorsStore.selectModelAndGen('MERCH', 'STICKERS')}
+                <Label onClick={() => this.props.selectorsStore!.selectModelAndGen('MERCH', 'STICKERS')}
                     css={css`margin-top: 18px;`}>STICKERS</Label>
-                <Label onClick={() => this.props.selectorsStore.selectModelAndGen('MERCH', 'SHIRTS')}
+                <Label onClick={() => this.props.selectorsStore!.selectModelAndGen('MERCH', 'SHIRTS')}
 
                 >SHIRTS</Label>
-                <Label onClick={() => this.props.selectorsStore.selectModelAndGen('MERCH', 'POSTERS')}
+                <Label onClick={() => this.props.selectorsStore!.selectModelAndGen('MERCH', 'POSTERS')}
                 >POSTERS</Label>
             </VarietiesOfMerch>
         </Root>

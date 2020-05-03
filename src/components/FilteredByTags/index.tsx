@@ -5,22 +5,25 @@ import { css, jsx } from '@emotion/core'
 import deleteIcon from '../../icons/DELETETAGICON.svg'
 import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS, FRONT, INTERIOR, SEDAN, SIDE, WAGON, REAR, DISCOUNTED } from '../HotGoods/icons'
 import { SelectorsStore } from '../../stores/SelectorsStore'
+import { inject, observer } from 'mobx-react'
 
 
 interface IProps {
-    selectorsStore: SelectorsStore
+    selectorsStore?: SelectorsStore
 }
 
+@inject('selectorsStore')
+@observer
 export default class FilteredByTags extends React.Component<IProps, {}> {
     render() {
         return <Root>
             <Wrapper>
                 <p>FILTERED BY #TAGS :</p>
-                {this.props.selectorsStore.selectedTags.map(tag => <Tag tag={tag} handleDeleteTag={this.props.selectorsStore.deleteTag} selectedTags={this.props.selectorsStore.selectedTags} />)}
+                {this.props.selectorsStore!.selectedTags.map(tag => <Tag tag={tag} handleDeleteTag={this.props.selectorsStore!.deleteTag} selectedTags={this.props.selectorsStore!.selectedTags} />)}
             </Wrapper>
             <DeleteAllTags>
-                <TextClearAll>CLEAR ALL</TextClearAll>
-                <TagDeleteBtn onClick={() => this.props.selectorsStore.deleteAllTags}/>
+                <TextClearAll onClick={() => this.props.selectorsStore!.deleteAllTags()}>CLEAR ALL</TextClearAll>
+                <TagDeleteBtn onClick={() => this.props.selectorsStore!.deleteAllTags()} />
             </DeleteAllTags>
         </Root>
     }
@@ -115,6 +118,7 @@ font-size: 14px;
 display: flex;
 align-items: center;
 color: #9D998E;
+cursor: pointer;
 `
 const tagIconsMap: { [key: string]: string } = {
     RARE: RARE,

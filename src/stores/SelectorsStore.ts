@@ -14,8 +14,10 @@ export class SelectorsStore extends SubStore {
   @action addTag = (tag: string) => {
     if (this.selectedTags.indexOf(tag) == -1) {
       this.selectedTags = this.selectedTags.concat(tag);
+      console.log(this.selectedTags.toString())
     }
   };
+
   @action deleteTag = (tag: string) => {
     const N = this.selectedTags.length;
     const newArr: string[] = [];
@@ -26,9 +28,11 @@ export class SelectorsStore extends SubStore {
     }
     this.selectedTags = newArr;
   };
+
   @action deleteAllTags = () => {
     this.selectedTags = [];
   };
+
   @action selectModelAndGen = (model: string, gen: string) => {
     this.selectedModel = model;
     this.selectedGen = gen;

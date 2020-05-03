@@ -3,15 +3,19 @@ import styled from '@emotion/styled'
 import deleteIcon from '../../icons/DELETETAGICON.svg'
 import Tag from './Tag'
 import { SelectorsStore } from '../../stores/SelectorsStore'
+import { inject, observer } from 'mobx-react'
 
 
 interface IProps {
-    selectorsStore: SelectorsStore
+    selectorsStore?: SelectorsStore
 }
 
+@inject('selectorsStore')
+@observer
 export default class SortByTag extends React.Component<IProps, {}> {
+
     render() {
-        let selectedTags: string[] = this.props.selectorsStore.selectedTags
+        let selectedTags: string[] = this.props.selectorsStore!.selectedTags
         return <Root>
             <Title>SORT BY #TAG</Title>
             <Line />
@@ -19,31 +23,31 @@ export default class SortByTag extends React.Component<IProps, {}> {
                 {['FRONT', 'REAR', 'SIDE', 'INTERIOR'].map((tag, key) =>
                     <Tag
                         tag={tag} key={key}
-                        handleAddTag={this.props.selectorsStore.addTag}
-                        handleDeleteTag={this.props.selectorsStore.deleteTag}
+                        handleAddTag={this.props.selectorsStore!.addTag}
+                        handleDeleteTag={this.props.selectorsStore!.deleteTag}
                         selectedTags={selectedTags}
                     />
                 )}
             </FirstSection>
             <Line />
             <SecondSection>
-                <Tag tag={'SEDAN'} handleAddTag={this.props.selectorsStore.addTag} handleDeleteTag={this.props.selectorsStore.deleteTag} selectedTags={this.props.selectorsStore.selectedTags} />
-                <Tag tag={'WAGON'} handleAddTag={this.props.selectorsStore.addTag} handleDeleteTag={this.props.selectorsStore.deleteTag} selectedTags={this.props.selectorsStore.selectedTags} />
+                <Tag tag={'SEDAN'} handleAddTag={this.props.selectorsStore!.addTag} handleDeleteTag={this.props.selectorsStore!.deleteTag} selectedTags={this.props.selectorsStore!.selectedTags} />
+                <Tag tag={'WAGON'} handleAddTag={this.props.selectorsStore!.addTag} handleDeleteTag={this.props.selectorsStore!.deleteTag} selectedTags={this.props.selectorsStore!.selectedTags} />
             </SecondSection>
             <Line />
             <ThirdSection>
                 {['HOT', 'RARE', 'EXTRARARE', 'BRANDNEW', 'DISCOUNTED', 'NEWARRIVALS', 'BRANDED'].map((tag, key) =>
                     <Tag
                         tag={tag} key={key}
-                        handleAddTag={this.props.selectorsStore.addTag}
-                        handleDeleteTag={this.props.selectorsStore.deleteTag}
-                        selectedTags={this.props.selectorsStore.selectedTags}
+                        handleAddTag={this.props.selectorsStore!.addTag}
+                        handleDeleteTag={this.props.selectorsStore!.deleteTag}
+                        selectedTags={this.props.selectorsStore!.selectedTags}
                     />
                 )}
             </ThirdSection>
             <DeleteAllTags >
-                <TextClearAll onClick={() => this.props.selectorsStore.deleteAllTags()}>CLEAR ALL</TextClearAll>
-                <TagDeleteBtn  onClick={() => this.props.selectorsStore.deleteAllTags()}/>
+                <TextClearAll onClick={() => this.props.selectorsStore!.deleteAllTags()}>CLEAR ALL</TextClearAll>
+                <TagDeleteBtn onClick={() => this.props.selectorsStore!.deleteAllTags()} />
             </DeleteAllTags>
         </Root>
     }
@@ -106,4 +110,5 @@ margin-top: -2px;
 background-image: url(${deleteIcon});
 cursor: pointer;
 `
+
 

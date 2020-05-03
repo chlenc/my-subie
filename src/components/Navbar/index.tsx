@@ -248,10 +248,5 @@ font-size: 20px;
 line-height: 17px;
 color: #CF4B4B;
 background-color: white;
-/* border: 1px solid black; */
 border-radius: 50% 50% 50% 50%;
-/* text-shadow: 4px 0 5px #FFF, 
-0 4px 5px #FFF, 
--4px 0 5px #FFF, 
-0 -4px 5px #FFF; */
 `

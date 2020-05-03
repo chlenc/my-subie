@@ -4,9 +4,10 @@ import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 import ARROW from '../../icons/ARROW.svg'
 import { SelectorsStore } from '../../stores/SelectorsStore'
+import { inject, observer } from 'mobx-react'
 
 interface IProps {
-    selectorsStore: SelectorsStore
+    selectorsStore?: SelectorsStore
 }
 interface IState {
     isOpenLegacy: boolean
@@ -14,7 +15,8 @@ interface IState {
     isOpenForester: boolean
 }
 
-
+@inject('selectorsStore')
+@observer
 export default class SortByModel extends React.Component<IProps, IState> {
     state = {
         isOpenLegacy: false,
@@ -42,7 +44,7 @@ export default class SortByModel extends React.Component<IProps, IState> {
     render() {
 
         return <Root>
-            <Title onClick={() => this.props.selectorsStore.selectModelAndGen('', '')}>MODEL</Title>
+            <Title onClick={() => this.props.selectorsStore!!.selectModelAndGen('', '')}>MODEL</Title>
 
             <Line />
 
@@ -51,7 +53,7 @@ export default class SortByModel extends React.Component<IProps, IState> {
                     <ModelName>{'LEGACY'} <br /> {'& OUTBACK'}</ModelName>
                     <Arrow src={ARROW} className={this.state.isOpenLegacy ? 'activeArrow' : ''} />
                 </Wrapper>
-                <LegacyList isOpen={this.state.isOpenLegacy} selectModelAndGen={this.props.selectorsStore.selectModelAndGen} />
+                <LegacyList isOpen={this.state.isOpenLegacy} selectModelAndGen={this.props.selectorsStore!!.selectModelAndGen} />
             </Model>
 
             <Model>
@@ -59,7 +61,7 @@ export default class SortByModel extends React.Component<IProps, IState> {
                     <ModelName>IMPREZA</ModelName>
                     <Arrow src={ARROW} className={this.state.isOpenImpreza ? 'activeArrow' : ''} />
                 </Wrapper>
-                <ImprezaList isOpen={this.state.isOpenImpreza} selectModelAndGen={this.props.selectorsStore.selectModelAndGen} />
+                <ImprezaList isOpen={this.state.isOpenImpreza} selectModelAndGen={this.props.selectorsStore!!.selectModelAndGen} />
             </Model>
 
             <Model>
@@ -67,13 +69,13 @@ export default class SortByModel extends React.Component<IProps, IState> {
                     <ModelName>FORESTER</ModelName>
                     <Arrow src={ARROW} className={this.state.isOpenForester ? 'activeArrow' : ''} />
                 </Wrapper>
-                <ForesterList isOpen={this.state.isOpenForester} selectModelAndGen={this.props.selectorsStore.selectModelAndGen} />
+                <ForesterList isOpen={this.state.isOpenForester} selectModelAndGen={this.props.selectorsStore!!.selectModelAndGen} />
             </Model>
 
             <Model >
                 <ModelName
                     css={css`width: 100%;`}
-                    onClick={() => this.props.selectorsStore.selectModelAndGen('MISC', '')}
+                    onClick={() => this.props.selectorsStore!!.selectModelAndGen('MISC', '')}
                 >
                     MISC
                 </ModelName>

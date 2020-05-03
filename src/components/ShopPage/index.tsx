@@ -21,37 +21,35 @@ const Loader = () => <div css={css` margin: 17% auto; `}>
 
 interface IProps {
     dataStore?: DataStore
-    selectorsStore: SelectorsStore
+    selectorsStore?: SelectorsStore
 }
 
 @inject('dataStore', 'selectorsStore')
 @observer
 export default class MainPage extends React.Component<IProps, {}> {
-    handleDeleteTag = (tag: string) => this.props.selectorsStore.deleteTag(tag)
+    handleDeleteTag = (tag: string) => this.props.selectorsStore!.deleteTag(tag)
 
-    handleDeleteAllTags = () => this.props.selectorsStore.deleteAllTags()
+    handleDeleteAllTags = () => this.props.selectorsStore!.deleteAllTags()
 
-    handleAddTag = (tag: string) => this.props.selectorsStore.addTag(tag)
+    handleAddTag = (tag: string) => this.props.selectorsStore!.addTag(tag)
 
     scrollToTop() { scroll.scrollToTop() }
 
     render() {
-        let goodsWithKeys = this.props.dataStore!.goods
-        let goods = Object.entries(goodsWithKeys).reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), [])
+        const goods = Object.entries(this.props.dataStore!.goods).reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), [])
 
-
-        let selectedTags: string[] = this.props.selectorsStore.selectedTags
-        let selectedModel: string = this.props.selectorsStore.selectedModel
-        let selectedGen: string = this.props.selectorsStore.selectedGen
+        let selectedTags: string[] = this.props.selectorsStore!.selectedTags
+        let selectedModel: string = this.props.selectorsStore!.selectedModel
+        let selectedGen: string = this.props.selectorsStore!.selectedGen
         return goods && goods.length
             ? <Root>
-                <FilteredByTags selectorsStore={this.props.selectorsStore} />
-                <FilterHandler selectorsStore={this.props.selectorsStore} />
+                <FilteredByTags />
+                <FilterHandler />
                 <div css={css`display: flex; justify-content: space-between;`}>
                     <div css={css`display: flex; flex-direction: column; justify-content: flex-start;`}>
-                        <SortByModel selectorsStore={this.props.selectorsStore} />
-                        <SortByTag selectorsStore={this.props.selectorsStore} />
-                        <SortByMerch selectorsStore={this.props.selectorsStore} />
+                        <SortByModel />
+                        <SortByTag />
+                        <SortByMerch />
                     </div>
                     <FilteredGoods goods={filter(goods, selectedTags, selectedModel, selectedGen)} />
                 </div>
@@ -59,7 +57,6 @@ export default class MainPage extends React.Component<IProps, {}> {
             </Root>
             : <Loader />
     }
-
 }
 
 const Root = styled.div`
@@ -76,36 +73,28 @@ cursor: pointer;
 
 
 function filter(goods: IItem[], selectedTags: string[], selectedModel: string = '', selectedGen: string = '') {
-    let filteredGoods: IItem[] = []
+    let filteredGoods: IItem[] = goods
     const N = selectedTags.length
     selectedModel = selectedModel.toUpperCase()
     selectedGen = selectedGen.toUpperCase()
 
-    selectedModel === '' && selectedGen === ''
+    selectedModel == '' && selectedGen == ''
         ? filteredGoods = goods
-        : selectedGen === '' && selectedModel !== ''
-            ? goods.forEach(item => {
-                if (item.model.toUpperCase().indexOf(selectedModel) !== -1)
-                    filteredGoods.push(item)
-            })
-            : goods.forEach(item => {
-                if (item.model.toUpperCase().indexOf(selectedModel) !== -1 &&
-                    item.gen.toUpperCase().indexOf(selectedGen) !== -1)
-                    filteredGoods.push(item)
-            })
+        : selectedGen == '' && selectedModel != ''
+            ? filteredGoods = goods.filter(item => (item.model.toUpperCase().indexOf(selectedModel) !== -1))
+            : filteredGoods = goods.filter(item => (item.model.toUpperCase().indexOf(selectedModel) !== -1)
+                && (item.gen.toUpperCase().indexOf(selectedGen) !== -1))
 
-    filteredGoods.forEach(item => {
+
+    filteredGoods = filteredGoods.filter(item => {
         let count = 0
         for (let i = 0; i < N; i++) {
-            if (item.tags.indexOf(`#${selectedTags[i]}`) !== -1) {
+            if (item.tags.indexOf(`#${selectedTags[i]}`) != -1) {
                 count += 1
             }
         }
-        if (count === N) {
-            filteredGoods.push(item)
-        }
+        return (count === N)
     })
-    filteredGoods.forEach(item => {
-    })
+
     return filteredGoods
 }

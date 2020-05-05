@@ -26,21 +26,23 @@ const Root = styled.div`
 width: 100%;
 display: flex;
 flex-direction: column;
+transition: all 1s;
 `
 
 const SelectedImage = styled.img`
 width: 100%;
 height: auto;
+max-height: 600px;
 object-fit: scale-down;
 `
 interface IOtherProps {
     item: IItem
     imageHandler: (ref: string) => void
 }
+
 class OtherImages extends React.Component<IOtherProps> {
     render() {
         const Refs = this.props.item.attachments!
-
         return <OtherRoot>
             {Refs.map(ref => <MicroImage src={ref} onMouseEnter={() => this.props.imageHandler(ref)} />)}
         </OtherRoot>

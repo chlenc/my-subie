@@ -31,8 +31,9 @@ export default class ProductPage extends React.Component<IProps, IState> {
         const goods = Object.entries(this.props.dataStore!.goods)
         const item = goods.find(([key]) => key === id)
         this.state = { item: item ? { key: item[0], ...item[1] } : null }
+        
         if (goods && goods.length)
-            if (item![1])
+            if (item !== undefined)
                 return <Root>
                     <FilterHandler />
                     <Wrapper>

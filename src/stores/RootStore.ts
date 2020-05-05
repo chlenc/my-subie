@@ -1,11 +1,13 @@
 import { DataStore } from "./index";
 import { BasketStore } from "./BasketStore";
 import { SelectorsStore } from "./SelectorsStore";
+import HistoryStore from "./HistoryStore";
 
 class RootStore {
   public dataStore: DataStore;
   public basketStore: BasketStore;
   public selectorsStore: SelectorsStore;
+  public historyStore: HistoryStore;
 
   constructor(initState: any) {
     this.dataStore = new DataStore(
@@ -20,6 +22,7 @@ class RootStore {
       this,
       initState && initState.dataStore ? initState.dataStore : null
     );
+    this.historyStore = new HistoryStore(this)
   }
 
   public serialize = () => ({

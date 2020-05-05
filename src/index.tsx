@@ -9,8 +9,6 @@ import { createBrowserHistory } from 'history';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 
-const history = createBrowserHistory();
-
 const initState = loadState();
 const mobXStore = new RootStore(initState);
 
@@ -21,5 +19,5 @@ autorun(() => {
 }, { delay: 1000 });
 
 ReactDOM.render(<Provider {...mobXStore}>
-    <App history={history}/>
+    <App/>
     </Provider>, document.getElementById('root'));

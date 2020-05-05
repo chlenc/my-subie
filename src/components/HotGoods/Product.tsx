@@ -7,7 +7,8 @@ import NOPICYET from '../../icons/HotGoods/NOPICYET.svg'
 import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS, FRONT, INTERIOR, SEDAN, SIDE, WAGON, REAR, DISCOUNTED } from './icons'
 import { BasketStore } from '../../stores/BasketStore'
 import { observer, inject } from 'mobx-react'
-
+import { Link } from 'react-router-dom'
+import HistoryStore from '../../stores/HistoryStore'
 interface IProps {
     good: IItem
     basketStore?: BasketStore
@@ -22,8 +23,10 @@ export default class Product extends React.Component<IProps, {}> {
             <TagsIcon tags={this.props.good.tags} />
             <Gen>{this.props.good.gen}</Gen>
             <Cost cost={this.props.good.price} lastCost={this.props.good.oldPrice} />
-            <AddButton onClick={() => {this.props.basketStore!.increaseItem(this.props.good.id!, 1)
-            console.log(this.props.good)}}>
+            <AddButton onClick={() => {
+                this.props.basketStore!.increaseItem(this.props.good.id!, 1)
+                console.log(this.props.good)
+            }}>
                 Add to cart
             </AddButton>
             <Title>{this.props.good.title}</Title>
@@ -52,23 +55,41 @@ const Cost: React.FC<ICostProps> = (props) => {
 
 interface IImageProps {
     good: IItem
+    historyStore?: HistoryStore
 }
 
-const Image: React.FC<IImageProps> = (props) => {
-    const Root = styled.div`
-    width: 190px;
-    height: 190px;
-    background-size: cover;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
-    @media screen and (max-width: 768px){
-        width: 162px;
-        height: 162px;
-    }`
-    const imageURLs = props.good.attachments
-    return (imageURLs === undefined)
-        ? <Root css={css` background-image: url(${NOPICYET}); background-size: cover;`} />
-        : <Root css={css` background-image: url(${props.good.attachments![0]}); background-size: contain; background-repeat: no-repeat; background-position: center;`} />
-}
+const ImageRoot = styled.div`
+width: 190px;
+height: 190px;
+background-size: cover;
+box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+@media screen and (max-width: 768px){
+    width: 162px;
+    height: 162px;
+}`
+
+const imageStyle = css`
+background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+`;
+
+
+const Image = ({ good: { id, attachments } }: IImageProps) => <Link to={`/product/${id}`}>
+    <ImageRoot
+        css={attachments && attachments.length > 0
+            ? css` 
+                background-image: url(${attachments[0]});
+                ${imageStyle};`
+            : css` 
+                background-image: url(${NOPICYET}); 
+            background-size: cover;
+            `
+        }
+    />
+</Link>
+
+
 
 interface ITagsProps {
     tags: string[]

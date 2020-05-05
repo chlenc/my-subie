@@ -27,11 +27,11 @@ interface IProps {
 @inject('dataStore', 'selectorsStore')
 @observer
 export default class MainPage extends React.Component<IProps, {}> {
-    handleDeleteTag = (tag: string) => this.props.selectorsStore!.deleteTag(tag)
+    // handleDeleteTag = (tag: string) => this.props.selectorsStore!.deleteTag(tag)
 
-    handleDeleteAllTags = () => this.props.selectorsStore!.deleteAllTags()
+    // handleDeleteAllTags = () => this.props.selectorsStore!.deleteAllTags()
 
-    handleAddTag = (tag: string) => this.props.selectorsStore!.addTag(tag)
+    // handleAddTag = (tag: string) => this.props.selectorsStore!.addTag(tag)
 
     scrollToTop() { scroll.scrollToTop() }
 

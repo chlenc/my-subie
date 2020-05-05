@@ -19,8 +19,8 @@ export default class FilterHandler extends React.Component<IProps, IState> {
     render() {
         return <Root>
             <Link href='/'>HOME >&nbsp;</Link>
-            <Text onClick={() => this.selectorsStore.selectModelAndGen('', '')}>ALL PARTS</Text>
-            <Text onClick={() => this.selectorsStore.selectModelAndGen(this.selectorsStore.selectedModel, '')}>
+            <Link href='/products' onClick={() => this.selectorsStore.selectModelAndGen('', '')}>ALL PARTS</Link>
+            <Text href='/products' onClick={() => this.selectorsStore.selectModelAndGen(this.selectorsStore.selectedModel, '')}>
                 {this.selectorsStore.selectedModel.length != 0
                     ? ` > ${this.selectorsStore.selectedModel}> `
                     : null}
@@ -37,12 +37,13 @@ display: flex;
 align-items: center;
 justify-content: flex-start;
 `
-const Text = styled.div`
+const Text = styled.a`
 font-family: 'GothamPro-Medium';
 font-weight: bold;
 font-size: 16px;
 line-height: 15px;
 color: #9D998E;
+text-decoration: none;
 cursor: pointer;
 `
 const Link = styled.a`

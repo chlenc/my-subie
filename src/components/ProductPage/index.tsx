@@ -8,6 +8,8 @@ import HistoryStore from '../../stores/HistoryStore'
 import { IItem, DataStore } from '../../stores/DataStore';
 import ReactLoaderSpinner from 'react-loader-spinner'
 import ProductImages from '../ProductImages'
+import ItemTags from '../ItemTags'
+import CardProduct from '../CardProduct';
 
 interface IProps {
     historyStore?: HistoryStore
@@ -21,27 +23,30 @@ interface IState {
 @inject('historyStore', 'dataStore')
 @observer
 export default class ProductPage extends React.Component<IProps, IState> {
-    
+
     constructor(props: IProps) {
         super(props)
     }
-    
+
     render() {
         const id = this.props.historyStore!.currentPath.replace('product/', '').replace('/', '');
         const goods = Object.entries(this.props.dataStore!.goods)
-        const item = goods.find(([key]) => key === id)
-        this.state = { item: item ? { key: item[0], ...item[1] } : null }
-        
+            .reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), [])
+        // const goods = Object.entries(this.props.dataStore!.goods)
+        const item = goods.find(item => item.id === id)
+        this.state = { item: item ? item : null }
+
         if (goods && goods.length)
             if (item !== undefined)
                 return <Root>
                     <FilterHandler />
                     <Wrapper>
                         <LeftColumn>
-                            <ProductImages item={this.state.item!}/>
+                            <ProductImages item={this.state.item!} />
+                            <ItemTags tags={this.state.item!.tags} />
                         </LeftColumn>
                         <RightColumn>
-
+                            <CardProduct item={this.state.item!} />
                         </RightColumn>
                     </Wrapper>
                 </Root>
@@ -64,6 +69,7 @@ const Wrapper = styled.div`
 width: 100%;
 display: flex;
 flex-direction: row;
+justify-content: space-between;
 margin-top: 20px;
 `
 const LeftColumn = styled.div`

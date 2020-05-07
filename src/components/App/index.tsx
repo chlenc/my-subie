@@ -1,5 +1,7 @@
+/**@jsx jsx*/
 import React from 'react';
 import styled from '@emotion/styled'
+import { css, jsx } from '@emotion/core'
 import MainPage from '../MainPage';
 import ShopPage from '../ShopPage';
 import Navbar from '../Navbar'
@@ -33,14 +35,14 @@ export default class App extends React.Component<IProps, IState>{
             {sessionStorage.setItem('selectedTags', '')}
             <Root>
                 <Navbar/>
-                <Switch>
+                <Switch >
                     <Route exact path="/" component={MainPage} />
                     <Route exact path="/products" component={ShopPage} />
                     <Route exact path="/product/:id" component={ProductPage} />
                     <Route component={MainPage} />
                 </Switch>
-                <SubFooter />
-                <Footer />
+                {/* <SubFooter /> */}
+                {/* <Footer /> */}
             </Root>
         </Router>
     }

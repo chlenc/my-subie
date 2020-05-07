@@ -6,16 +6,23 @@ import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS, FRONT, INTERIOR, 
 interface IProps {
     tags: string[];
 }
-// interface IState {
-// }
 
 export default class ItemTags extends React.Component<IProps, {}> {
     render() {
+        const tags = this.props.tags
+        let index = tags.indexOf('#UNDER100');
+        if (index > -1) {
+            tags.splice(index, 1);
+        }
+        index = tags.indexOf('#BYMYSUBIE');
+        if (index > -1) {
+            tags.splice(index, 1);
+        }
         console.log(this.props.tags)
         return <Root>
             <Title>ITEM TAGS:</Title>
             <Tags>
-                {this.props.tags.map(tag => <TagIcon src={tagIconsMap[tag]}/>)}
+                {tags.map(tag => <TagIcon src={tagIconsMap[tag]} />)}
             </Tags>
         </Root>
     }

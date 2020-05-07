@@ -10,7 +10,7 @@ import { IItem } from '../../stores/DataStore'
 import { observer, inject } from 'mobx-react'
 
 interface IProps {
-    goods: Array<IItem>
+    goods: IItem[]
 }
 
 
@@ -29,7 +29,7 @@ const HotGoods: React.FC<IProps> = (props) => {
                 infinite
                 arrows
             >
-                {props.goods.map(good => <Product good={good}/>)}
+                {props.goods.map(good => <Product good={good} />)}
             </Slider>
             <Button>SHOW ME MORE</Button>
         </Body>

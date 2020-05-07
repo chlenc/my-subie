@@ -5,7 +5,7 @@ import Product from './Product'
 import { IItem } from '../../stores/DataStore'
 
 interface IProps {
-    goods: Array<IItem>
+    goods: IItem[]
 }
 
 export default class HotGoods extends React.Component<IProps, {}>{
@@ -13,7 +13,7 @@ export default class HotGoods extends React.Component<IProps, {}>{
         return <Root>
             <Body>
                 <Title>Featured parts</Title>
-                {this.props.goods.map(good => <Product good={good}/>)}
+                {this.props.goods.map(good => <Product good={good} />)}
             </Body>
         </Root>
     }

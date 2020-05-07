@@ -34,8 +34,8 @@ const HotGoods: React.FC<IProps> = inject('dataStore')(observer(
 
 
 
-function randomGoods(goods: Array<IItem>) {
-    const hotGoods: Array<IItem> = []
+function randomGoods(goods: IItem[]) {
+    const hotGoods: IItem[] = []
     const filterGoods = goods.filter(item => item.tags.indexOf('#DISCOUNTED' || '#UNDER100') == -1 && item.tags[item.tags.length - 1] != undefined)
     const N = filterGoods.length
     // console.log('N=', N)

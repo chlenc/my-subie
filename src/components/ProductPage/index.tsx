@@ -10,10 +10,14 @@ import ReactLoaderSpinner from 'react-loader-spinner'
 import ProductImages from '../ProductImages'
 import ItemTags from '../ItemTags'
 import CardProduct from '../CardProduct';
+import Description from './Description'
+import { SelectorsStore } from '../../stores/SelectorsStore';
+import RecommendedProducts from '../RecommendedProducts';
 
 interface IProps {
     historyStore?: HistoryStore
     dataStore?: DataStore
+    selectorsStore?: SelectorsStore
 }
 
 interface IState {
@@ -32,24 +36,27 @@ export default class ProductPage extends React.Component<IProps, IState> {
         const id = this.props.historyStore!.currentPath.replace('product/', '').replace('/', '');
         const goods = Object.entries(this.props.dataStore!.goods)
             .reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), [])
-        // const goods = Object.entries(this.props.dataStore!.goods)
         const item = goods.find(item => item.id === id)
         this.state = { item: item ? item : null }
 
         if (goods && goods.length)
             if (item !== undefined)
-                return <Root>
+                return <Background><Root>
                     <FilterHandler />
                     <Wrapper>
                         <LeftColumn>
-                            <ProductImages item={this.state.item!} />
-                            <ItemTags tags={this.state.item!.tags} />
+                            <ProductImages item={item} />
+                            <ItemTags tags={item.tags} />
+                            {console.log(item.tags.toString())}
                         </LeftColumn>
                         <RightColumn>
-                            <CardProduct item={this.state.item!} />
+                            <CardProduct item={item} />
+                            <Description item={item} />
                         </RightColumn>
                     </Wrapper>
+                    <RecommendedProducts items={goods} />
                 </Root>
+                </Background>
             else return <NoProduct />
         else return <Loader />
     }
@@ -64,6 +71,20 @@ const Root = styled.div`
 width: 1070px;
 display: flex;
 flex-direction: column;
+transition: all 500ms;
+@media (max-width: 1074px){
+    width: 630px;
+}
+@media (max-width: 666px){
+    width: 92vw;
+}
+`
+const Background = styled.div`
+width: 100vw;
+height: 100%;
+background: #FAFAFA;
+display: flex;
+justify-content: center;
 `
 const Wrapper = styled.div`
 width: 100%;
@@ -71,15 +92,28 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 margin-top: 20px;
+@media (max-width: 1074px){
+    flex-direction: column;
+}
 `
 const LeftColumn = styled.div`
 display: flex;
 flex-direction: column;
+align-items: center;
 width: 58.87850467%;
+@media (max-width: 1074px){
+    width: 100%;
+}
 `
 
 const RightColumn = styled.div`
 display: flex;
 flex-direction: column;
-width: 38.31775701%
+align-items: center;
+width: 38.31775701%;
+@media (max-width: 1074px){
+    margin-top: 15px;
+    width: 100%;
+}
 `
+

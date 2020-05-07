@@ -26,7 +26,14 @@ const Root = styled.div`
 width: 100%;
 display: flex;
 flex-direction: column;
+align-items: center;
 transition: all 1s;
+@media (max-width: 1023px){
+    width: 630px;
+}
+@media (max-width: 767px){
+    width: 92vw;
+}
 `
 
 const SelectedImage = styled.img`
@@ -45,7 +52,7 @@ class OtherImages extends React.Component<IOtherProps> {
     render() {
         const Refs = this.props.item.attachments!
         return <OtherRoot>
-            {Refs.map(ref => <MicroImage src={ref} onMouseEnter={() => this.props.imageHandler(ref)} />)}
+            {Refs.map(ref => <MicroImage src={ref} onClick={() => this.props.imageHandler(ref)} />)}
         </OtherRoot>
     }
 }

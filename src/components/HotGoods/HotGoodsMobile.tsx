@@ -28,7 +28,7 @@ display: flex;
 flex-direction: row;
 justify-content: space-around;
 background: #FAFAFA;
-@media screen and (max-width: 768px){
+@media screen and (max-width: 767px){
     background: #FAFAFA;
 }
 `
@@ -40,7 +40,7 @@ width: 1070px;
 display: flex;
 flex-direction: row;
 align-items: center;
-@media screen and (max-width: 768px){
+@media screen and (max-width: 767px){
     margin-top: 26px; 
     width: 375px;
 }
@@ -53,7 +53,7 @@ font-weight: bold;
 font-size: 18px;
 line-height: 17px;
 text-align: center;
-@media screen and (max-width: 768px){
+@media screen and (max-width: 767px){
     height: 23px;
     margin-bottom: 22px;
     font-weight: normal;

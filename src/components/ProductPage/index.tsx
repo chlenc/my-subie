@@ -13,6 +13,9 @@ import CardProduct from '../CardProduct';
 import Description from './Description'
 import { SelectorsStore } from '../../stores/SelectorsStore';
 import RecommendedProducts from '../RecommendedProducts';
+import MerchProducts from '../MerchProducts';
+import { animateScroll as scroll } from 'react-scroll'
+import GOHEADERBUTTON from '../../icons/GOHEADERBUTTON.svg'
 
 interface IProps {
     historyStore?: HistoryStore
@@ -31,6 +34,7 @@ export default class ProductPage extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props)
     }
+    scrollToTop() { scroll.scrollToTop() }
 
     render() {
         const id = this.props.historyStore!.currentPath.replace('product/', '').replace('/', '');
@@ -55,6 +59,8 @@ export default class ProductPage extends React.Component<IProps, IState> {
                         </RightColumn>
                     </Wrapper>
                     <RecommendedProducts items={goods} />
+                    <MerchProducts items={goods} />
+                    <GoTopButton src={GOHEADERBUTTON} onClick={this.scrollToTop} />
                 </Root>
                 </Background>
             else return <NoProduct />
@@ -117,3 +123,15 @@ width: 38.31775701%;
 }
 `
 
+const GoTopButton = styled.img`
+position: fixed;
+left: 5%;
+bottom: 50px;
+width: 56px;
+height: 56px;
+border-radius: 50%;
+cursor: pointer;
+@media (max-width: 1074px){
+    display: none;
+}
+`

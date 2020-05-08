@@ -41,8 +41,8 @@ export default class App extends React.Component<IProps, IState>{
                     <Route exact path="/product/:id" component={ProductPage} />
                     <Route component={MainPage} />
                 </Switch>
-                {/* <SubFooter /> */}
-                {/* <Footer /> */}
+                <Footer />
+                <SubFooter />
             </Root>
         </Router>
     }

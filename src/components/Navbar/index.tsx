@@ -189,16 +189,20 @@ height: 28px;
 margin-left: 35px;
 background-image: url(${search});
 @media (max-width: 1074px){
-    background-image: url(${search768});
     margin-left: 13px;
     height: 36px;
     width: 36px;
+    background: #FAFAFA;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    border-radius: 20px;
 }
 @media (max-width: 767px){
     background-image: url(${search768});
     margin-left: 0px;
     height: 36px;
     width: 36px;
+    border: 0px;
 }
 `
 

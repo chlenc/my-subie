@@ -18,8 +18,8 @@ export default class ReplyForm extends React.Component<{}, IState> {
         const { model } = this.state;
         return <Root>
             <Title>
-                    <p>Struggling to choose a goodies?</p>
-                    <p>Let us help you!</p>
+                <p>Struggling to choose a goodies?</p>
+                <p>Let us help you!</p>
             </Title>
             <Body>
                 <TitleForm>Please fill in the fields, we will contact you!</TitleForm>
@@ -90,7 +90,7 @@ text-align: center;
         margin: 5px 0;
     }
 }
-@media (max-width: 768px){
+@media (max-width: 767px){
     width: 375px;
     height: 79px;
     p {

@@ -30,5 +30,6 @@ margin-top: 40px;
 width: 850px;
 height: auto;
 display: flex;
+align-items: flex-start;
 flex-wrap: wrap;
 `

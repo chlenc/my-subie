@@ -7,7 +7,6 @@ import ButtonShowMeMore from '../../icons/ShowMeMoreButton.svg'
 import Product from './Product'
 import { useWindowDimensions } from '../../utils/dimensions'
 import { IItem } from '../../stores/DataStore'
-import { observer, inject } from 'mobx-react'
 
 interface IProps {
     goods: IItem[]
@@ -17,7 +16,7 @@ interface IProps {
 const HotGoods: React.FC<IProps> = (props) => {
     const { width } = useWindowDimensions();
     let amount: number = 5;
-    width > 1280 ? amount = 5 : amount = 3;
+    width > 1279 ? amount = 5 : amount = 3;
     return <Root>
         <Body>
             <Title>Featured parts</Title>
@@ -77,7 +76,7 @@ align-items: center;
     background-image: url(${rightArrow});
     background-size: cover;
 }
-@media (max-width: 1280px){
+@media (max-width: 1279px){
     width: 768px;
     height: auto;
     .slick-slider {

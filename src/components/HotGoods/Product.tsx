@@ -63,7 +63,7 @@ width: 190px;
 height: 190px;
 background-size: cover;
 box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
-@media screen and (max-width: 768px){
+@media screen and (max-width: 767px){
     width: 162px;
     height: 162px;
 }`
@@ -129,7 +129,7 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 margin-bottom: 40px;
-@media screen and (max-width: 768px){
+@media screen and (max-width: 767px){
     width: 50%;
 }
 `

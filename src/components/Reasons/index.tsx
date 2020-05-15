@@ -29,7 +29,11 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: start;
-@media screen and (max-width: 768px){
+@media screen and (max-width: 1073px){
+    width: 768px;
+    height: auto;
+}
+@media screen and (max-width: 767px){
     width: 375px;
     height: auto;
 }
@@ -44,7 +48,7 @@ font-weight: bold;
 font-size: 220px;
 line-height: 211px;
 text-align: center;
-@media screen and (max-width: 768px){
+@media screen and (max-width: 767px){
     width: auto;
     height: auto;
     line-height: 172px;
@@ -60,7 +64,7 @@ font-size: 100px;
 line-height: 96px;
 text-align: center;
 color: #000000;
-@media screen and (max-width: 768px){
+@media screen and (max-width: 767px){
 width: auto;
     margin-top: -25px;
     font-size: 30px;
@@ -77,7 +81,7 @@ font-size: 16px;
 line-height: 15px;
 text-align: center;
 color: #9D998E;
-@media screen and (max-width: 768px){
+@media screen and (max-width: 767px){
     width: auto;
     height: auto;
     font-size: 14px;
@@ -93,7 +97,7 @@ margin-top: 48px;
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
-@media screen and (max-width: 768px){
+@media screen and (max-width: 767px){
     width: auto;
     height: auto;
     margin-top: 40px;

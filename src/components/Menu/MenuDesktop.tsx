@@ -1,6 +1,6 @@
 /**@jsx jsx*/
 import React from 'react'
-import {jsx, css} from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 import styled from '@emotion/styled'
 import car1 from '../../images/car1.png'
 import car2 from '../../images/car2.png'
@@ -52,7 +52,7 @@ font-weight: bold;
 -webkit-text-stroke-color: #424242;
 backdrop-filter: blur(10px);
 font-size: 21px;
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
     width: 690px;
     height: 164px;
     margin-top: 59px;
@@ -70,7 +70,7 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
     width: 264.39px;
     height: 163.15px;
 }
@@ -88,7 +88,7 @@ justify-content: space-between;
 width: 630px;
 height: 253px;
 margin-left: 30px;
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
     width: 406.26px;
     height: 163.15px;
     margin-left: 20px;
@@ -102,7 +102,7 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 align-items: flex-start;
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
     height: calc((100% - 13.54px)/2);
 }
 `
@@ -116,9 +116,8 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
     height: 100%;
-    /* width: 122px; */
     flex: 1;
 }
 `
@@ -131,7 +130,7 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
     height: 100%;
     flex: 1;
 }
@@ -145,7 +144,7 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
     height: 100%;
     flex: 1;
 }
@@ -158,7 +157,7 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 align-items: flex-end;
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
     height: calc((100% - 21px)/2);
 }
 `
@@ -171,7 +170,7 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
     height: 100%;
     flex: 1;
 }
@@ -184,7 +183,7 @@ background-size: cover;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
     height: 100%;
     flex: 1;
 }

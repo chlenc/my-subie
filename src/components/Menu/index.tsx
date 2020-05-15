@@ -5,7 +5,7 @@ import MenuMobile from './MenuMobile'
 
 const Menu: React.FC = () => {
     const {width} = useWindowDimensions();
-    return width > 768 ? <MenuDesktop/> : <MenuMobile/>;
+    return width > 767 ? <MenuDesktop/> : <MenuMobile/>;
 };
 
 export default  Menu 

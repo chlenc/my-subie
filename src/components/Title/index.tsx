@@ -11,14 +11,14 @@ export default class ContentBox extends React.Component {
                 <Content>
                     <Text1>WELCOME TO MYSUBIE-PARTS.COM</Text1>
                     <Text2>WE SHIP JDM PARTS<br /> AROUND THE WORLD.</Text2>
-                    <Button></Button>
+                    <Button href='/products' />
                 </Content>
             </Body>
         </Root>
     }
 }
 
-const Root = styled.div `
+const Root = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: center;
@@ -37,14 +37,21 @@ justify-content: left;
 font-family: 'GothamPro-Black';
 font-weight: normal;
 color: white;
-@media  screen and (max-width: 1280px) {
+@media  screen and (max-width: 1279px) {
     width: 690px;
     height: 206px;
 }
-@media  screen and (max-width: 768px) {
-    width: 375px;
+@media  screen and (max-width: 767px) {
+    width: 92vw;
+    height: 39.008vw;
+    justify-content: center;
+    align-items: center;
+}
+@media  screen and (max-width: 375px) {
+    width: 100vw;
     height: 159px;
     justify-content: center;
+    align-items: center;
 }
 `
 const Content = styled.div`
@@ -55,13 +62,13 @@ display: flex;
 flex-direction: column;
 align-items: center;
 text-align: center;
-@media  screen and (max-width: 1280px) {
+@media  screen and (max-width: 1279px) {
     width: 315px;
     align-items: flex-start;
     margin-left: 30px;
     text-align: left;
 }
-@media  screen and (max-width: 768px) {
+@media  screen and (max-width: 767px) {
     width: 343px;
     align-items: center;
     margin-left: 0px;
@@ -71,11 +78,11 @@ text-align: center;
 const Text1 = styled.div`
 margin-top: 95px;
 font-size: 20px;
-@media  screen and (max-width: 1280px) {
+@media  screen and (max-width: 1279px) {
     margin-top: 30px;
     font-size: 14px;
 }
-@media  screen and (max-width: 768px) {
+@media  screen and (max-width: 767px) {
     margin-top: 16px;
     font-size: 18px;
 }
@@ -87,12 +94,12 @@ font-weight: bold;
 line-height: 42px;
 font-weight: 900;
 color: white;
-@media  screen and (max-width: 1280px) {
+@media  screen and (max-width: 1279px) {
     margin-top: 15px;
     font-size: 24px;
     line-height: 33px;
 }
-@media  screen and (max-width: 768px) {
+@media  screen and (max-width: 767px) {
     margin-top: 20px;
     font-size: 24px;
     line-height: 23px;
@@ -100,19 +107,19 @@ color: white;
 }
 `
 
-const Button = styled.div`
+const Button = styled.a`
 width: 172px;
 height: 44px;
 background-image: url(${buttonbg});
-background-size: cover;
+background-position: 50% 30%;
 margin-left: 200px;
-@media  screen and (max-width: 1280px) {
+@media  screen and (max-width: 1279px) {
     font-size: 24px;
     line-height: 23px;
     margin-left: -10px;
     margin-top: 7px;
 }
-@media  screen and (max-width: 768px) {
+@media  screen and (max-width: 767px) {
     font-size: 24px;
     line-height: 23px;
     margin-left: -10px;

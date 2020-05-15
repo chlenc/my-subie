@@ -15,7 +15,8 @@ export default class MenuMobile extends React.Component {
             <Body>
             <Title>SHOW ME</Title>
             <Menu>
-                <MenuColumn css={css`padding-left: 16px;`}>
+            {/* css={css`padding-left: 16px;`} */}
+                <MenuColumn css={css`margin-right: 10vw;`}>
                     <MenuElement css={css`margin-top: 13px;`}>
                         <Icon css={css`background-image: url(${front});`} />
                         #FRONTPARTS
@@ -54,9 +55,10 @@ width: 100%;
 display: flex;
 justify-content: center;
 background: #FAFAFA;
+padding-bottom: 10px;
 `
 const Body = styled.div `
-width: 375px;
+width: 92vw;
 margin-top: 13px;
 justify-content: center;
 align-items: center;
@@ -72,10 +74,11 @@ const Menu = styled.div`
 width: 100%;
 display: flex;
 flex-direction: row;
+justify-content: space-evenly;
 `
 const MenuColumn = styled.div`
 display: flex;
-width: 50%;
+width: auto;
 flex-direction: column;
 align-items: flex-start;
 justify-content: space-between;

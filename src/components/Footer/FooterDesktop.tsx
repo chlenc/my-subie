@@ -19,7 +19,7 @@ export default class Footer extends React.Component {
                     <Text>ABOUT US</Text>
                     <Text>SHIPPING</Text>
                     <Text>RETURNS</Text>
-                    <Text>FEEDBACK</Text>
+                    <Text>BLOG</Text>
                     <Text>CONTACT US</Text>
                 </Menu>
             </Body>
@@ -38,6 +38,15 @@ height: 136px;
 display: flex;
 justify-content: space-between;
 align-items: center;
+@media (max-width: 1074px){
+    width: 92vw;
+    width: 768px;
+}
+@media (max-width: 767px){
+    width: 375px;
+    height: auto;
+    flex-direction: column;
+}
 `
 
 const Logo = styled.div `
@@ -59,7 +68,7 @@ background-size: cover;
 const Menu = styled.div `
 width: 81px;
 height: 105px;
-padding-right: 50px;
+/* padding-right: 50px; */
 display: flex;
 flex-direction: column;
 justify-content: center;

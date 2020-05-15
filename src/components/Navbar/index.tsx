@@ -9,57 +9,62 @@ import cart from '../../icons/Navbar/CART.svg'
 import { useWindowDimensions } from '../../utils/dimensions'
 import IG from '../../icons/Footer/IG.svg'
 import FB from '../../icons/Footer/FB.svg'
+import { BasketStore } from '../../stores/BasketStore'
+import { inject, observer } from 'mobx-react'
 
-interface IProps {
-}
-interface IState {
-    isOpen: boolean
-}
 
 const Layout = styled.div`
-@media (max-width: 769px) {
-    position: fixed;left: 0; top:0; bottom: 0;right: 0;
+@media (max-width: 767px) {
+    position: fixed;
+    left: 0; top:0; bottom: 0;right: 0;
     background-color: rgba(0,0,0,.6);
     z-index:4;
 }
 `
-
-const Navbar: React.FC = () => {
-
-    const [isOpen, setIsOpen] = React.useState(false);
-
-    const handleCloseMenu = () => setIsOpen(false)
-    const handleOpenMenu = () => setIsOpen(true)
-
-    const { width } = useWindowDimensions();
-
-    return <Root>
-        <Body>
-            <div css={css`@media (max-width: 768px){margin-left: 15px; margin-top: 15px;}`}>
-                <OpenMenuBtn onClick={handleOpenMenu} />
-            </div>
-            <Logo />
-            {(width > 768 || isOpen) && <Layout>
-                <div css={css`display: none; @media (max-width: 768px){ display: flex; justify-content: flex-end; margin-top: 12px; margin-right: 15.35px;}`}>
-                    <CloseBtn onClick={handleCloseMenu} />
-                </div>
-                <Menu>
-                    <Text css={css`@media (max-width: 768px) { border-top: 2px solid #9D998E;}`}>PARTS</Text>
-                    <Text>SHIPPING</Text>
-                    <Text>JDM GUIDE</Text>
-                    <Text>FEEDBACK</Text>
-                    <Text>CONTACT US</Text>
-                    <SocialNetworks>
-                        <NetworkIcon style={{ backgroundImage: `url(${IG})` }} />
-                        <NetworkIcon style={{ backgroundImage: `url(${FB})` }} />
-                    </SocialNetworks>
-                </Menu>
-            </Layout>}
-            <Search />
-            <Cart />
-        </Body>
-    </Root>
+interface IProps {
+    basketStore?: BasketStore
 }
+const Navbar: React.FC<IProps> = inject('basketStore')(observer(
+    ({ basketStore }) => {
+
+        const [isOpen, setIsOpen] = React.useState(false);
+
+        const handleCloseMenu = () => setIsOpen(false)
+        const handleOpenMenu = () => setIsOpen(true)
+
+        const { width } = useWindowDimensions();
+
+        return <Root>
+            <Body>
+                <div css={css`@media (max-width: 767px){margin-left: 0px; margin-top: 15px;}`}>
+                    <OpenMenuBtn onClick={handleOpenMenu} />
+                </div>
+                <Logo href='/' />
+                {(width > 767 || isOpen) && <Layout>
+                    <div css={css`display: none; @media (max-width: 767px){ display: flex; justify-content: flex-end; margin-top: 12px; margin-right: 15.35px;}`}>
+                        <CloseBtn onClick={handleCloseMenu} />
+                    </div>
+                    <Menu>
+                        <Text css={css`@media (max-width: 767px) { border-top: 2px solid #9D998E;}`}>PARTS</Text>
+                        <Text>SHIPPING</Text>
+                        <Text>JDM GUIDE</Text>
+                        <Text>FEEDBACK</Text>
+                        <Text>CONTACT US</Text>
+                        <SocialNetworks>
+                            <NetworkIcon style={{ backgroundImage: `url(${IG})` }} />
+                            <NetworkIcon style={{ backgroundImage: `url(${FB})` }} />
+                        </SocialNetworks>
+                    </Menu>
+                </Layout>}
+                <Search />
+                <Cart>
+                    <Counter>
+                        {basketStore?.basketItems.length}
+                    </Counter>
+                </Cart>
+            </Body>
+        </Root>
+    }))
 
 export default Navbar
 
@@ -71,9 +76,10 @@ const CloseBtn: React.FunctionComponent<{ onClick?: () => void }> = ({ onClick }
 
 
 const OpenMenuBtnRoot = styled.svg`
-    @media (min-width: 769px) {
+    @media (min-width: 768px) {
         display: none;
     }
+    cursor: pointer;
 `
 
 const OpenMenuBtn: React.FunctionComponent<{ onClick?: () => void }> = ({ onClick }) =>
@@ -102,28 +108,28 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-@media (max-width: 1280px) {
+@media (max-width: 1074px) {
     height: 100px;
     width: 768px;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     height: 82px;
-    width: 375px;
+    width: 92vw;
     justify-content: space-between;
 }
 `
 
-const Logo = styled.div`
+const Logo = styled.a`
 width: 165px;
 height: 81px;
 background-image: url(${logoMain});
 background-size: cover;
 margin-top: -1.4%;
-@media (max-width: 1280px) {
+@media (max-width: 1074px) {
     height: 40px;
     width: 81px;
 }
-@media (max-width: 768px){
+@media (max-width: 767px){
     width: 118px;
     height: 59px;
 }
@@ -136,11 +142,11 @@ justify-content: space-between;
 align-items: center;
 width: 637px;
 margin-left: 55px;
-@media (max-width: 1280px) {
+@media (max-width: 1074px) {
     width: 455px;
     margin-left: 15px;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     width:50vw;
     height: 100vh;
     flex-direction: column;
@@ -164,11 +170,11 @@ font-family: 'GothamPro-Black';
 font-weight: bold;
     font-size: 18px;
     line-height: 17px;
-@media (max-width: 1280px){
+@media (max-width: 1074px){
     font-size: 14px;
     line-height: 13px;
 }
-@media (max-width: 768px){
+@media (max-width: 767px){
     width: calc(100% - 15px);
     height: 44px;
     border-bottom: 2px solid #9D998E;
@@ -182,21 +188,28 @@ width: 85px;
 height: 28px;
 margin-left: 35px;
 background-image: url(${search});
-@media (max-width: 1280px){
-    background-image: url(${search768});
+@media (max-width: 1074px){
     margin-left: 13px;
     height: 36px;
     width: 36px;
+    background: #FAFAFA;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    border-radius: 20px;
 }
-@media (max-width: 768px){
+@media (max-width: 767px){
     background-image: url(${search768});
     margin-left: 0px;
     height: 36px;
     width: 36px;
+    border: 0px;
 }
 `
 
 const Cart = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
 width: 72px;
 height: 40px;
 margin-left: 21px;
@@ -204,15 +217,15 @@ margin-top: -5px;
 background-image: url(${cart});
 background-size: cover;
 z-index: 2;
-@media (max-width: 1280px) {
+@media (max-width: 1074px) {
     margin-left: 18px;
     height: 40px;
     width: 72px;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     margin-top: 5px;
     margin-left: 0;
-    margin-right: 15px;
+    margin-right: 0;
 }
 `
 const SocialNetworks = styled.div`
@@ -230,4 +243,16 @@ width: 44px;
 height: 44px;
 margin-left: 15px;
 background-size: cover;
+`
+const Counter = styled.div`
+margin-top: -15px;
+padding: 1.5px;
+font-family: 'GothamPro-Medium';
+font-style: normal;
+font-weight: 900;
+font-size: 20px;
+line-height: 17px;
+color: #CF4B4B;
+background-color: white;
+border-radius: 50% 50% 50% 50%;
 `

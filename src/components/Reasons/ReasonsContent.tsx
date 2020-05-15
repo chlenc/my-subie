@@ -17,7 +17,7 @@ export default class ReasonsContent extends React.Component<IProps, IState> {
     render() {
 
         return <Root>
-            <Image style={{backgroundImage: `url(${this.props.imageURL})`}}/>
+            <Image style={{ backgroundImage: `url(${this.props.imageURL})` }} />
             <TextContainer>
                 <Header>{this.props.header}</Header>
                 <Text> <br /> {this.props.text}</Text>
@@ -33,7 +33,7 @@ height: 50%;
 display: flex;
 flex-direction: row;
 justify-content: flex-start;
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     width: 375px;
     justify-content: flex-start;
     margin-top: 20px;
@@ -45,7 +45,7 @@ const Image = styled.div`
 width: 110px;
 height: 110px;
 background-size: cover;
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     width: 50px;
     height: 50px;
 }
@@ -56,7 +56,7 @@ margin-left: 21px;
 display: flex;
 flex-direction: column;
 align-items: flex-start;
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     width: 70%;
 }
 `
@@ -67,7 +67,7 @@ font-weight: 900;
 font-size: 18px;
 line-height: 17px;
 text-align: center;
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     width: auto;
     height: auto;
     font-size: 24px;
@@ -82,7 +82,7 @@ font-weight: normal;
 font-size: 12px;
 line-height: 11px;
 color: #000000;
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     width: auto;
     height: auto;
     font-size: 14px;

@@ -9,7 +9,7 @@ export default class Footer extends React.Component {
     render() {
         return <Root>
             <Body>
-                <Logo/>
+                <Logo href='/'/>
                 <SocialNetworks>
                     <NetworkIcon style={ {backgroundImage: `url(${IG})`} }/>
                     <NetworkIcon style={ {backgroundImage: `url(${FB})`} }/>
@@ -19,7 +19,7 @@ export default class Footer extends React.Component {
                     <Text>ABOUT US</Text>
                     <Text>SHIPPING</Text>
                     <Text>RETURNS</Text>
-                    <Text>FEEDBACK</Text>
+                    <Text>BLOG</Text>
                     <Text>CONTACT US</Text>
                 </Menu>
             </Body>
@@ -30,6 +30,7 @@ export default class Footer extends React.Component {
 const Root = styled.div `
 display: flex;
 align-items: center;
+user-select: none;
 `
 
 const Body = styled.div `
@@ -38,9 +39,18 @@ height: 136px;
 display: flex;
 justify-content: space-between;
 align-items: center;
+@media (max-width: 1074px){
+    width: 92vw;
+    width: 768px;
+}
+@media (max-width: 767px){
+    width: 375px;
+    height: auto;
+    flex-direction: column;
+}
 `
 
-const Logo = styled.div `
+const Logo = styled.a`
 width: 127px;
 height: 63px;
 background-image: url(${logo});
@@ -59,7 +69,7 @@ background-size: cover;
 const Menu = styled.div `
 width: 81px;
 height: 105px;
-padding-right: 50px;
+/* padding-right: 50px; */
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -71,4 +81,5 @@ color: #9D998E;
 `
 const Text = styled.div `
 height: 17px;
+cursor: pointer;
 `

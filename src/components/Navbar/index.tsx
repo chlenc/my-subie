@@ -3,77 +3,94 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 import logoMain from '../../icons/Navbar/logoMain.svg'
-import search from '../../icons/Navbar/search.svg'
-import search768 from '../../icons/Navbar/SEARCH768.svg'
+import SearchIcon from '../../icons/Navbar/SearchIcon.svg'
 import cart from '../../icons/Navbar/CART.svg'
 import { useWindowDimensions } from '../../utils/dimensions'
 import IG from '../../icons/Footer/IG.svg'
 import FB from '../../icons/Footer/FB.svg'
+import { BasketStore } from '../../stores/BasketStore'
+import { inject, observer } from 'mobx-react'
 
-interface IProps {
-}
-interface IState {
-    isOpen: boolean
-}
 
 const Layout = styled.div`
-@media (max-width: 769px) {
-    position: fixed;left: 0; top:0; bottom: 0;right: 0;
+height: 100%;
+@media (max-width: 767px) {
+    position: fixed;
+    left: 0; top:0; bottom: 0;right: 0;
     background-color: rgba(0,0,0,.6);
-    z-index:4;
+    z-index:5;
 }
 `
-
-const Navbar: React.FC = () => {
-
-    const [isOpen, setIsOpen] = React.useState(false);
-
-    const handleCloseMenu = () => setIsOpen(false)
-    const handleOpenMenu = () => setIsOpen(true)
-
-    const { width } = useWindowDimensions();
-
-    return <Root>
-        <Body>
-            <div css={css`@media (max-width: 768px){margin-left: 15px; margin-top: 15px;}`}>
-                <OpenMenuBtn onClick={handleOpenMenu} />
-            </div>
-            <Logo />
-            {(width > 768 || isOpen) && <Layout>
-                <div css={css`display: none; @media (max-width: 768px){ display: flex; justify-content: flex-end; margin-top: 12px; margin-right: 15.35px;}`}>
-                    <CloseBtn onClick={handleCloseMenu} />
-                </div>
-                <Menu>
-                    <Text css={css`@media (max-width: 768px) { border-top: 2px solid #9D998E;}`}>PARTS</Text>
-                    <Text>SHIPPING</Text>
-                    <Text>JDM GUIDE</Text>
-                    <Text>FEEDBACK</Text>
-                    <Text>CONTACT US</Text>
-                    <SocialNetworks>
-                        <NetworkIcon style={{ backgroundImage: `url(${IG})` }} />
-                        <NetworkIcon style={{ backgroundImage: `url(${FB})` }} />
-                    </SocialNetworks>
-                </Menu>
-            </Layout>}
-            <Search />
-            <Cart />
-        </Body>
-    </Root>
+interface IProps {
+    basketStore?: BasketStore
 }
+const Navbar: React.FC<IProps> = inject('basketStore')(observer(
+    ({ basketStore }) => {
+
+        const [isOpen, setIsOpen] = React.useState(false);
+        const [searchIsOpen, setSearchIsOpen] = React.useState(false);
+
+        const handleOpenMenu = () => setIsOpen(true)
+        const handleCloseMenu = () => setIsOpen(false)
+        const handleOpenSearch = () => setSearchIsOpen(true)
+        const handleCloseSearch = () => setSearchIsOpen(false)
+
+        const { width } = useWindowDimensions();
+        let searchClass: string = 'closeSearchPanel'
+        { (searchIsOpen) ? searchClass = 'openSearchPanel' : searchClass = 'closeSearchPanel' }
+        return <Root>
+            <Body >
+                <div css={css`@media (max-width: 767px){margin-left: 0px; margin-top: 15px;}`}>
+                    <OpenMenuBtn onClick={handleOpenMenu} />
+                </div>
+                <Logo href='/' />
+                {(width > 767 || isOpen) && <Layout>
+                    <div css={css`display: none; @media (max-width: 767px){ display: flex; justify-content: flex-end; margin-top: 12px; margin-right: 15.35px;}`}>
+                        <CloseBtn onClick={handleCloseMenu} />
+                    </div>
+                    <Menu onClick={handleCloseSearch}>
+                        <Text css={css`@media (max-width: 767px) { border-top: 2px solid #9D998E;}`}>PARTS</Text>
+                        <Text>SHIPPING</Text>
+                        <Text>JDM GUIDE</Text>
+                        <Text>FEEDBACK</Text>
+                        <Text>CONTACT US</Text>
+                        <SocialNetworks>
+                            <NetworkIcon style={{ backgroundImage: `url(${IG})` }} />
+                            <NetworkIcon style={{ backgroundImage: `url(${FB})` }} />
+                        </SocialNetworks>
+                    </Menu>
+                </Layout>}
+                <div css={css`width: 85px; @media(max-width: 1069px){width: 36px;}`}></div>
+                <Search className={searchClass} onClick={handleOpenSearch}>
+                    <img src={SearchIcon} />
+                    <SearchInput placeholder='Search' />
+                </Search>
+            </Body>
+            <Cart>
+                <Counter>
+                    {basketStore?.basketItems.length}
+                </Counter>
+            </Cart>
+            {console.log(searchIsOpen)}
+        </Root>
+    }))
 
 export default Navbar
 
 const CloseBtn: React.FunctionComponent<{ onClick?: () => void }> = ({ onClick }) =>
-    <svg onClick={onClick} width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="33.2341" width="2" height="47" transform="rotate(45 33.2341 0)" fill="white" />
-        <rect x="34.6482" y="33.2354" width="2" height="47" transform="rotate(135 34.6482 33.2354)" fill="white" />
-    </svg>
+    <div css={css`cursor: pointer;`}>
+        <svg onClick={onClick} width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="33.2341" width="2" height="47" transform="rotate(45 33.2341 0)" fill="white" />
+            <rect x="34.6482" y="33.2354" width="2" height="47" transform="rotate(135 34.6482 33.2354)" fill="white" />
+        </svg>
+    </div>
 
 
 const OpenMenuBtnRoot = styled.svg`
-    @media (min-width: 769px) {
+    @media (min-width: 768px) {
         display: none;
     }
+    cursor: pointer;
 `
 
 const OpenMenuBtn: React.FunctionComponent<{ onClick?: () => void }> = ({ onClick }) =>
@@ -90,40 +107,80 @@ const OpenMenuBtn: React.FunctionComponent<{ onClick?: () => void }> = ({ onClic
 
 
 const Root = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: center;
-`
-
-const Body = styled.div`
-height: 140px;
-width: 1070px;
+background: white;
 display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-@media (max-width: 1280px) {
-    height: 100px;
-    width: 768px;
+`
+
+const Body = styled.div`
+position: relative;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+@media (min-width: 1070px){
+    height: 140px;
+    width: 998px;
 }
-@media (max-width: 768px) {
+@media (max-width: 1069px) {
+    height: 100px;
+    width: 605px;
+}
+@media (max-width: 767px) {
     height: 82px;
-    width: 375px;
+    width: calc(92vw - 72px);;
     justify-content: space-between;
+}
+.openSearchPanel{
+    width: 770px;
+    > input {
+        ::placeholder{
+            font-size: 17px;
+        }
+    }
+    @media (max-width: 1069px) {
+        width: 520px;
+        border-radius: 20px;
+        display: flex;
+        justify-content: flex-start;
+        > img {
+            width: 10%;
+            height: 60%;
+        }
+    }
+    @media (max-width: 767px){
+        width: 200px;
+    }
+    > input {
+        ::placeholder{
+            font-size: 17px;
+            color: #9D998E;
+        }
+    }
+}
+.closeSearchPanel{
+    @media(max-width: 1069px){
+        > input {
+            display: none;
+        }
+    }
 }
 `
 
-const Logo = styled.div`
+const Logo = styled.a`
 width: 165px;
 height: 81px;
 background-image: url(${logoMain});
 background-size: cover;
 margin-top: -1.4%;
-@media (max-width: 1280px) {
+@media (max-width: 1069px) {
     height: 40px;
     width: 81px;
+    margin-left: -20px;
 }
-@media (max-width: 768px){
+@media (max-width: 767px){
     width: 118px;
     height: 59px;
 }
@@ -135,12 +192,13 @@ flex-direction: row;
 justify-content: space-between;
 align-items: center;
 width: 637px;
+height: 100%;
 margin-left: 55px;
-@media (max-width: 1280px) {
+@media (max-width: 1069px) {
     width: 455px;
     margin-left: 15px;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     width:50vw;
     height: 100vh;
     flex-direction: column;
@@ -151,7 +209,7 @@ margin-left: 55px;
     left: 0;
     margin-left: 0;
     background-color: #fff;
-    z-index:5;
+    z-index:6;
 }
 `
 
@@ -162,13 +220,15 @@ align-items: center;
 width: auto;
 font-family: 'GothamPro-Black';
 font-weight: bold;
-    font-size: 18px;
-    line-height: 17px;
-@media (max-width: 1280px){
+font-size: 18px;
+line-height: 17px;
+cursor: pointer;
+user-select: none;
+@media (max-width: 1069px){
     font-size: 14px;
     line-height: 13px;
 }
-@media (max-width: 768px){
+@media (max-width: 767px){
     width: calc(100% - 15px);
     height: 44px;
     border-bottom: 2px solid #9D998E;
@@ -177,26 +237,67 @@ font-weight: bold;
 `
 
 const Search = styled.div`
-background-size: cover;
-width: 85px;
-height: 28px;
-margin-left: 35px;
-background-image: url(${search});
-@media (max-width: 1280px){
-    background-image: url(${search768});
-    margin-left: 13px;
-    height: 36px;
-    width: 36px;
+position: absolute;
+right: 0;
+display: flex;
+align-items: center;
+transition: 0.3s;
+z-index: 4;
+background: #FFFFFF;
+cursor: pointer;
+@media(min-width: 1070px){
+    width: 85px;
+    height: 28px;
+    padding-left: 7px;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    border-radius: 20px;
 }
-@media (max-width: 768px){
-    background-image: url(${search768});
-    margin-left: 0px;
-    height: 36px;
+@media (max-width: 1069px){
     width: 36px;
+    height: 36px;
+    margin-top: -3px;
+    justify-content: center;
+    margin-left: 16px;
+    background: #FAFAFA;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    border-radius: 50%;
+    > img {
+        width: 60%;
+        height: 60%;
+    }
+}
+@media (max-width: 767px){
+    width: 36px;
+    height: 36px;
+    margin-left: 0px;
+    /* margin-top:  */
+    right: 6vw;
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    border-radius: 50%;
 }
 `
-
+const SearchInput = styled.input`
+width: 63.94117647%;
+height: 80%;
+margin-top: -1px;
+border: none;
+font-weight: normal;
+font-size: 14px;
+line-height: 13px;
+background: #FAFAFA;
+font-size: 17px;
+::placeholder{
+    font-size: 15px;
+    color: #9D998E;
+}
+`
 const Cart = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
 width: 72px;
 height: 40px;
 margin-left: 21px;
@@ -204,19 +305,19 @@ margin-top: -5px;
 background-image: url(${cart});
 background-size: cover;
 z-index: 2;
-@media (max-width: 1280px) {
-    margin-left: 18px;
+@media (max-width: 1069px) {
+    margin-left: 13px;
     height: 40px;
     width: 72px;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     margin-top: 5px;
     margin-left: 0;
-    margin-right: 15px;
+    margin-right: 0;
 }
 `
 const SocialNetworks = styled.div`
-width: 100%;;
+width: 100%;
 height: 74px;
 display: flex;
 align-items: center;
@@ -230,4 +331,16 @@ width: 44px;
 height: 44px;
 margin-left: 15px;
 background-size: cover;
+`
+const Counter = styled.div`
+margin-top: -15px;
+padding: 1.5px;
+font-family: 'GothamPro-Medium';
+font-style: normal;
+font-weight: 900;
+font-size: 20px;
+line-height: 17px;
+color: #CF4B4B;
+background-color: white;
+border-radius: 50% 50% 50% 50%;
 `

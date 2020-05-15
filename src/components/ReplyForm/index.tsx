@@ -18,8 +18,8 @@ export default class ReplyForm extends React.Component<{}, IState> {
         const { model } = this.state;
         return <Root>
             <Title>
-                    <p>Struggling to choose a goodies?</p>
-                    <p>Let us help you!</p>
+                <p>Struggling to choose a goodies?</p>
+                <p>Let us help you!</p>
             </Title>
             <Body>
                 <TitleForm>Please fill in the fields, we will contact you!</TitleForm>
@@ -51,13 +51,15 @@ export default class ReplyForm extends React.Component<{}, IState> {
 }
 
 const Root = styled.div`
-margin-top: 43px;
+width: 100%;
+margin-top: 23px;
+padding-top: 43px;
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
 background: #FAFAFA;
-width: 100%;
+font-family: 'GothamPro-Medium';
 `
 
 const Body = styled.div`
@@ -77,7 +79,6 @@ border-bottom: 2px solid #9D998E;
 display: flex;
 flex-direction: column;
 align-items: center;
-font-family: 'GothamPro-Medium';
 font-weight: bold;
 justify-content: center;
 font-size: 18px;
@@ -90,7 +91,7 @@ text-align: center;
         margin: 5px 0;
     }
 }
-@media (max-width: 768px){
+@media (max-width: 767px){
     width: 375px;
     height: 79px;
     p {
@@ -122,7 +123,6 @@ box-sizing: border-box;
 const Number = styled.div`
 width: 30px;
 text-align: right;
-font-family: 'GothamPro-Medium';
 font-weight: normal;
 font-size: 14px;
 line-height: 138.2%;
@@ -132,7 +132,6 @@ const TitleForm = styled.div`
 height: 49px;
 top: 1.78%;
 bottom: 85.5%;
-font-family: 'GothamPro-Medium';
 font-weight: bold;
 font-size: 14px;
 line-height: 138.2%;
@@ -144,7 +143,6 @@ color: #73B289;
 const Name = styled.input`
 width: 220px;
 margin-left: 13px;
-font-family: 'GothamPro-Medium';
 font-weight: normal;
 font-size: 14px;
 line-height: 138.2%;
@@ -157,10 +155,10 @@ background: #FAFAFA;
 }
 `
 const Comment = styled.textarea`
+font-family: 'GothamPro-Medium';
 width: 212px;
 height: 92px;
 margin-left: 13px;
-font-family: 'GothamPro-Medium';
 font-weight: normal;
 font-size: 14px;
 line-height: 138.2%;
@@ -191,4 +189,5 @@ font-weight: bold;
 font-size: 18px;
 line-height: 25px;
 color: #000000;
+box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 `

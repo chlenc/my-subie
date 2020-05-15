@@ -11,7 +11,7 @@ export default class Footer extends React.Component {
     render() {
         return <Root>
             <LeftColumn>
-                <Logo />
+                <Logo href='/'/>
                 <SocialNetworks>
                     <NetworkIcon style={{ backgroundImage: `url(${IG})` }} />
                     <NetworkIcon style={{ backgroundImage: `url(${FB})` }} />
@@ -22,7 +22,7 @@ export default class Footer extends React.Component {
                 <Text css={css`margin-top: 0px;`}>ABOUT US</Text>
                 <Text>SHIPPING</Text>
                 <Text>RETURNS</Text>
-                <Text>FEEDBACK</Text>
+                <Text>BLOG</Text>
                 <Text>CONTACT US</Text>
             </Menu>
         </Root>
@@ -30,11 +30,12 @@ export default class Footer extends React.Component {
 }
 
 const Root = styled.div`
-width: 375px;
+width: 92vw;
 height: auto;
 display: flex;
 align-items: center;
 margin-bottom: 24px;
+user-select: none;
 `
 
 const LeftColumn = styled.div`
@@ -43,7 +44,7 @@ display: flex;
 flex-direction: column;
 
 `
-const Logo = styled.div`
+const Logo = styled.a`
 width: 127px;
 height: 63px;
 margin-top: 21px;

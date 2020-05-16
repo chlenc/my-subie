@@ -9,6 +9,7 @@ import { BasketStore } from '../../stores/BasketStore'
 import { observer, inject } from 'mobx-react'
 import { Link } from 'react-router-dom'
 import HistoryStore from '../../stores/HistoryStore'
+
 interface IProps {
     good: IItem
     basketStore?: BasketStore

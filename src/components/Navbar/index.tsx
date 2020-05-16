@@ -10,7 +10,7 @@ import IG from '../../icons/Footer/IG.svg'
 import FB from '../../icons/Footer/FB.svg'
 import { BasketStore } from '../../stores/BasketStore'
 import { inject, observer } from 'mobx-react'
-
+import { Link } from 'react-router-dom'
 
 const Layout = styled.div`
 height: 100%;
@@ -66,11 +66,13 @@ const Navbar: React.FC<IProps> = inject('basketStore')(observer(
                     <SearchInput placeholder='Search' />
                 </Search>
             </Body>
-            <Cart>
-                <Counter>
-                    {basketStore?.basketItems.length}
-                </Counter>
-            </Cart>
+            <Link to='/cart'>
+                <Cart>
+                    <Counter>
+                        {basketStore?.basketItems.length}
+                    </Counter>
+                </Cart>
+            </Link>
             {console.log(searchIsOpen)}
         </Root>
     }))
@@ -305,6 +307,7 @@ margin-top: -5px;
 background-image: url(${cart});
 background-size: cover;
 z-index: 2;
+cursor: pointer;
 @media (max-width: 1069px) {
     margin-left: 13px;
     height: 40px;

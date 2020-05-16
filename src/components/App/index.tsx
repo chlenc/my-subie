@@ -14,6 +14,7 @@ import { BasketStore } from '../../stores/BasketStore'
 import { observer, inject } from 'mobx-react';
 import HistoryStore from '../../stores/HistoryStore';
 import ProductPage from '../ProductPage';
+import CartPage from '../CartPage';
 
 interface IProps {
     historyStore?: HistoryStore;
@@ -40,6 +41,7 @@ export default class App extends React.Component<IProps, IState>{
                     <Route exact path="/" component={MainPage} />
                     <Route exact path="/products" component={ShopPage} />
                     <Route exact path="/product/:id" component={ProductPage} />
+                    <Route exact path="/cart" component={CartPage} />
                     <Route component={Page404} />
                 </Switch>
                 <Footer />

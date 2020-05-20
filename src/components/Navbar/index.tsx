@@ -49,7 +49,7 @@ const Navbar: React.FC<IProps> = inject('basketStore')(observer(
                         <CloseBtn onClick={handleCloseMenu} />
                     </div>
                     <Menu onClick={handleCloseSearch}>
-                        <Text css={css`@media (max-width: 767px) { border-top: 2px solid #9D998E;}`}>PARTS</Text>
+                        <Text css={css`@media (max-width: 767px) { border-top: 2px solid #9D998E;}`} href='/products'>PARTS</Text>
                         <Text>SHIPPING</Text>
                         <Text>JDM GUIDE</Text>
                         <Text>FEEDBACK</Text>
@@ -215,7 +215,7 @@ margin-left: 55px;
 }
 `
 
-const Text = styled.div`
+const Text = styled.a`
 display: flex;
 flex-direction: row;
 align-items: center;
@@ -226,6 +226,8 @@ font-size: 18px;
 line-height: 17px;
 cursor: pointer;
 user-select: none;
+text-decoration: none;
+color: black;
 @media (max-width: 1069px){
     font-size: 14px;
     line-height: 13px;

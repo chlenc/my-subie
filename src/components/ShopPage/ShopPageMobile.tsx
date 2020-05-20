@@ -38,25 +38,21 @@ export default class MainPage extends React.Component<IProps, {}> {
         let selectedTags: string[] = this.props.selectorsStore!.selectedTags
         let selectedModel: string = this.props.selectorsStore!.selectedModel
         let selectedGen: string = this.props.selectorsStore!.selectedGen
-        // return goods && goods.length
-        //     ? <Root>
-        //         <SortByModel/>
-        //     </Root>
-        //     : <Loader />
-        // return goods && goods.length
-        return <Root>
-            <Selectors>
-                <SortByModel />
-                <SortByTagMobile />
-            </Selectors>
-            <FilterHandler/>
-        </Root>
+        return goods && goods.length
+            ? <Root>
+                <Selectors>
+                    <SortByModel />
+                    <SortByTagMobile />
+                </Selectors>
+                <FilterHandler />
+                <FilteredGoods goods={filter(goods, selectedTags, selectedModel, selectedGen)} />
+            </Root>
+            : <Loader />
     }
 }
 
 const Root = styled.div`
 width: 92vw;
-height: 44px;
 `
 const Selectors = styled.div`
 display: flex;

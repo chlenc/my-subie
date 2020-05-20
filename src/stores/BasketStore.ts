@@ -17,13 +17,12 @@ export class BasketStore extends SubStore {
     JSON.parse(localStorage.getItem("basket")!) || [];
 
   autoUpdate = autorun(() => {
-    console.log("boom");
     localStorage.setItem("basket", JSON.stringify(this.basketItems));
   });
 
   @action increaseItem = (id: string, count: number = 1) => {
     this.basketItems.filter((item) => item.id == id).length == 0
-      ? this.basketItems.push({ "id": id, "count": count })
+      ? this.basketItems.push({ id: id, count: count })
       : this.basketItems.map((item) => {
           if (item.id == id) item.count += count;
         });
@@ -35,5 +34,9 @@ export class BasketStore extends SubStore {
         if (item.count <= 0) item.count = 0;
       });
     }
+  };
+  @action deleteItem = (id: string) => {
+    const index = this.basketItems.findIndex((item) => item.id === id);
+    this.basketItems.splice(index, 1);
   };
 }

@@ -35,6 +35,18 @@ export default class Product extends React.Component<IProps, {}> {
     }
 }
 
+const Root = styled.div`
+position: relative;
+width: 190px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+margin-bottom: 40px;
+@media screen and (max-width: 767px){
+    width: 50%;
+}
+`
 
 interface ICostProps {
     cost: number
@@ -84,8 +96,7 @@ const Image = ({ good: { id, attachments } }: IImageProps) => <Link to={`/produc
                 ${imageStyle};`
             : css` 
                 background-image: url(${NOPICYET}); 
-            background-size: cover;
-            `
+                background-size: cover;`
         }
     />
 </Link>
@@ -122,18 +133,6 @@ const TagsIcon: React.FC<ITagsProps> = (props) => {
         ? <Root src={tagIconsMap[lastTag!]} />
         : null
 }
-const Root = styled.div`
-position: relative;
-width: 190px;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-margin-bottom: 40px;
-@media screen and (max-width: 767px){
-    width: 50%;
-}
-`
 
 const Gen = styled.div`
 width: 190px;
@@ -203,6 +202,10 @@ font-size: 10px;
 line-height: 10px;
 text-align: center;
 cursor: pointer;
+transition: 0.2s;
+:hover {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.7)
+}
 `
 
 const tagIconsMap: { [key: string]: string } = {

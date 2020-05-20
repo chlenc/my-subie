@@ -14,11 +14,9 @@ export default class FilteredGoods extends React.Component<IProps, {}> {
     render() {
         return <Root>
             {this.props.goods.map(good =>
-                <div css={css`width: 21%; margin-left: 30px !important;`}>
+                <Wrapper>
                     <Product good={good} />
-                </div>
-            )
-            }
+                </Wrapper>)}
         </Root>
     }
 }
@@ -32,4 +30,19 @@ height: auto;
 display: flex;
 align-items: flex-start;
 flex-wrap: wrap;
+@media (max-width: 1279px) {
+    width: calc(92vw + 30px);
+    justify-content: space-between;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+`
+const Wrapper = styled.div`
+@media (min-width: 1070px){
+    width: 21%;
+    margin-left: 30px;
+}
+margin-left: 15px;
+margin-right: 15px;
+width: 190px;
 `

@@ -66,7 +66,7 @@ const Navbar: React.FC<IProps> = inject('basketStore')(observer(
                     <SearchInput placeholder='Search' />
                 </Search>
             </Body>
-            <Link to='/cart'>
+            <Link to='/cart' css={css`text-decoration: none;`}>
                 <Cart>
                     <Counter>
                         {basketStore?.basketItems.length}

@@ -30,7 +30,8 @@ export default class MainPage extends React.Component<IProps, {}> {
     scrollToTop() { scroll.scrollToTop() }
 
     render() {
-        const goods = Object.entries(this.props.dataStore!.goods).reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), [])
+        const goods = Object.entries(this.props.dataStore!.goods)
+        .reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), [])
 
         let selectedTags: string[] = this.props.selectorsStore!.selectedTags
         let selectedModel: string = this.props.selectorsStore!.selectedModel

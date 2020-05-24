@@ -25,6 +25,7 @@ export default class FilteredGoods extends React.Component<IProps, {}> {
 const Root = styled.div`
 position: relative;
 margin-top: 40px;
+margin-left: 30px;
 width: 850px;
 height: auto;
 display: flex;
@@ -38,9 +39,9 @@ flex-wrap: wrap;
 }
 `
 const Wrapper = styled.div`
-@media (min-width: 1070px){
+@media (min-width: 1280px){
     width: 21%;
-    margin-left: 30px;
+    /* margin-left: 30px; */
 }
 margin-left: 15px;
 margin-right: 15px;

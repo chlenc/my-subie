@@ -11,8 +11,8 @@ interface IProps {
 export default class HotGoods extends React.Component<IProps, {}>{
     render() {
         return <Root>
+            <Title>Featured parts</Title>
             <Body>
-                <Title>Featured parts</Title>
                 {this.props.goods.map(good => <Product good={good} />)}
             </Body>
         </Root>
@@ -25,11 +25,12 @@ const Root = styled.div`
 width: 100%;
 z-index: 0;
 display: flex;
-flex-direction: row;
-justify-content: space-around;
+flex-direction: column;
+align-items: center;
 background: #FAFAFA;
 @media screen and (max-width: 767px){
     background: #FAFAFA;
+    padding-top: 20px;
 }
 `
 const Body = styled.div`
@@ -42,7 +43,10 @@ flex-direction: row;
 align-items: center;
 @media screen and (max-width: 767px){
     margin-top: 26px; 
-    width: 375px;
+    width: 92vw;
+    >div{
+        margin: 10px 15px;
+    }
 }
 `
 const Title = styled.div`

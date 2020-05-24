@@ -44,7 +44,7 @@ align-items: center;
 justify-content: center;
 margin-bottom: 40px;
 @media screen and (max-width: 767px){
-    width: 50%;
+    width: 162px;
 }
 `
 
@@ -117,6 +117,10 @@ const TagsIcon: React.FC<ITagsProps> = (props) => {
     position: absolute;
     right: 12px;
     top: 12px;
+    @media screen and (max-width: 767px){
+        right: 9px;
+        top: 9px;
+    }
     `
     const tags = props.tags
     let index = tags.indexOf('#UNDER100');
@@ -185,6 +189,9 @@ font-size: 14px;
 line-height: 13px;
 text-align: center;
 color: #000000;
+@media screen and (max-width: 767px){
+    width: 162px;
+}
 `
 const AddButton = styled.div`
 width: 101.64px;

@@ -17,9 +17,9 @@ export default class StepsPanel extends React.Component {
         return <Root>
             <Wrapper>
                 <Step image={backArrow} text='CONTINUE SHOPPING' href='/products' active={false} />
-                <Step image={one} text='SHIPPING QUOTE' href='/products' active={true} />
-                <Step image={two} text='CHECKOUT DETAILS' href='/products' active={false} />
-                <Step image={next} text='ORDER COMPLETE' href='/products' active={false} />
+                <Step image={one} text='SHIPPING QUOTE' href='/' active={true} />
+                <Step image={two} text='CHECKOUT DETAILS' href='/' active={false} />
+                <Step image={next} text='ORDER COMPLETE' href='/' active={false} />
             </Wrapper>
         </Root>
     }

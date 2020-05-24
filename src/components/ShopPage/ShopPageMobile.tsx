@@ -14,7 +14,6 @@ import ReactLoaderSpinner from 'react-loader-spinner'
 import { animateScroll as scroll } from 'react-scroll'
 import GOHEADERBUTTON from '../../icons/GOHEADERBUTTON.svg'
 import { SelectorsStore } from '../../stores/SelectorsStore'
-
 import { useWindowDimensions } from '../../utils/dimensions'
 import SortByTagMobile from '../SortByTag/SortByTagMobile'
 

@@ -2,7 +2,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
-import { Link } from 'react-router-dom'
 import backArrow from '../../icons/CartPage/backArrow.svg'
 import one from '../../icons/CartPage/one.svg'
 import two from '../../icons/CartPage/two.svg'

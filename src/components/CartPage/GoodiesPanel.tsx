@@ -1,9 +1,7 @@
-/** @jsx jsx*/
 import React from 'react'
 import styled from '@emotion/styled'
-import { css, jsx } from '@emotion/core'
 import { inject, observer } from 'mobx-react'
-import { BasketStore, IBasketItems } from '../../stores/BasketStore'
+import { BasketStore } from '../../stores/BasketStore'
 import { IItem, DataStore } from '../../stores/DataStore'
 import ItemCard from './ItemCard'
 

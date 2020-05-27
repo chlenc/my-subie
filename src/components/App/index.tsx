@@ -1,16 +1,12 @@
-/**@jsx jsx*/
 import React from 'react';
 import styled from '@emotion/styled'
-import { css, jsx } from '@emotion/core'
 import MainPage from '../MainPage';
 import ShopPage from '../ShopPage';
 import Page404 from '../Page404';
-import Navbar from '../Navbar'
-import Footer from '../Footer'
-import SubFooter from '../SubFooter'
+import Navbar from '../ReusableComponents/Navbar'
+import Footer from '../ReusableComponents/Footer'
+import SubFooter from '../ReusableComponents/SubFooter'
 import { Route, Router, Switch } from 'react-router-dom';
-import { History } from 'history';
-import { BasketStore } from '../../stores/BasketStore'
 import { observer, inject } from 'mobx-react';
 import HistoryStore from '../../stores/HistoryStore';
 import ProductPage from '../ProductPage';

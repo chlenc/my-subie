@@ -2,15 +2,43 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
+import Select from './Select'
+import { Option } from 'rc-select'
+import ShippingQuote from './ShippingQuote'
 
 interface IProps {
 
 }
 
-export default class Calculator extends React.Component {
-    render () {
+interface IState {
+    country?: string
+}
+
+export default class Calculator extends React.Component<IProps, IState> {
+    state: IState = {}
+
+    handleChangeCountry = (country: string) => this.setState({ country });
+    render() {
+        const { country } = this.state;
         return <Root>
             <Title>SHIP TO</Title>
+            <Select value={country} onChange={this.handleChangeCountry} placeholder="Select your country">
+                <Option value="USA">USA</Option>
+                <Option value="CANADA">CANADA</Option>
+                <Option value="AUSTRALIA">AUSTRALIA</Option>
+                <Option value="NEW ZEALAND">NEW ZEALAND</Option>
+            </Select>
+            <Line />
+            <ShippingQuote country={this.state.country!} />
+
+            <div className="foo">Some text</div>
+            <span className="foo">Some text</span>
+            <div id="bar">Some text</div>
+            <div className="baz">
+                <div>Some</div>
+                <div>text</div>
+            </div>
+            {console.log('bbb'.replace(/b/, 'a'))}
         </Root>
     }
 }
@@ -37,4 +65,11 @@ justify-content: flex-start;
 font-weight: bold;
 font-size: 24px;
 color: #000000;
+`
+const Line = styled.div`
+width: 100%;
+margin-top: 20px;
+margin-bottom: 20px;
+border-bottom: 2px solid #9D998E;
+box-sizing: border-box;
 `

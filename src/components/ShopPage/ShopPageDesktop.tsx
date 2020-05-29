@@ -66,7 +66,6 @@ border-radius: 50%;
 cursor: pointer;
 `
 
-
 function filter(goods: IItem[], selectedTags: string[], selectedModel: string = '', selectedGen: string = '') {
     let filteredGoods: IItem[] = goods
     const N = selectedTags.length

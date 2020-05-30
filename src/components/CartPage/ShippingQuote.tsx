@@ -15,19 +15,26 @@ export default class ShippingQuote extends React.Component<IProps> {
                 <Cost>{`$${cost(this.props.country).cost}`}</Cost>
                 <DeliveryTime>{`Air delivery(${cost(this.props.country).deliveryTime})`}</DeliveryTime>
             </Wrapper>
-
         </Root>
     }
 }
 
 const Root = styled.div`
-display: flex;
+width: 100%;
+margin-top: 20px;
+margin-bottom: 20px;
+padding-top: 17px;
+padding-bottom: 12px;
 flex-direction: column;
+display: flex;
 align-items: flex-start;
+border-top: 2px solid #9D998E;
+border-bottom: 2px solid #9D998E;
 `
 const Wrapper = styled.div`
+margin-top: 3px;
 display: flex;
-
+align-items: center;
 `
 const Title = styled.div`
 display: flex;
@@ -48,6 +55,9 @@ font-style: normal;
 font-weight: normal;
 font-size: 20px;
 line-height: 138.2%;
+@media (max-width: 1279px) {
+    font-size: 14px;
+}
 `
 const cost = (country: string) => {
     let shipQuote: { cost: number, deliveryTime: string } = { cost: 0, deliveryTime: '' }

@@ -28,17 +28,7 @@ export default class Calculator extends React.Component<IProps, IState> {
                 <Option value="AUSTRALIA">AUSTRALIA</Option>
                 <Option value="NEW ZEALAND">NEW ZEALAND</Option>
             </Select>
-            <Line />
             <ShippingQuote country={this.state.country!} />
-
-            <div className="foo">Some text</div>
-            <span className="foo">Some text</span>
-            <div id="bar">Some text</div>
-            <div className="baz">
-                <div>Some</div>
-                <div>text</div>
-            </div>
-            {console.log('bbb'.replace(/b/, 'a'))}
         </Root>
     }
 }

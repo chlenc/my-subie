@@ -2,18 +2,18 @@
 import React from 'react';
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
-import FilterHandler from '../FilterHandler'
+import FilterHandler from '../ShopPage/FilterHandler'
 import { observer, inject } from 'mobx-react';
 import HistoryStore from '../../stores/HistoryStore'
 import { IItem, DataStore } from '../../stores/DataStore';
 import ReactLoaderSpinner from 'react-loader-spinner'
-import ProductImages from '../ProductImages'
-import ItemTags from '../ItemTags'
-import CardProduct from '../CardProduct';
+import ProductImages from './ProductImages'
+import ItemTags from './ItemTags'
+import CardProduct from './CardProduct';
 import Description from './Description'
 import { SelectorsStore } from '../../stores/SelectorsStore';
-import RecommendedProducts from '../RecommendedProducts';
-import MerchProducts from '../MerchProducts';
+import RecommendedProducts from './RecommendedProducts';
+import MerchProducts from './MerchProducts';
 import { animateScroll as scroll } from 'react-scroll'
 import GOHEADERBUTTON from '../../icons/GOHEADERBUTTON.svg'
 

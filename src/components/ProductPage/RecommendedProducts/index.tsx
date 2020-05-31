@@ -1,19 +1,17 @@
-/** @jsx jsx*/
 import React from 'react'
 import styled from '@emotion/styled'
-import { css, jsx } from '@emotion/core'
-import { IItem } from '../../stores/DataStore'
-import Product from '../MainPage/HotGoods/Product'
+import { IItem } from '../../../stores/DataStore'
+import Product from '../../MainPage/HotGoods/Product'
 
 interface IProps {
     items: IItem[]
 }
 
-export default class MerchProducts extends React.Component<IProps, {}> {
-    goods = merchGoods(this.props.items)
+export default class RecommendedProducts extends React.Component<IProps, {}> {
+    goods = randomGoods(this.props.items)
     render() {
         return <Root>
-            <Title>Support us #designedwithlove</Title>
+            <Title>You may also be interested in...</Title>
             <Products>
                 {this.goods.map(item => <Product good={item} />)}
             </Products>
@@ -21,9 +19,9 @@ export default class MerchProducts extends React.Component<IProps, {}> {
     }
 }
 
-function merchGoods(goods: IItem[]) {
+function randomGoods(goods: IItem[]) {
     const hotGoods: IItem[] = []
-    const filterGoods = goods.filter(item => item.model.toUpperCase() === 'MERCH')
+    const filterGoods = goods.filter(item => item.tags.indexOf('#DISCOUNTED' || '#UNDER100') === -1 && item.tags[item.tags.length - 1] !== undefined)
     const N = filterGoods.length
     let rand: number = 0
     while (hotGoods.length < 5) {

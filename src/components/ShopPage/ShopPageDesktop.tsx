@@ -2,12 +2,12 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
-import SortByModel from '../SortByModel'
-import SortByTag from '../SortByTag'
-import SortByMerch from '../SortByMerch'
-import FilteredByTags from '../FilteredByTags'
-import FilteredGoods from '../FilteredGoods'
-import FilterHandler from '../FilterHandler'
+import SortByModel from './SortByModel'
+import SortByTag from './SortByTag'
+import SortByMerch from './SortByMerch'
+import FilteredByTags from './FilteredByTags'
+import FilteredGoods from './FilteredGoods'
+import FilterHandler from './FilterHandler'
 import { IItem, DataStore } from '../../stores/DataStore'
 import { inject, observer } from 'mobx-react'
 import ReactLoaderSpinner from 'react-loader-spinner'
@@ -30,7 +30,8 @@ export default class MainPage extends React.Component<IProps, {}> {
     scrollToTop() { scroll.scrollToTop() }
 
     render() {
-        const goods = Object.entries(this.props.dataStore!.goods).reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), [])
+        const goods = Object.entries(this.props.dataStore!.goods)
+            .reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), [])
 
         let selectedTags: string[] = this.props.selectorsStore!.selectedTags
         let selectedModel: string = this.props.selectorsStore!.selectedModel
@@ -65,16 +66,15 @@ border-radius: 50%;
 cursor: pointer;
 `
 
-
 function filter(goods: IItem[], selectedTags: string[], selectedModel: string = '', selectedGen: string = '') {
     let filteredGoods: IItem[] = goods
     const N = selectedTags.length
     selectedModel = selectedModel.toUpperCase()
     selectedGen = selectedGen.toUpperCase()
 
-    selectedModel == '' && selectedGen == ''
+    selectedModel === '' && selectedGen === ''
         ? filteredGoods = goods
-        : selectedGen == '' && selectedModel != ''
+        : selectedGen === '' && selectedModel !== ''
             ? filteredGoods = goods.filter(item => (item.model.toUpperCase().indexOf(selectedModel) !== -1))
             : filteredGoods = goods.filter(item => (item.model.toUpperCase().indexOf(selectedModel) !== -1)
                 && (item.gen.toUpperCase().indexOf(selectedGen) !== -1))
@@ -83,7 +83,7 @@ function filter(goods: IItem[], selectedTags: string[], selectedModel: string = 
     filteredGoods = filteredGoods.filter(item => {
         let count = 0
         for (let i = 0; i < N; i++) {
-            if (item.tags.indexOf(`#${selectedTags[i]}`) != -1) {
+            if (item.tags.indexOf(`#${selectedTags[i]}`) !== -1) {
                 count += 1
             }
         }

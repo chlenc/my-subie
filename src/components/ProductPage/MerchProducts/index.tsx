@@ -1,9 +1,7 @@
-/** @jsx jsx*/
 import React from 'react'
 import styled from '@emotion/styled'
-import { css, jsx } from '@emotion/core'
-import { IItem } from '../../stores/DataStore'
-import Product from '../MainPage/HotGoods/Product'
+import { IItem } from '../../../stores/DataStore'
+import Product from '../../MainPage/HotGoods/Product'
 
 interface IProps {
     items: IItem[]

@@ -2,20 +2,15 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
-import SortByModel from '../SortByModel'
-import SortByTag from '../SortByTag'
-import SortByMerch from '../SortByMerch'
-import FilteredByTags from '../FilteredByTags'
-import FilteredGoods from '../FilteredGoods'
-import FilterHandler from '../FilterHandler'
+import SortByModel from './SortByModel'
+import FilteredGoods from './FilteredGoods'
+import FilterHandler from './FilterHandler'
 import { IItem, DataStore } from '../../stores/DataStore'
 import { inject, observer } from 'mobx-react'
 import ReactLoaderSpinner from 'react-loader-spinner'
 import { animateScroll as scroll } from 'react-scroll'
-import GOHEADERBUTTON from '../../icons/GOHEADERBUTTON.svg'
 import { SelectorsStore } from '../../stores/SelectorsStore'
-
-import {useWindowDimensions} from '../../utils/dimensions'
+import SortByTagMobile from './SortByTag/SortByTagMobile'
 
 const Loader = () => <div css={css` margin: 17% auto; `}>
     <ReactLoaderSpinner type="TailSpin" color="#00BFFF" height={100} width={100} />
@@ -39,7 +34,12 @@ export default class MainPage extends React.Component<IProps, {}> {
         let selectedGen: string = this.props.selectorsStore!.selectedGen
         return goods && goods.length
             ? <Root>
-                <SortByModel/>
+                <Selectors>
+                    <SortByModel />
+                    <SortByTagMobile />
+                </Selectors>
+                <FilterHandler />
+                <FilteredGoods goods={filter(goods, selectedTags, selectedModel, selectedGen)} />
             </Root>
             : <Loader />
     }
@@ -47,8 +47,6 @@ export default class MainPage extends React.Component<IProps, {}> {
 
 const Root = styled.div`
 width: 92vw;
-height: 44px;
-border: 2px solid red;
 `
 const Selectors = styled.div`
 display: flex;
@@ -61,9 +59,9 @@ function filter(goods: IItem[], selectedTags: string[], selectedModel: string = 
     selectedModel = selectedModel.toUpperCase()
     selectedGen = selectedGen.toUpperCase()
 
-    selectedModel == '' && selectedGen == ''
+    selectedModel === '' && selectedGen === ''
         ? filteredGoods = goods
-        : selectedGen == '' && selectedModel != ''
+        : selectedGen === '' && selectedModel !== ''
             ? filteredGoods = goods.filter(item => (item.model.toUpperCase().indexOf(selectedModel) !== -1))
             : filteredGoods = goods.filter(item => (item.model.toUpperCase().indexOf(selectedModel) !== -1)
                 && (item.gen.toUpperCase().indexOf(selectedGen) !== -1))
@@ -72,7 +70,7 @@ function filter(goods: IItem[], selectedTags: string[], selectedModel: string = 
     filteredGoods = filteredGoods.filter(item => {
         let count = 0
         for (let i = 0; i < N; i++) {
-            if (item.tags.indexOf(`#${selectedTags[i]}`) != -1) {
+            if (item.tags.indexOf(`#${selectedTags[i]}`) !== -1) {
                 count += 1
             }
         }
@@ -81,11 +79,3 @@ function filter(goods: IItem[], selectedTags: string[], selectedModel: string = 
 
     return filteredGoods
 }
-
-// const ShopPage: React.FC<IProps> = inject('dataStore', 'selectorsStore')(observer(
-//     () => {
-//         const {width} = useWindowDimensions();
-//         return
-//     }
-    
-// ))

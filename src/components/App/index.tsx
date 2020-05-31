@@ -1,18 +1,16 @@
-/**@jsx jsx*/
 import React from 'react';
 import styled from '@emotion/styled'
-import { css, jsx } from '@emotion/core'
 import MainPage from '../MainPage';
 import ShopPage from '../ShopPage';
-import Navbar from '../Navbar'
-import Footer from '../Footer'
-import SubFooter from '../SubFooter'
+import Page404 from '../Page404';
+import Navbar from '../ReusableComponents/Navbar'
+import Footer from '../ReusableComponents/Footer'
+import SubFooter from '../ReusableComponents/SubFooter'
 import { Route, Router, Switch } from 'react-router-dom';
-import { History } from 'history';
-import { BasketStore } from '../../stores/BasketStore'
 import { observer, inject } from 'mobx-react';
 import HistoryStore from '../../stores/HistoryStore';
 import ProductPage from '../ProductPage';
+import CartPage from '../CartPage';
 
 interface IProps {
     historyStore?: HistoryStore;
@@ -39,7 +37,8 @@ export default class App extends React.Component<IProps, IState>{
                     <Route exact path="/" component={MainPage} />
                     <Route exact path="/products" component={ShopPage} />
                     <Route exact path="/product/:id" component={ProductPage} />
-                    <Route component={MainPage} />
+                    <Route exact path="/cart" component={CartPage} />
+                    <Route component={Page404} />
                 </Switch>
                 <Footer />
                 <SubFooter />

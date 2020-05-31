@@ -31,7 +31,7 @@ export default class MainPage extends React.Component<IProps, {}> {
 
     render() {
         const goods = Object.entries(this.props.dataStore!.goods)
-        .reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), [])
+            .reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), [])
 
         let selectedTags: string[] = this.props.selectorsStore!.selectedTags
         let selectedModel: string = this.props.selectorsStore!.selectedModel
@@ -53,6 +53,7 @@ export default class MainPage extends React.Component<IProps, {}> {
             : <Loader />
     }
 }
+
 
 const Root = styled.div`
 `

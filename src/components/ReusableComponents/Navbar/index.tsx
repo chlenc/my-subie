@@ -36,8 +36,8 @@ const Navbar: React.FC<IProps> = inject('basketStore')(observer(
         const handleCloseSearch = () => setSearchIsOpen(false)
 
         const { width } = useWindowDimensions();
-        let searchClass: string = 'closeSearchPanel'
-        { (searchIsOpen) ? searchClass = 'openSearchPanel' : searchClass = 'closeSearchPanel' }
+        let searchClass: string = 'closeSearchPanel';
+        searchClass = searchIsOpen ? 'openSearchPanel' : 'closeSearchPanel';
         return <Root>
             <Body >
                 <div css={css`@media (max-width: 767px){margin-left: 0px; margin-top: 15px;}`}>
@@ -62,7 +62,7 @@ const Navbar: React.FC<IProps> = inject('basketStore')(observer(
                 </Layout>}
                 <div css={css`width: 85px; @media(max-width: 1069px){width: 36px;}`}></div>
                 <Search className={searchClass} onClick={handleOpenSearch}>
-                    <img src={SearchIcon} />
+                    <img src={SearchIcon} alt="" />
                     <SearchInput placeholder='Search' />
                 </Search>
             </Body>
@@ -179,11 +179,12 @@ height: 81px;
 background-image: url(${logoMain});
 background-size: cover;
 margin-top: -1.4%;
-/* margin-left: -40px; */
+margin-left: -50px;
 @media (max-width: 1069px) {
     height: 40px;
     width: 81px;
-    /* margin-left: -20px; */
+    margin-left: -20px;
+    margin-left: -20px;
 }
 @media (max-width: 767px){
     width: 118px;
@@ -252,18 +253,20 @@ transition: 0.3s;
 z-index: 4;
 background: #FFFFFF;
 cursor: pointer;
+transition: all 500ms;
 @media(min-width: 1070px){
+    top: 52px;
     width: 85px;
-    height: 28px;
+    height: 32px;
     padding-left: 7px;
     border: 2px solid #000000;
     box-sizing: border-box;
     border-radius: 20px;
 }
 @media (max-width: 1069px){
+    top: 30px;
     width: 36px;
     height: 36px;
-    margin-top: -3px;
     justify-content: center;
     margin-left: 16px;
     background: #FAFAFA;
@@ -276,10 +279,10 @@ cursor: pointer;
     }
 }
 @media (max-width: 767px){
+    top: 28px;
     width: 36px;
     height: 36px;
     margin-left: 0px;
-    /* margin-top:  */
     right: 6vw;
     border: 2px solid #000000;
     box-sizing: border-box;
@@ -297,6 +300,7 @@ line-height: 13px;
 background: #FAFAFA;
 font-size: 17px;
 ::placeholder{
+    border: none;
     font-size: 15px;
     color: #9D998E;
 }
@@ -307,7 +311,7 @@ align-items: center;
 justify-content: center;
 width: 72px;
 height: 40px;
-margin-left: 21px;
+/* margin-left: 21px; */
 margin-top: -5px;
 background-image: url(${cart});
 background-size: cover;

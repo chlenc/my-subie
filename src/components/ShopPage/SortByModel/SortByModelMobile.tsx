@@ -2,9 +2,9 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
-import ARROW from '../../../icons/LEFTARROW_mini.svg'
 import { SelectorsStore } from '../../../stores/SelectorsStore'
 import { inject, observer } from 'mobx-react'
+import CloseButton from './CloseButton'
 
 interface IProps {
     selectorsStore?: SelectorsStore
@@ -58,27 +58,6 @@ box-sizing: border-box;
 border-radius: 10px;
 cursor: pointer;
 `
-const CloseButton = styled.div`
-width: 91.30434783%;
-height: 30px;
-margin-top: 15px;
-margin-bottom: 20px;
-display: flex;
-align-items: center;
-justify-content: center;
-background: #FFAE00;
-border-radius: 29px;
-font-size: 20px;
-line-height: 19px;
-text-align: center;
-cursor: pointer;
-p {
-    margin: 3px 15px 0 15px;
-
-}
-`
-
-
 
 const Layout = styled.div`
 display: flex;
@@ -100,22 +79,16 @@ interface IPropsMenu {
 class Menu extends React.Component<IPropsMenu, {}> {
     render() {
         return <RootMenu>
-            <CloseButton onClick={() => this.props.handleClose()}>
-                <img src={ARROW} />
-                <p>CLOSE MODELS</p>
-                <img src={ARROW} />
-            </CloseButton>
-
-
+            <CloseButton onClose={this.props.handleClose} />
             <Model>
                 <ModelName onClick={() => this.props.selectorsStore!.selectModelAndGen('LEGACY', '')}>
                     {'LEGACY'} <br /> {'& OUTBACK'}
                 </ModelName>
                 <GensList>
-                        <Gen onClick={() => this.props.selectorsStore!.selectModelAndGen('LEGACY', '2GEN (BG/BD/BK) 1993-1999')}>{'2GEN (BK BG BD)'}<br />{'1993-1999'}</Gen>
-                        <Gen onClick={() => this.props.selectorsStore!.selectModelAndGen('LEGACY', '3GEN (BH/BE) 1999-2004')}>{'3GEN (BH BE)'}<br />{'1999-2004'}</Gen>
-                        <Gen onClick={() => this.props.selectorsStore!.selectModelAndGen('LEGACY', '4GEN (BP/BL) 2003-2009')}>{'4GEN (BP BL)'}<br />{'2003-2009'}</Gen>
-                        <Gen onClick={() => this.props.selectorsStore!.selectModelAndGen('LEGACY', 'OTHER LEGACY & OB')} css={css`margin-bottom: 0px;`}>{'OTHER LEGACY & OB'}</Gen>
+                    <Gen onClick={() => this.props.selectorsStore!.selectModelAndGen('LEGACY', '2GEN (BG/BD/BK) 1993-1999')}>{'2GEN (BK BG BD)'}<br />{'1993-1999'}</Gen>
+                    <Gen onClick={() => this.props.selectorsStore!.selectModelAndGen('LEGACY', '3GEN (BH/BE) 1999-2004')}>{'3GEN (BH BE)'}<br />{'1999-2004'}</Gen>
+                    <Gen onClick={() => this.props.selectorsStore!.selectModelAndGen('LEGACY', '4GEN (BP/BL) 2003-2009')}>{'4GEN (BP BL)'}<br />{'2003-2009'}</Gen>
+                    <Gen onClick={() => this.props.selectorsStore!.selectModelAndGen('LEGACY', 'OTHER LEGACY & OB')} css={css`margin-bottom: 0px;`}>{'OTHER LEGACY & OB'}</Gen>
                 </GensList>
 
             </Model>

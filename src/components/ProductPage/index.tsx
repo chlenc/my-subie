@@ -31,9 +31,9 @@ interface IState {
 @observer
 export default class ProductPage extends React.Component<IProps, IState> {
 
-    constructor(props: IProps) {
-        super(props)
-    }
+    // constructor(props: IProps) {
+    //     super(props)
+    // }
     scrollToTop() { scroll.scrollToTop() }
 
     render() {

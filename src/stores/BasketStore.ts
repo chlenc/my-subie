@@ -1,6 +1,5 @@
 import { RootStore } from "./index";
 import { SubStore } from "./SubStore";
-import { database } from "../utils/firebase";
 import { action, observable, autorun } from "mobx";
 
 export interface IBasketItems {
@@ -23,13 +22,13 @@ export class BasketStore extends SubStore {
   @action increaseItem = (id: string, count: number = 1) => {
     this.basketItems.filter((item) => item.id === id).length === 0
       ? this.basketItems.push({ id: id, count: count })
-      : this.basketItems.map((item) => {
+      : this.basketItems.forEach((item) => {
           if (item.id === id) item.count += count;
         });
   };
   @action decreaseItem = (id: string, count: number = 1) => {
     if (this.basketItems.filter((item) => item.id === id).length !== 0) {
-      this.basketItems.map((item) => {
+      this.basketItems.forEach((item) => {
         if (item.id === id) item.count -= count;
         if (item.count <= 0) item.count = 0;
       });

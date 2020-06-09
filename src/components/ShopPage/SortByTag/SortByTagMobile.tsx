@@ -104,9 +104,9 @@ class Menu extends React.Component<IPropsMenu, {}> {
         let selectedTags: string[] = this.props.selectorsStore!.selectedTags
         return <RootMenu>
             <CloseButton onClick={() => this.props.handleClose()}>
-                <img src={ARROW} />
+                <img src={ARROW} alt="" />
                 <p>CLOSE FILTERS</p>
-                <img src={ARROW} />
+                <img src={ARROW} alt="" />
             </CloseButton>
             <div css={css`width: 92vw; display: flex;`}>
                 <Wrapper>

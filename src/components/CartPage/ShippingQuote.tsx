@@ -1,7 +1,6 @@
-/** @jsx jsx*/
 import React from 'react'
 import styled from '@emotion/styled'
-import { css, jsx } from '@emotion/core'
+// import { css, jsx } from '@emotion/core'
 
 interface IProps {
     country: string

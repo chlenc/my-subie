@@ -1,7 +1,6 @@
-/** @jsx jsx*/
 import React from 'react'
 import styled from '@emotion/styled'
-import { css, jsx } from '@emotion/core'
+// import { css, jsx } from '@emotion/core'
 import Select from './Select'
 import { Option } from 'rc-select'
 import ShippingQuote from './ShippingQuote'
@@ -56,10 +55,10 @@ font-weight: bold;
 font-size: 24px;
 color: #000000;
 `
-const Line = styled.div`
-width: 100%;
-margin-top: 20px;
-margin-bottom: 20px;
-border-bottom: 2px solid #9D998E;
-box-sizing: border-box;
-`
+// const Line = styled.div`
+// width: 100%;
+// margin-top: 20px;
+// margin-bottom: 20px;
+// border-bottom: 2px solid #9D998E;
+// box-sizing: border-box;
+// `

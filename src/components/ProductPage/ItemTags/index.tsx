@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled'
-import { IItem } from '../../../stores/DataStore';
 import { RARE, EXTRARARE, HOT, BRANDED, BRANDNEW, NEWARRIVALS, FRONT, INTERIOR, SEDAN, SIDE, WAGON, REAR, DISCOUNTED } from '../../MainPage/HotGoods/icons'
 
 interface IProps {

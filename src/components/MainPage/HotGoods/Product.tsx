@@ -25,7 +25,7 @@ export default class Product extends React.Component<IProps, {}> {
             <Gen>{this.props.good.gen}</Gen>
             <Cost cost={this.props.good.price} lastCost={this.props.good.oldPrice} />
             <AddButton onClick={() => {
-                this.props.basketStore!.increaseItem(this.props.good.id!, 1)
+                this.props.basketStore!.increaseItem(this.props.good.id!, this.props.good.price!)
                 console.log(this.props.good)
             }}>
                 Add to cart

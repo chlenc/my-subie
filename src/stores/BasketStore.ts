@@ -5,6 +5,7 @@ import { action, observable, autorun } from "mobx";
 export interface IBasketItems {
   id: any;
   count: number;
+  cost: number;
 }
 
 export class BasketStore extends SubStore {
@@ -19,9 +20,9 @@ export class BasketStore extends SubStore {
     localStorage.setItem("basket", JSON.stringify(this.basketItems));
   });
 
-  @action increaseItem = (id: string, count: number = 1) => {
+  @action increaseItem = (id: string, cost: number, count: number = 1) => {
     this.basketItems.filter((item) => item.id === id).length === 0
-      ? this.basketItems.push({ id: id, count: count })
+      ? this.basketItems.push({ id: id, cost: cost, count: count })
       : this.basketItems.forEach((item) => {
           if (item.id === id) item.count += count;
         });

@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import Select from './Select'
 import { Option } from 'rc-select'
 import ShippingQuote from './ShippingQuote'
+import FinalInvoice from './FinalInvoice'
 
 interface IProps {
 
@@ -28,13 +29,14 @@ export default class Calculator extends React.Component<IProps, IState> {
                 <Option value="NEW ZEALAND">NEW ZEALAND</Option>
             </Select>
             <ShippingQuote country={this.state.country!} />
+            <FinalInvoice />
         </Root>
     }
 }
 
 const Root = styled.div`
 width: 410px;
-height: 447px;
+max-height: 406px;
 padding: 19px 25px 24px 25px;
 display: flex;
 flex-direction: column;
@@ -55,10 +57,3 @@ font-weight: bold;
 font-size: 24px;
 color: #000000;
 `
-// const Line = styled.div`
-// width: 100%;
-// margin-top: 20px;
-// margin-bottom: 20px;
-// border-bottom: 2px solid #9D998E;
-// box-sizing: border-box;
-// `

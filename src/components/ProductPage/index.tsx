@@ -31,15 +31,12 @@ interface IState {
 @observer
 export default class ProductPage extends React.Component<IProps, IState> {
 
-    // constructor(props: IProps) {
-    //     super(props)
-    // }
     scrollToTop() { scroll.scrollToTop() }
 
     render() {
         const id = this.props.historyStore!.currentPath.replace('product/', '').replace('/', '');
         const goods = Object.entries(this.props.dataStore!.goods)
-            .reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), [])
+            .reduce((acc: IItem[], [key, value]) => [...acc, { ...value, id: key }], [])
         const item = goods.find(item => item.id === id)
         this.state = { item: item ? item : null }
 

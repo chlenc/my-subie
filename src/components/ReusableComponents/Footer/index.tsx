@@ -5,7 +5,7 @@ import FooterMobile from './FooterMobile'
 
 const Footer: React.FC = () => {
     const {width} = useWindowDimensions();
-    return width > 767 ? <FooterDesktop/> : <FooterMobile/>;
+    return width > 768 ? <FooterDesktop/> : <FooterMobile/>;
 };
 
 export default Footer

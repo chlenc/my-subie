@@ -13,7 +13,6 @@ interface IProps {
 @inject('basketStore')
 @observer
 export default class CardProduct extends React.Component<IProps, {}> {
-    item = this.props.item
     render() {
         const item = this.props.item
         return <Root>
@@ -21,10 +20,7 @@ export default class CardProduct extends React.Component<IProps, {}> {
             <Stock>{item.stock ? 'In stock' : 'Nosock'}</Stock>
             <Line />
             <PriceBlock item={item} />
-            <AddButton onClick={() => {
-                console.log(this.props.item.id)
-                this.props.basketStore?.increaseItem(this.props.item.id!, this.props.item.price!)
-            }}>
+            <AddButton onClick={() => this.props.basketStore?.increaseItem(item.id!, item.price!)}>
                 ADD TO CART
             </AddButton>
             <Text>• Worldwide shipping available.</Text>

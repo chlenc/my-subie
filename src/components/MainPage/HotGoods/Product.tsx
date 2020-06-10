@@ -26,7 +26,6 @@ export default class Product extends React.Component<IProps, {}> {
             <Cost cost={this.props.good.price} lastCost={this.props.good.oldPrice} />
             <AddButton onClick={() => {
                 this.props.basketStore!.increaseItem(this.props.good.id!, this.props.good.price!)
-                console.log(this.props.good)
             }}>
                 Add to cart
             </AddButton>
@@ -44,7 +43,7 @@ align-items: center;
 justify-content: center;
 margin-bottom: 40px;
 @media screen and (max-width: 767px){
-    width: 162px;
+    max-width: 162px;
 }
 `
 

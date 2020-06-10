@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-// import { css, jsx } from '@emotion/core'
+import { CountryContext } from './Calculator'
 
 interface IProps {
     country: string
@@ -8,13 +8,20 @@ interface IProps {
 
 export default class ShippingQuote extends React.Component<IProps> {
     render() {
-        return <Root>
-            <Title>SHIPPING QUOTE:</Title>
-            <Wrapper>
-                <Cost>{`$${cost(this.props.country).cost}`}</Cost>
-                <DeliveryTime>{`Air delivery(${cost(this.props.country).deliveryTime})`}</DeliveryTime>
-            </Wrapper>
-        </Root>
+        return <CountryContext.Consumer>
+            {country => <Root>
+                <Title>SHIPPING QUOTE:</Title>
+                {country !== ''
+                    ? <Wrapper>
+                        <Cost>{`$${cost(this.props.country).cost}`}</Cost>
+                        <DeliveryTime>{`Air delivery(${cost(this.props.country).deliveryTime})`}</DeliveryTime>
+                    </Wrapper>
+                    : <Text>
+                        Please select your country
+                </Text>}
+
+            </Root>}
+        </CountryContext.Consumer>
     }
 }
 
@@ -36,6 +43,7 @@ display: flex;
 align-items: center;
 `
 const Title = styled.div`
+margin-bottom: 8px;
 display: flex;
 justify-content: flex-start;
 font-weight: bold;
@@ -58,8 +66,13 @@ line-height: 138.2%;
     font-size: 14px;
 }
 `
+const Text = styled.div`
+font-size: 20px;
+line-height: 138.2%;
+color: #214C73;
+`
 const cost = (country: string) => {
-    let shipQuote: { cost: number, deliveryTime: string } = { cost: 0, deliveryTime: '' }
+    let shipQuote: { cost: number, deliveryTime?: string } = { cost: 0, deliveryTime: '' }
     switch (country) {
         case 'USA': shipQuote = { cost: 150, deliveryTime: '2-3 weeks' }; break;
         case 'CANADA': shipQuote = { cost: 200, deliveryTime: '2-3 weeks' }; break;

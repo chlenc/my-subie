@@ -17,7 +17,6 @@ export default class ItemTags extends React.Component<IProps, {}> {
         if (index > -1) {
             tags.splice(index, 1);
         }
-        console.log(this.props.tags)
         return <Root>
             <Title>ITEM TAGS:</Title>
             <Tags>

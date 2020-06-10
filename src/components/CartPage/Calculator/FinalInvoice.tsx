@@ -1,9 +1,8 @@
-/**jsx*/
 import React from 'react'
 import styled from '@emotion/styled'
-import { css, jsx } from '@emotion/core'
-import { BasketStore, IBasketItems } from '../../stores/BasketStore'
+import { BasketStore, IBasketItems } from '../../../stores/BasketStore'
 import { inject, observer } from 'mobx-react'
+import { CountryContext } from './Calculator'
 
 interface IProps {
     basketStore?: BasketStore
@@ -15,12 +14,14 @@ export default class FinalInvoice extends React.Component<IProps> {
     count = this.props.basketStore!.basketItems.reduce((acc: number, item: IBasketItems) => acc += item.count, 0)
     totalCost = this.props.basketStore!.basketItems.reduce((acc: number, item: IBasketItems) => acc += item.cost * item.count, 0)
     render() {
-        return <Root>
-            <Title>{`TOTAL [${this.count} items]`}</Title>
-            <Cost>{`$${this.totalCost}`}</Cost>
-            <Description>Shipped by domestic post and packed carefully </Description>
-            <NextButton href='/'>NEXT</NextButton>
-        </Root>
+        return <CountryContext.Consumer>
+            {country => <Root>
+                <Title>{`TOTAL [${this.count} items]`}</Title>
+                <Cost>{country !== '' ? `$${this.totalCost}` : 'Please select your country'}</Cost>
+                <Description>Shipped by domestic post and packed carefully </Description>
+                <NextButton href='/'>NEXT</NextButton>
+            </Root>}
+        </CountryContext.Consumer>
     }
 }
 
@@ -48,6 +49,7 @@ line-height: 138.2%;
 color: #214C73;
 `
 const Description = styled.div`
+margin-top: 2px;
 font-weight: bold;
 font-size: 12px;
 line-height: 138.2%;

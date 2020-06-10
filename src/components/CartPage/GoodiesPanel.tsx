@@ -27,14 +27,16 @@ export default class GoodiesPanel extends React.Component<IProps, {}> {
 }
 
 const Root = styled.div`
-width: 504px;
+max-width: 504px;
 margin-right: 111px;
 display: flex;
 flex-direction: column;
 font-family: 'GothamPro-Medium';
 @media(max-width: 1279px){
-    width: 301px;
-    margin-right: 44px;
+    max-width: 301px;
+}
+@media (max-width: 768px){
+    margin-right: 0px;
 }
 `
 const Wrapper = styled.div`

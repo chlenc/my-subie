@@ -4,13 +4,13 @@ import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 import logoMain from '../../../icons/Navbar/logoMain.svg'
 import SearchIcon from '../../../icons/Navbar/SearchIcon.svg'
-import cart from '../../../icons/Navbar/CART.svg'
 import IG from '../../../icons/Footer/IG.svg'
 import FB from '../../../icons/Footer/FB.svg'
-import { BasketStore } from '../../../stores/BasketStore'
+// import { BasketStore } from '../../../stores/BasketStore'
 import { inject, observer } from 'mobx-react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { useWindowDimensions } from '../../../utils/dimensions'
+import Cart from './Cart'
 
 const Layout = styled.div`
 height: 100%;
@@ -22,10 +22,12 @@ height: 100%;
 }
 `
 interface IProps {
-    basketStore?: BasketStore
+    // basketStore?: BasketStore
+    searchValue: string
+    onChangeSearchValue: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 const Navbar: React.FC<IProps> = inject('basketStore')(observer(
-    ({ basketStore }) => {
+    ({ searchValue, onChangeSearchValue }) => {
 
         const [isOpen, setIsOpen] = React.useState(false);
         const [searchIsOpen, setSearchIsOpen] = React.useState(false);
@@ -38,16 +40,15 @@ const Navbar: React.FC<IProps> = inject('basketStore')(observer(
         const { width } = useWindowDimensions();
         let searchClass: string = 'closeSearchPanel';
         searchClass = searchIsOpen ? 'openSearchPanel' : 'closeSearchPanel';
+        // document.getElementById('root')?.onclick(MouseEvent.)
         return <Root>
             <Body >
-                <div css={css`@media (max-width: 767px){margin-left: 0px; margin-top: 15px;}`}>
+                <WrapperOpenMenuButton>
                     <OpenMenuBtn onClick={handleOpenMenu} />
-                </div>
+                </WrapperOpenMenuButton>
                 <Logo href='/' />
                 {(width > 767 || isOpen) && <Layout>
-                    <div css={css`display: none; @media (max-width: 767px){ display: flex; justify-content: flex-end; margin-top: 12px; margin-right: 15.35px;}`}>
-                        <CloseBtn onClick={handleCloseMenu} />
-                    </div>
+                    <CloseBtn onClick={handleCloseMenu} />
                     <Menu onClick={handleCloseSearch}>
                         <Text css={css`@media (max-width: 767px) { border-top: 2px solid #9D998E;}`} href='/products'>PARTS</Text>
                         <Text>SHIPPING</Text>
@@ -60,39 +61,24 @@ const Navbar: React.FC<IProps> = inject('basketStore')(observer(
                         </SocialNetworks>
                     </Menu>
                 </Layout>}
-                <div css={css`width: 85px; @media(max-width: 1069px){width: 36px;}`}></div>
+                <LittleCrutch/>
                 <Search className={searchClass} onClick={handleOpenSearch}>
                     <img src={SearchIcon} alt="" />
-                    <SearchInput placeholder='Search' />
+                    <SearchInput value={searchValue} onChange={onChangeSearchValue} placeholder='Search' />
                 </Search>
             </Body>
-            <Link to='/cart' css={css`text-decoration: none;`}>
-                <Cart>
-                    <Counter>
-                        {basketStore?.basketItems.length}
-                    </Counter>
-                </Cart>
-            </Link>
-            {console.log(searchIsOpen)}
+            <Cart/>
         </Root>
     }))
 
 export default Navbar
 
-const CloseBtn: React.FunctionComponent<{ onClick?: () => void }> = ({ onClick }) =>
-    <div css={css`cursor: pointer;`}>
-        <svg onClick={onClick} width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="33.2341" width="2" height="47" transform="rotate(45 33.2341 0)" fill="white" />
-            <rect x="34.6482" y="33.2354" width="2" height="47" transform="rotate(135 34.6482 33.2354)" fill="white" />
-        </svg>
-    </div>
-
 
 const OpenMenuBtnRoot = styled.svg`
-    @media (min-width: 768px) {
-        display: none;
-    }
-    cursor: pointer;
+@media (min-width: 768px) {
+    display: none;
+}
+cursor: pointer;
 `
 
 const OpenMenuBtn: React.FunctionComponent<{ onClick?: () => void }> = ({ onClick }) =>
@@ -105,6 +91,8 @@ const OpenMenuBtn: React.FunctionComponent<{ onClick?: () => void }> = ({ onClic
         <rect x="9" y="20" width="27" height="2" fill="black" />
         <rect x="1" y="20" width="4" height="2" fill="black" />
     </OpenMenuBtnRoot>
+
+
 
 
 
@@ -170,6 +158,29 @@ align-items: center;
             display: none;
         }
     }
+}
+`
+const CloseBtn: React.FunctionComponent<{ onClick?: () => void }> = ({ onClick }) =>
+    <RootCloseBtn>
+        <svg onClick={onClick} width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="33.2341" width="2" height="47" transform="rotate(45 33.2341 0)" fill="white" />
+            <rect x="34.6482" y="33.2354" width="2" height="47" transform="rotate(135 34.6482 33.2354)" fill="white" />
+        </svg>
+    </RootCloseBtn>
+
+const RootCloseBtn = styled.div`
+display: none; 
+@media (max-width: 767px){
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+    margin-right: 15.35px;
+}`
+
+const WrapperOpenMenuButton = styled.div`
+@media (max-width: 767px){
+    margin-left: 0px;
+    margin-top: 15px;
 }
 `
 
@@ -243,7 +254,12 @@ color: black;
     padding-left: 15px;
 }
 `
-
+const LittleCrutch = styled.div`
+width: 85px;
+@media(max-width: 1069px){
+    width: 36px;
+}
+`
 const Search = styled.div`
 position: absolute;
 right: 0;
@@ -305,29 +321,7 @@ font-size: 17px;
     color: #9D998E;
 }
 `
-const Cart = styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
-width: 72px;
-height: 40px;
-/* margin-left: 21px; */
-margin-top: -5px;
-background-image: url(${cart});
-background-size: cover;
-z-index: 2;
-cursor: pointer;
-@media (max-width: 1069px) {
-    margin-left: 13px;
-    height: 40px;
-    width: 72px;
-}
-@media (max-width: 767px) {
-    margin-top: 5px;
-    margin-left: 0;
-    margin-right: 0;
-}
-`
+
 const SocialNetworks = styled.div`
 width: 100%;
 height: 74px;
@@ -343,16 +337,4 @@ width: 44px;
 height: 44px;
 margin-left: 15px;
 background-size: cover;
-`
-const Counter = styled.div`
-margin-top: -15px;
-padding: 1.5px;
-font-family: 'GothamPro-Medium';
-font-style: normal;
-font-weight: 900;
-font-size: 20px;
-line-height: 17px;
-color: #CF4B4B;
-background-color: white;
-border-radius: 50% 50% 50% 50%;
 `

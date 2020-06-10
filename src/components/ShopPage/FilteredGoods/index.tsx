@@ -41,6 +41,9 @@ const Wrapper = styled.div`
     width: 21%;
     /* margin-left: 30px; */
 }
+@media (max-width: 768px) {
+    max-width: 162px;
+}
 margin-left: 15px;
 margin-right: 15px;
 width: 190px;

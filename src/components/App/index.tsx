@@ -17,6 +17,7 @@ interface IProps {
 }
 
 interface IState {
+    searchValue: string
 }
 
 const Root = styled.div`
@@ -28,14 +29,25 @@ align-items: center;
 @inject('historyStore')
 @observer
 export default class App extends React.Component<IProps, IState>{
+
+    state: IState = { searchValue: '' }
+
+    handleChangeSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ searchValue: e.target.value });
+        this.props.historyStore?.history.push("/products");
+        console.log('')
+    }
+
+
     render() {
+        const { searchValue } = this.state;
         return <Router history={this.props.historyStore!.history}>
             {sessionStorage.setItem('selectedTags', '')}
             <Root>
-                <Navbar/>
+                <Navbar searchValue={searchValue} onChangeSearchValue={this.handleChangeSearchValue} />
                 <Switch >
                     <Route exact path="/" component={MainPage} />
-                    <Route exact path="/products" component={ShopPage} />
+                    <Route exact path="/products" component={() => <ShopPage searchValue={searchValue} />} />
                     <Route exact path="/product/:id" component={ProductPage} />
                     <Route exact path="/cart" component={CartPage} />
                     <Route component={Page404} />

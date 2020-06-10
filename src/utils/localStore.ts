@@ -5,7 +5,6 @@ export const loadState = (): any | undefined => {
         return state || undefined;
 
     } catch (error) {
-        console.log(error);
         return undefined;
     }
 

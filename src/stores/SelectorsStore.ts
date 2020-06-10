@@ -14,7 +14,6 @@ export class SelectorsStore extends SubStore {
   @action addTag = (tag: string) => {
     if (this.selectedTags.indexOf(tag) === -1) {
       this.selectedTags = this.selectedTags.concat(tag);
-      console.log(this.selectedTags.toString())
     }
   };
 

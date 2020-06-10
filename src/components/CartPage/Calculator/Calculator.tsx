@@ -1,42 +1,47 @@
 import React from 'react'
 import styled from '@emotion/styled'
-// import { css, jsx } from '@emotion/core'
-import Select from './Select'
+import Select from '../Select'
 import { Option } from 'rc-select'
 import ShippingQuote from './ShippingQuote'
 import FinalInvoice from './FinalInvoice'
+
+export const CountryContext = React.createContext('')
 
 interface IProps {
 
 }
 
 interface IState {
-    country?: string
+    country: string
 }
 
 export default class Calculator extends React.Component<IProps, IState> {
-    state: IState = {}
+    state: IState = {
+        country: '',
+    }
 
     handleChangeCountry = (country: string) => this.setState({ country });
     render() {
         const { country } = this.state;
         return <Root>
-            <Title>SHIP TO</Title>
-            <Select value={country} onChange={this.handleChangeCountry} placeholder="Select your country">
-                <Option value="USA">USA</Option>
-                <Option value="CANADA">CANADA</Option>
-                <Option value="AUSTRALIA">AUSTRALIA</Option>
-                <Option value="NEW ZEALAND">NEW ZEALAND</Option>
-            </Select>
-            <ShippingQuote country={this.state.country!} />
-            <FinalInvoice />
+            <CountryContext.Provider value={country}>
+                <Title>SHIP TO</Title>
+                <Select value={country} onChange={this.handleChangeCountry} placeholder="Select your country">
+                    <Option value="USA">USA</Option>
+                    <Option value="CANADA">CANADA</Option>
+                    <Option value="AUSTRALIA">AUSTRALIA</Option>
+                    <Option value="NEW ZEALAND">NEW ZEALAND</Option>
+                </Select>
+                <ShippingQuote country={this.state.country!} />
+                <FinalInvoice />
+            </CountryContext.Provider>
         </Root>
     }
 }
 
 const Root = styled.div`
 width: 410px;
-max-height: 406px;
+max-height: 414px;
 padding: 19px 25px 24px 25px;
 display: flex;
 flex-direction: column;

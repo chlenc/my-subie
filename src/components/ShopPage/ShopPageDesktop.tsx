@@ -22,6 +22,7 @@ const Loader = () => <div css={css` margin: 17% auto; `}>
 interface IProps {
     dataStore?: DataStore
     selectorsStore?: SelectorsStore
+    searchValue?: string
 }
 
 @inject('dataStore', 'selectorsStore')

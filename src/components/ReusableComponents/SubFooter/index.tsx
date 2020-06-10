@@ -18,8 +18,9 @@ display: flex;
 justify-content: center;
 align-items: center;
 background: #FAFAFA;
-@media (max-width: 767px){
+@media (max-width: 768px){
     flex-direction: column;
+    /* width: 92vw; */
 }
 `
 const Body = styled.div`

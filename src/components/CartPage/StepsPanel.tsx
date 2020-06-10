@@ -7,10 +7,6 @@ import one from '../../icons/CartPage/one.svg'
 import two from '../../icons/CartPage/two.svg'
 import next from '../../icons/CartPage/next.svg'
 
-interface IProps {
-
-}
-
 export default class StepsPanel extends React.Component {
     render() {
         return <Root>
@@ -25,7 +21,7 @@ export default class StepsPanel extends React.Component {
 }
 
 const Root = styled.div`
-width: 100%;
+width: 100vw;
 background: #FAFAFA;
 display: flex;
 justify-content: center;

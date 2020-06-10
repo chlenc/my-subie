@@ -37,7 +37,6 @@ export default class Description extends React.Component<IProps, {}> {
             <Title>
                 <Icon src={ItemInfo} />
                 ITEM INFO:
-                {console.log(this.props.item.description)}
             </Title>
             <Line />
             <Text>

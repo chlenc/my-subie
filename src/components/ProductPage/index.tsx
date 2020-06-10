@@ -48,7 +48,6 @@ export default class ProductPage extends React.Component<IProps, IState> {
                         <LeftColumn>
                             <ProductImages item={item} />
                             <ItemTags tags={item.tags} />
-                            {console.log(item.tags.toString())}
                         </LeftColumn>
                         <RightColumn>
                             <CardProduct item={item} />

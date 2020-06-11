@@ -42,8 +42,7 @@ margin-top: 10px;
 .tagSelected{
     height: 22px;
     border: 2px solid black;
-    border-start-start-radius: 12.5px;
-    border-end-start-radius: 12.5px;
+    border-radius: 12.5px 0 0 12.5px;
 }
 .tagNotSelected{
     display: none;

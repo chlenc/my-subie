@@ -6,9 +6,7 @@ import logoMain from '../../../icons/Navbar/logoMain.svg'
 import SearchIcon from '../../../icons/Navbar/SearchIcon.svg'
 import IG from '../../../icons/Footer/IG.svg'
 import FB from '../../../icons/Footer/FB.svg'
-// import { BasketStore } from '../../../stores/BasketStore'
 import { inject, observer } from 'mobx-react'
-// import { Link } from 'react-router-dom'
 import { useWindowDimensions } from '../../../utils/dimensions'
 import Cart from './Cart'
 
@@ -22,25 +20,33 @@ height: 100%;
 }
 `
 interface IProps {
-    // basketStore?: BasketStore
     searchValue: string
-    onChangeSearchValue: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onChangeSearchValue: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 const Navbar: React.FC<IProps> = inject('basketStore')(observer(
     ({ searchValue, onChangeSearchValue }) => {
-
         const [isOpen, setIsOpen] = React.useState(false);
         const [searchIsOpen, setSearchIsOpen] = React.useState(false);
-
+        
         const handleOpenMenu = () => setIsOpen(true)
         const handleCloseMenu = () => setIsOpen(false)
         const handleOpenSearch = () => setSearchIsOpen(true)
-        const handleCloseSearch = () => setSearchIsOpen(false)
-
+        const handleCloseSearch = (event: any) => {
+            const path = event.path || event.composedPath();
+            if (!(path.some((element: any) => element.dataset && element.dataset.owner === 'search'))) {
+                setSearchIsOpen(false)
+            }
+        };
+        
+        React.useEffect(() => {
+            document.addEventListener('mousedown', handleCloseSearch)
+            return () => document.removeEventListener('mousedown', handleCloseSearch);
+        })
+        
         const { width } = useWindowDimensions();
         let searchClass: string = 'closeSearchPanel';
         searchClass = searchIsOpen ? 'openSearchPanel' : 'closeSearchPanel';
-        // document.getElementById('root')?.onclick(MouseEvent.)
+
         return <Root>
             <Body >
                 <WrapperOpenMenuButton>
@@ -61,13 +67,13 @@ const Navbar: React.FC<IProps> = inject('basketStore')(observer(
                         </SocialNetworks>
                     </Menu>
                 </Layout>}
-                <LittleCrutch/>
-                <Search className={searchClass} onClick={handleOpenSearch}>
+                <LittleCrutch />
+                <Search className={searchClass} onClick={handleOpenSearch} data-owner='search'>
                     <img src={SearchIcon} alt="" />
-                    <SearchInput value={searchValue} onChange={onChangeSearchValue} placeholder='Search' />
+                    <SearchInput value={searchValue} onInput={onChangeSearchValue} placeholder='Search' />
                 </Search>
             </Body>
-            <Cart/>
+            <Cart />
         </Root>
     }))
 
@@ -195,7 +201,6 @@ margin-left: -50px;
     height: 40px;
     width: 81px;
     margin-left: -20px;
-    margin-left: -20px;
 }
 @media (max-width: 767px){
     width: 118px;
@@ -262,7 +267,6 @@ width: 85px;
 `
 const Search = styled.div`
 position: absolute;
-right: 0;
 display: flex;
 align-items: center;
 transition: 0.3s;
@@ -271,6 +275,7 @@ background: #FFFFFF;
 cursor: pointer;
 transition: all 500ms;
 @media(min-width: 1070px){
+    right: 20px;
     top: 52px;
     width: 85px;
     height: 32px;
@@ -281,6 +286,7 @@ transition: all 500ms;
 }
 @media (max-width: 1069px){
     top: 30px;
+    right: 0px;
     width: 36px;
     height: 36px;
     justify-content: center;
@@ -295,7 +301,7 @@ transition: all 500ms;
     }
 }
 @media (max-width: 767px){
-    top: 28px;
+    top: 25px;
     width: 36px;
     height: 36px;
     margin-left: 0px;

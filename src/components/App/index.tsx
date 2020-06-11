@@ -32,10 +32,9 @@ export default class App extends React.Component<IProps, IState>{
 
     state: IState = { searchValue: '' }
 
-    handleChangeSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ searchValue: e.target.value });
+    handleSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ searchValue: e.target.value});
         this.props.historyStore?.history.push("/products");
-        console.log('')
     }
 
 
@@ -44,7 +43,7 @@ export default class App extends React.Component<IProps, IState>{
         return <Router history={this.props.historyStore!.history}>
             {sessionStorage.setItem('selectedTags', '')}
             <Root>
-                <Navbar searchValue={searchValue} onChangeSearchValue={this.handleChangeSearchValue} />
+                <Navbar searchValue={searchValue} onChangeSearchValue={this.handleSearchValue} />
                 <Switch >
                     <Route exact path="/" component={MainPage} />
                     <Route exact path="/products" component={() => <ShopPage searchValue={searchValue} />} />
@@ -57,5 +56,4 @@ export default class App extends React.Component<IProps, IState>{
             </Root>
         </Router>
     }
-
 };

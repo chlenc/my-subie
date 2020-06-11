@@ -1,10 +1,13 @@
+/** @jsx jsx*/
 import React from 'react'
+import { css, jsx } from '@emotion/core'
 import { useWindowDimensions } from '../../utils/dimensions'
 import ShopPageDesktop from './ShopPageDesktop'
 import ShopPageMobile from './ShopPageMobile'
 import { IItem, DataStore } from '../../stores/DataStore'
 import { inject, observer } from 'mobx-react'
 import { SelectorsStore } from '../../stores/SelectorsStore'
+import ReactLoaderSpinner from 'react-loader-spinner'
 
 interface IProps {
     searchValue?: string
@@ -14,19 +17,25 @@ interface IProps {
 
 const ShopPage: React.FC<IProps> = inject('dataStore', 'selectorsStore')(observer((props) => {
     const { width } = useWindowDimensions();
-    let goods = Object.entries(props.dataStore!.goods)
-        .reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), [])
+    const goods = (Object.entries(props.dataStore!.goods)
+        .reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), []))
     let selectedTags: string[] = props.selectorsStore!.selectedTags
     let selectedModel: string = props.selectorsStore!.selectedModel
     let selectedGen: string = props.selectorsStore!.selectedGen
-    goods = filter(goods, selectedTags, selectedModel, selectedGen, props.searchValue)
+    const filteredGoods = filter(goods, selectedTags, selectedModel, selectedGen, props.searchValue)
+    return goods && goods.length
+        ? width > 1279
+            ? <ShopPageDesktop filteredGoods={filteredGoods} />
+            : <ShopPageMobile filteredGoods={filteredGoods} />
+        : <Loader />
 
-    return width > 1279
-        ? <ShopPageDesktop searchValue={props.searchValue} />
-        : <ShopPageMobile filteredGoods={goods} />
 }))
 
 export default ShopPage
+
+const Loader = () => <div css={css` margin: 17% auto; `}>
+    <ReactLoaderSpinner type="TailSpin" color="#00BFFF" height={100} width={100} />
+</div>
 
 function filter(goods: IItem[], selectedTags: string[], selectedModel: string = '', selectedGen: string = '', searchValue: string = '') {
     let filteredGoods: IItem[] = goods
@@ -55,11 +64,10 @@ function filter(goods: IItem[], selectedTags: string[], selectedModel: string = 
         })
 
     if (searchValue.length)
-        filteredGoods = filteredGoods.filter(item => {
+        filteredGoods = filteredGoods.filter(item =>
             item.description.includes(searchValue)
-                || item.gen.includes(searchValue)
-                || item.model.includes(searchValue)
-        })
+            || item.gen.includes(searchValue)
+            || item.model.includes(searchValue))
 
     return filteredGoods
 }

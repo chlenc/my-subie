@@ -1,7 +1,5 @@
-/**@jsx jsx*/
 import React from 'react';
 import styled from '@emotion/styled'
-import { css, jsx } from '@emotion/core'
 import { IItem } from '../../stores/DataStore';
 import ItemInfo from '../../icons/ItemInfo.svg'
 import Condition from '../../icons/Condition.svg'
@@ -39,7 +37,6 @@ export default class Description extends React.Component<IProps, {}> {
             <Title>
                 <Icon src={ItemInfo} />
                 ITEM INFO:
-                {console.log(this.props.item.description)}
             </Title>
             <Line />
             <Text>

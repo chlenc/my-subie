@@ -2,18 +2,18 @@
 import React from 'react';
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
-import FilterHandler from '../FilterHandler'
+import FilterHandler from '../ShopPage/FilterHandler'
 import { observer, inject } from 'mobx-react';
 import HistoryStore from '../../stores/HistoryStore'
 import { IItem, DataStore } from '../../stores/DataStore';
 import ReactLoaderSpinner from 'react-loader-spinner'
-import ProductImages from '../ProductImages'
-import ItemTags from '../ItemTags'
-import CardProduct from '../CardProduct';
+import ProductImages from './ProductImages'
+import ItemTags from './ItemTags'
+import CardProduct from './CardProduct';
 import Description from './Description'
 import { SelectorsStore } from '../../stores/SelectorsStore';
-import RecommendedProducts from '../RecommendedProducts';
-import MerchProducts from '../MerchProducts';
+import RecommendedProducts from './RecommendedProducts';
+import MerchProducts from './MerchProducts';
 import { animateScroll as scroll } from 'react-scroll'
 import GOHEADERBUTTON from '../../icons/GOHEADERBUTTON.svg'
 
@@ -31,27 +31,21 @@ interface IState {
 @observer
 export default class ProductPage extends React.Component<IProps, IState> {
 
-    constructor(props: IProps) {
-        super(props)
-    }
     scrollToTop() { scroll.scrollToTop() }
-
     render() {
         const id = this.props.historyStore!.currentPath.replace('product/', '').replace('/', '');
         const goods = Object.entries(this.props.dataStore!.goods)
-            .reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), [])
+            .reduce((acc: IItem[], [key, value]) => [...acc, { ...value, id: key }], [])
         const item = goods.find(item => item.id === id)
-        this.state = { item: item ? item : null }
 
-        if (goods && goods.length)
-            if (item !== undefined)
-                return <Background><Root>
+        return goods && goods.length
+            ? item !== undefined
+                ? <Background><Root>
                     <FilterHandler />
                     <Wrapper>
                         <LeftColumn>
-                            <ProductImages item={item} />
+                            <ProductImages attachments={item.attachments || []} item={item} id={id} />
                             <ItemTags tags={item.tags} />
-                            {console.log(item.tags.toString())}
                         </LeftColumn>
                         <RightColumn>
                             <CardProduct item={item} />
@@ -63,14 +57,15 @@ export default class ProductPage extends React.Component<IProps, IState> {
                     <GoTopButton src={GOHEADERBUTTON} onClick={this.scrollToTop} />
                 </Root>
                 </Background>
-            else return <NoProduct />
-        else return <Loader />
+                : <NoProduct />
+            : <Loader />
     }
 }
 
 const Loader = () => <div css={css` margin: 17% auto; `}>
     <ReactLoaderSpinner type="TailSpin" color="#00BFFF" height={100} width={100} />
 </div>
+
 const NoProduct = () => <div>Product does not exists</div>
 
 const Root = styled.div`

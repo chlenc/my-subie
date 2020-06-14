@@ -3,7 +3,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 import { IItem } from '../../stores/DataStore'
-import Product from '../HotGoods/Product'
+import Product from '../MainPage/HotGoods/Product'
 
 interface IProps {
     items: IItem[]
@@ -23,7 +23,7 @@ export default class MerchProducts extends React.Component<IProps, {}> {
 
 function merchGoods(goods: IItem[]) {
     const hotGoods: IItem[] = []
-    const filterGoods = goods.filter(item => item.model.toUpperCase() == 'MERCH')
+    const filterGoods = goods.filter(item => item.model.toUpperCase() === 'MERCH')
     const N = filterGoods.length
     let rand: number = 0
     while (hotGoods.length < 5) {

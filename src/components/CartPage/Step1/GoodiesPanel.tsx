@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { inject, observer } from 'mobx-react'
-import { BasketStore } from '../../stores/BasketStore'
-import { IItem, DataStore } from '../../stores/DataStore'
+import { BasketStore } from '../../../stores/BasketStore'
+import { IItem, DataStore } from '../../../stores/DataStore'
 import ItemCard from './ItemCard'
 
 interface IProps {
@@ -21,7 +21,7 @@ export default class GoodiesPanel extends React.Component<IProps, {}> {
                 <Title>GOODIES</Title>
                 <Title>PRICE</Title>
             </Wrapper>
-            {this.props.items.map((item, key) => <ItemCard key={key} item={item} handleDelete = {this.handleDelete}/>)}
+            {this.props.items.map((item, key) => <ItemCard key={key} item={item} onDelete = {this.handleDelete}/>)}
         </Root>
     }
 }

@@ -17,7 +17,7 @@ export default class FilteredByTags extends React.Component<IProps, {}> {
         return <Root>
             <Wrapper>
                 <p>FILTERED BY #TAGS :</p>
-                {this.props.selectorsStore!.selectedTags.map(tag => <Tag tag={tag} handleDeleteTag={this.props.selectorsStore!.deleteTag} selectedTags={this.props.selectorsStore!.selectedTags} />)}
+                {this.props.selectorsStore!.selectedTags.map((tag, index) => <Tag tag={tag} key={index} handleDeleteTag={this.props.selectorsStore!.deleteTag} selectedTags={this.props.selectorsStore!.selectedTags} />)}
             </Wrapper>
             <DeleteAllTags>
                 <TextClearAll onClick={() => this.props.selectorsStore!.deleteAllTags()}>CLEAR ALL</TextClearAll>

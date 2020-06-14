@@ -10,15 +10,6 @@ import { inject, observer } from 'mobx-react'
 import { useWindowDimensions } from '../../../utils/dimensions'
 import Cart from './Cart'
 
-const Layout = styled.div`
-height: 100%;
-@media (max-width: 767px) {
-    position: fixed;
-    left: 0; top:0; bottom: 0;right: 0;
-    background-color: rgba(0,0,0,.6);
-    z-index:5;
-}
-`
 interface IProps {
     searchValue: string
     onChangeSearchValue: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -27,22 +18,22 @@ const Navbar: React.FC<IProps> = inject('basketStore')(observer(
     ({ searchValue, onChangeSearchValue }) => {
         const [isOpen, setIsOpen] = React.useState(false);
         const [searchIsOpen, setSearchIsOpen] = React.useState(false);
-        
+
         const handleOpenMenu = () => setIsOpen(true)
         const handleCloseMenu = () => setIsOpen(false)
         const handleOpenSearch = () => setSearchIsOpen(true)
         const handleCloseSearch = (event: any) => {
-            const path = event.path || event.composedPath();
-            if (!(path.some((element: any) => element.dataset && element.dataset.owner === 'search'))) {
+            const path = event.path || (event.composedPath && event.composedPath());
+            if (searchIsOpen && !(path.some((element: any) => element.dataset && element.dataset.owner === 'search'))) {
                 setSearchIsOpen(false)
             }
         };
-        
+        { console.log('navbar render', searchIsOpen) }
         React.useEffect(() => {
             document.addEventListener('mousedown', handleCloseSearch)
             return () => document.removeEventListener('mousedown', handleCloseSearch);
         })
-        
+
         const { width } = useWindowDimensions();
         let searchClass: string = 'closeSearchPanel';
         searchClass = searchIsOpen ? 'openSearchPanel' : 'closeSearchPanel';
@@ -57,10 +48,10 @@ const Navbar: React.FC<IProps> = inject('basketStore')(observer(
                     <CloseBtn onClick={handleCloseMenu} />
                     <Menu onClick={handleCloseSearch}>
                         <Text css={css`@media (max-width: 767px) { border-top: 2px solid #9D998E;}`} href='/products'>PARTS</Text>
-                        <Text>SHIPPING</Text>
-                        <Text>JDM GUIDE</Text>
-                        <Text>FEEDBACK</Text>
-                        <Text>CONTACT US</Text>
+                        <Text href='/'>SHIPPING</Text>
+                        <Text href='/'>JDM GUIDE</Text>
+                        <Text href='/'>FEEDBACK</Text>
+                        <Text href='/'>CONTACT US</Text>
                         <SocialNetworks>
                             <NetworkIcon style={{ backgroundImage: `url(${IG})` }} />
                             <NetworkIcon style={{ backgroundImage: `url(${FB})` }} />
@@ -70,7 +61,7 @@ const Navbar: React.FC<IProps> = inject('basketStore')(observer(
                 <LittleCrutch />
                 <Search className={searchClass} onClick={handleOpenSearch} data-owner='search'>
                     <img src={SearchIcon} alt="" />
-                    <SearchInput value={searchValue} onInput={onChangeSearchValue} placeholder='Search' />
+                    <SearchInput value={searchValue} onChange={onChangeSearchValue} type='text' placeholder='Search' />
                 </Search>
             </Body>
             <Cart />
@@ -166,6 +157,7 @@ align-items: center;
     }
 }
 `
+
 const CloseBtn: React.FunctionComponent<{ onClick?: () => void }> = ({ onClick }) =>
     <RootCloseBtn>
         <svg onClick={onClick} width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -187,6 +179,16 @@ const WrapperOpenMenuButton = styled.div`
 @media (max-width: 767px){
     margin-left: 0px;
     margin-top: 15px;
+}
+`
+
+const Layout = styled.div`
+height: 100%;
+@media (max-width: 767px) {
+    position: fixed;
+    left: 0; top:0; bottom: 0;right: 0;
+    background-color: rgba(0,0,0,.6);
+    z-index:5;
 }
 `
 
@@ -259,12 +261,14 @@ color: black;
     padding-left: 15px;
 }
 `
+
 const LittleCrutch = styled.div`
 width: 85px;
 @media(max-width: 1069px){
     width: 36px;
 }
 `
+
 const Search = styled.div`
 position: absolute;
 display: flex;
@@ -311,6 +315,7 @@ transition: all 500ms;
     border-radius: 50%;
 }
 `
+
 const SearchInput = styled.input`
 width: 63.94117647%;
 height: 80%;
@@ -321,6 +326,7 @@ font-size: 14px;
 line-height: 13px;
 background: #FAFAFA;
 font-size: 17px;
+text-overflow:ellipsis;
 ::placeholder{
     border: none;
     font-size: 15px;

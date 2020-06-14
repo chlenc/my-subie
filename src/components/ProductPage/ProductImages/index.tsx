@@ -1,23 +1,28 @@
 import React from 'react';
 import styled from '@emotion/styled'
 import { IItem } from '../../../stores/DataStore';
+import NOPICYET from '../../../icons/HotGoods/NOPICYET.svg'
 
 interface IProps {
+    attachments: string[]
     item: IItem
+    id: string
 }
 interface IState {
-    selectedImage: string
+    selectedImage: number
 }
 
 export default class ProductImages extends React.Component<IProps, IState> {
     state = {
-        selectedImage: this.props.item.attachments![0]
+        selectedImage: this.props.attachments.length > 0 ? 0 : -1
     }
-    imageHandler = (ref: string) => this.setState({ selectedImage: ref })
+    imageHandler = (selectedImage: number) => this.setState({ selectedImage })
     render() {
+        const { selectedImage } = this.state;
+        const { attachments } = this.props;
         return <Root>
-            <SelectedImage src={this.state.selectedImage} />
-            <OtherImages item={this.props.item} imageHandler={this.imageHandler} />
+            <SelectedImage src={attachments[selectedImage] || NOPICYET} />
+            <OtherImages attachments={this.props.attachments || []} imageHandler={this.imageHandler} />
         </Root>
     }
 }
@@ -44,16 +49,18 @@ object-fit: scale-down;
 box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
 `
 interface IOtherProps {
-    item: IItem
-    imageHandler: (ref: string) => void
+    attachments: string[]
+    imageHandler: (selectedImage: number) => void
 }
 
 class OtherImages extends React.Component<IOtherProps> {
     render() {
-        const Refs = this.props.item.attachments!
-        return <OtherRoot>
-            {Refs.map(ref => <MicroImage src={ref} onClick={() => this.props.imageHandler(ref)} />)}
-        </OtherRoot>
+        const { attachments: refs, imageHandler } = this.props;
+        return refs
+            ? <OtherRoot>
+                {refs.map((ref, index) => <MicroImage src={ref} key={index} onClick={() => imageHandler(index)} />)}
+            </OtherRoot>
+            : null
     }
 }
 

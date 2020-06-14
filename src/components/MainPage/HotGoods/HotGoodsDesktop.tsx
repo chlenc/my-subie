@@ -1,39 +1,43 @@
+/**@jsx jsx*/
 import React from 'react'
 import Slider from 'react-slick'
 import styled from '@emotion/styled'
+import { css, jsx } from '@emotion/core'
 import leftArrow from '../../../icons/LEFTARROW.svg'
 import rightArrow from '../../../icons/RIGHTARROW.svg'
 import Product from './Product'
-import { useWindowDimensions } from '../../../utils/dimensions'
 import { IItem } from '../../../stores/DataStore'
 
 interface IProps {
-    goods: IItem[]
+    goods?: IItem[]
 }
 
 
-const HotGoods: React.FC<IProps> = (props) => {
-    const { width } = useWindowDimensions();
-    let amount: number = 5;
-    width > 1279 ? amount = 5 : amount = 3;
-    return <Root>
-        <Body>
-            <Title>Featured parts</Title>
-            <Slider
-                centerMode={false}
-                dots={false}
-                slidesToShow={amount}
-                slidesToScroll={amount}
-                infinite
-                arrows
-            >
-                {props.goods.map(good => <Product good={good} />)}
-            </Slider>
-            <Button>SHOW ME MORE</Button>
-        </Body>
-    </Root>
+export default class HotGoodsDesktop extends React.Component<IProps> {
+    render() {
+        const { goods } = this.props
+        return <Root>
+            <Body>
+                <Title>Featured parts</Title>
+                <Slider
+                    // css
+                    centerMode={false}
+                    dots={false}
+                    slidesToShow={5}
+                    slidesToScroll={10}
+                    infinite
+                    arrows
+                >
+                    {/* {goods && goods.map(good => <Product good={good} />)} */}
+                    {/* {goods && goods.length} */}
+                </Slider>
+                <Button>SHOW ME MORE</Button>
+            </Body>
+        </Root>
+    }
+
+
 }
-export default HotGoods
 
 const Root = styled.div`
 width: 100%;
@@ -42,7 +46,6 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 background: #FAFAFA;
-width: 100%;
 `
 
 const Body = styled.div`
@@ -55,6 +58,17 @@ align-items: center;
 .slick-slider {
     width: 1070px;
     display: flex;
+    /* @media(max-width: 1280px){
+        >div::nth-child(1){
+            display: none;
+        }
+        >div::nth-child(2){
+            display: none;
+        }
+        >div::nth-child(3){
+            display: none;
+        }
+    } */
 }
 .slick-slide {
     display: flex;

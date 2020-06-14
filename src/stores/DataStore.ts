@@ -1,6 +1,6 @@
 import { RootStore } from "./index";
 import { SubStore } from "./SubStore";
-import { database } from "../utils/firebase";
+import { database } from "../../src/utils/firebase";
 import { action, observable } from "mobx";
 
 export interface IItem {
@@ -14,13 +14,15 @@ export interface IItem {
   stock: boolean;
   description: string;
   attachments?: string[];
-  key?: string;
-  id?: string;
+  key: string;
+  id: string;
 }
+
+// const isIItem = (item: Object): item is IItem => 'id' in item && (typeof (item as any).id) === 'string'
 
 export class DataStore extends SubStore {
   @observable goods: { [key: string]: IItem } = {};
-  
+
   constructor(rootStore: RootStore, initState: any) {
     super(rootStore);
     this.syncGoods();
@@ -31,8 +33,15 @@ export class DataStore extends SubStore {
       .ref("goods")
       .once("value")
       .then((snapshot) => {
-        const goods = snapshot.val();
-        this.goods = goods;
-      });
+        try {
+          const goods = snapshot.val();
+          this.goods = goods;
+          console.log(this.goods);
+          
+        } catch (e) {
+          console.error(e);
+        }
+      })
+      .catch((e) => console.error(e));
   };
 }

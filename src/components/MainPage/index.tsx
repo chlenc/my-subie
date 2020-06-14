@@ -9,27 +9,13 @@ import CustomCars from './CustomCars'
 import ReplyForm from './ReplyForm'
 import '../../vars'
 
-const Root = styled.div`
-display: flex;
-width: 100vw;
-flex-direction: column;
-align-items: center;
-`
 
-
-interface IProps {
-}
-
-interface IState {
-}
-
-
-export default class ShopPage extends React.Component<IProps, IState> {
+export default class ShopPage extends React.Component{
   render() {
     return <Root>
       <Title />
       <Menu />
-      <HotGoods />
+      <HotGoods/>
       <Reasons />
       <HowToBuy />
       <CustomCars />
@@ -37,3 +23,11 @@ export default class ShopPage extends React.Component<IProps, IState> {
     </Root>
   }
 };
+
+
+const Root = styled.div`
+display: flex;
+width: 100vw;
+flex-direction: column;
+align-items: center;
+`

@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { CountryContext } from './Calculator'
 
 interface IProps {
     country: string
@@ -8,20 +7,19 @@ interface IProps {
 
 export default class ShippingQuote extends React.Component<IProps> {
     render() {
-        return <CountryContext.Consumer>
-            {country => <Root>
-                <Title>SHIPPING QUOTE:</Title>
-                {country !== ''
-                    ? <Wrapper>
-                        <Cost>{`$${cost(this.props.country).cost}`}</Cost>
-                        <DeliveryTime>{`Air delivery(${cost(this.props.country).deliveryTime})`}</DeliveryTime>
-                    </Wrapper>
-                    : <Text>
-                        Please select your country
+        const { country } = this.props
+        return <Root>
+            <Title>SHIPPING QUOTE:</Title>
+            {country !== ''
+                ? <Wrapper>
+                    <Cost>{`$${cost(this.props.country).cost}`}</Cost>
+                    <DeliveryTime>{`Air delivery(${cost(this.props.country).deliveryTime})`}</DeliveryTime>
+                </Wrapper>
+                : <Text>
+                    Please select your country
                 </Text>}
 
-            </Root>}
-        </CountryContext.Consumer>
+        </Root>
     }
 }
 

@@ -3,13 +3,14 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 import StepsPanel from './StepsPanel'
-import { BasketStore } from '../../stores'
-import { DataStore } from '../../stores'
+import { BasketStore } from '../../../stores'
+import { DataStore } from '../../../stores'
 import { inject, observer } from 'mobx-react'
-import { IItem } from '../../stores/DataStore'
+import { IItem } from '../../../stores/DataStore'
 import GoodiesPanel from './GoodiesPanel'
 import ReactLoaderSpinner from 'react-loader-spinner'
 import Calculator from './Calculator/Calculator'
+import { IBasketItems } from '../../../stores/BasketStore'
 
 interface IProps {
     basketStore?: BasketStore
@@ -20,15 +21,23 @@ interface IProps {
 @observer
 export default class CartPage extends React.Component<IProps, {}> {
     render() {
-        const goods = Object.entries(this.props.dataStore!.goods).reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), [])
 
-        const goodsInCart = goods.filter(item => this.props.basketStore!.basketItems.map(basketItem => basketItem.id).indexOf(item.id) !== -1)
+        const goods = Object.entries(this.props.dataStore!.goods)
+            .reduce((acc: IItem[], [key, value]) => ([...acc, { ...value, id: key }]), [])
+        const goodsInCart: IBasketItems[] = this.props.basketStore?.basketItems!
+        const filteredGoods: IItem[] = goodsInCart.reduce(
+            (acc: IItem[], item: IBasketItems) => {
+                acc.push(goods.find(good => good.id === item.id)!)
+                return acc
+            }
+            , [])
+
         return goods && goods.length
             ? <Root>
                 <StepsPanel />
                 {this.props.basketStore?.basketItems.length
                     ? <Wrapper>
-                        <GoodiesPanel items={goodsInCart} />
+                        <GoodiesPanel items={filteredGoods} />
                         <Calculator />
                     </Wrapper>
                     : <Wrapper>

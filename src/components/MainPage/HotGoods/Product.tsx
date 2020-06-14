@@ -19,13 +19,14 @@ interface IProps {
 @observer
 export default class Product extends React.Component<IProps, {}> {
     render() {
+        const { good } = this.props
         return <Root>
-            <Image good={this.props.good} />
-            <TagsIcon tags={this.props.good.tags} />
-            <Gen>{this.props.good.gen}</Gen>
-            <Cost cost={this.props.good.price} lastCost={this.props.good.oldPrice} />
+            <Image good={good} />
+            <TagsIcon tags={good.tags} />
+            <Gen>{good.gen}</Gen>
+            <Cost cost={good.price} lastCost={good.oldPrice} />
             <AddButton onClick={() => {
-                this.props.basketStore!.increaseItem(this.props.good.id!, this.props.good.price!)
+                this.props.basketStore!.increaseItem(good.id!, good.price!)
             }}>
                 Add to cart
             </AddButton>

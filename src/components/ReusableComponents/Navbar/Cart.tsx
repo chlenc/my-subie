@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
 import { Link } from 'react-router-dom'
 import cart from '../../../icons/Navbar/CART.svg'
-import { BasketStore, IBasketItems } from '../../../stores/BasketStore'
+import { BasketStore } from '../../../stores/BasketStore'
 import { inject, observer } from 'mobx-react'
 
 interface IProps {
@@ -15,10 +15,9 @@ interface IProps {
 @observer
 export default class Cart extends React.Component<IProps> {
     render() {
-        const count = this.props.basketStore?.basketItems
-            .reduce((acc: number, item: IBasketItems) => acc += item.count, 0)
+        const count = this.props.basketStore?.basketItems.length
         return <Root>
-            <Link to='/cart' css={css`text-decoration: none;`}>
+            <Link to='/step1' css={css`text-decoration: none;`}>
                 <Wrapper>
                     <Counter>
                         {count}

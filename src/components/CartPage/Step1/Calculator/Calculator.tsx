@@ -5,36 +5,31 @@ import { Option } from 'rc-select'
 import ShippingQuote from './ShippingQuote'
 import FinalInvoice from './FinalInvoice'
 
-export const CountryContext = React.createContext('')
 
 interface IProps {
 
 }
 
 interface IState {
-    country: string
+    country?: string
 }
 
 export default class Calculator extends React.Component<IProps, IState> {
-    state: IState = {
-        country: '',
-    }
+    state: IState = { country: '' }
 
     handleChangeCountry = (country: string) => this.setState({ country });
     render() {
         const { country } = this.state;
         return <Root>
-            <CountryContext.Provider value={country}>
-                <Title>SHIP TO</Title>
-                <Select value={country} onChange={this.handleChangeCountry} placeholder="Select your country">
-                    <Option value="USA">USA</Option>
-                    <Option value="CANADA">CANADA</Option>
-                    <Option value="AUSTRALIA">AUSTRALIA</Option>
-                    <Option value="NEW ZEALAND">NEW ZEALAND</Option>
-                </Select>
-                <ShippingQuote country={this.state.country!} />
-                <FinalInvoice />
-            </CountryContext.Provider>
+            <Title>SHIP TO</Title>
+            <Select value={country} onChange={this.handleChangeCountry} placeholder="Select your country">
+                <Option value="USA">USA</Option>
+                <Option value="CANADA">CANADA</Option>
+                <Option value="AUSTRALIA">AUSTRALIA</Option>
+                <Option value="NEW ZEALAND">NEW ZEALAND</Option>
+            </Select>
+            <ShippingQuote country={country!} />
+            <FinalInvoice country={country!} />
         </Root>
     }
 }

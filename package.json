@@ -34,7 +34,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "git add . && git commit -m 'deploy' && git push heroku master",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

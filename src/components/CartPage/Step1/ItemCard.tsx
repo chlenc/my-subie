@@ -2,23 +2,23 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
-import NOPICYET from '../../icons/HotGoods/NOPICYET.svg'
-import HistoryStore from '../../stores/HistoryStore'
-import { IItem } from '../../stores/DataStore'
+import NOPICYET from '../../../icons/HotGoods/NOPICYET.svg'
+import HistoryStore from '../../../stores/HistoryStore'
+import { IItem } from '../../../stores/DataStore'
 import { Link } from 'react-router-dom'
-import DELETE from '../../icons/CartPage/DELETE.svg'
+import DELETE from '../../../icons/CartPage/DELETE.svg'
 
 interface IItemProps {
     item: IItem
-    handleDelete: (id: string) => void
+    onDelete?: (id: string) => void
 }
 
-const ItemCard: React.FC<IItemProps> = props => {
+const ItemCard: React.FC<IItemProps> = ({ item, onDelete }) => {
     return <Root>
-        <Image good={props.item} />
-        <Text>{props.item.title}</Text>
-        <Cost cost={props.item.price} lastCost={props.item.oldPrice} />
-        <DeleteIcon src={DELETE} onClick={() => props.handleDelete(props.item.id!)} />
+        <Image good={item} />
+        <Text>{item.title}</Text>
+        <Cost cost={item.price} lastCost={item.oldPrice} />
+        {onDelete && <DeleteIcon src={DELETE} onClick={() => onDelete!(item.id!)} />}
     </Root>
 }
 
@@ -83,7 +83,7 @@ const imageStyle = css`
 background-size: contain;
 background-repeat: no-repeat;
 background-position: center;
-`;
+`
 
 interface ICostProps {
     cost: number

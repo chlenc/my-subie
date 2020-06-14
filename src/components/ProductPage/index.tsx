@@ -32,21 +32,19 @@ interface IState {
 export default class ProductPage extends React.Component<IProps, IState> {
 
     scrollToTop() { scroll.scrollToTop() }
-
     render() {
         const id = this.props.historyStore!.currentPath.replace('product/', '').replace('/', '');
         const goods = Object.entries(this.props.dataStore!.goods)
             .reduce((acc: IItem[], [key, value]) => [...acc, { ...value, id: key }], [])
         const item = goods.find(item => item.id === id)
-        this.state = { item: item ? item : null }
 
-        if (goods && goods.length)
-            if (item !== undefined)
-                return <Background><Root>
+        return goods && goods.length
+            ? item !== undefined
+                ? <Background><Root>
                     <FilterHandler />
                     <Wrapper>
                         <LeftColumn>
-                            <ProductImages item={item} />
+                            <ProductImages attachments={item.attachments || []} item={item} id={id} />
                             <ItemTags tags={item.tags} />
                         </LeftColumn>
                         <RightColumn>
@@ -59,14 +57,15 @@ export default class ProductPage extends React.Component<IProps, IState> {
                     <GoTopButton src={GOHEADERBUTTON} onClick={this.scrollToTop} />
                 </Root>
                 </Background>
-            else return <NoProduct />
-        else return <Loader />
+                : <NoProduct />
+            : <Loader />
     }
 }
 
 const Loader = () => <div css={css` margin: 17% auto; `}>
     <ReactLoaderSpinner type="TailSpin" color="#00BFFF" height={100} width={100} />
 </div>
+
 const NoProduct = () => <div>Product does not exists</div>
 
 const Root = styled.div`

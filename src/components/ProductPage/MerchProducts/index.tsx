@@ -36,6 +36,9 @@ margin-top: 47px;
 display: flex;
 flex-direction: column;
 transition: all 500ms;
+@media (max-width: 520px){
+    display: none;
+}
 `
 const Title = styled.div`
 margin-bottom: 27px;
@@ -49,7 +52,7 @@ const Products = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-@media (max-width: 1074px){
+@media (max-width: 1070px){
 > div:nth-child(1) {
  display: none;
 }

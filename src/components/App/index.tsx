@@ -10,7 +10,8 @@ import { Route, Router, Switch } from 'react-router-dom';
 import { observer, inject } from 'mobx-react';
 import HistoryStore from '../../stores/HistoryStore';
 import ProductPage from '../ProductPage';
-import CartPage from '../CartPage';
+import CartPage from '../CartPage/Step1';
+import OrderDetails from '../CartPage/Step2';
 
 interface IProps {
     historyStore?: HistoryStore;
@@ -48,7 +49,8 @@ export default class App extends React.Component<IProps, IState>{
                     <Route exact path="/" component={MainPage} />
                     <Route exact path="/products" component={() => <ShopPage searchValue={searchValue} />} />
                     <Route exact path="/product/:id" component={ProductPage} />
-                    <Route exact path="/cart" component={CartPage} />
+                    <Route exact path="/step1" component={CartPage} />
+                    <Route exact path="/step2" component={OrderDetails} />
                     <Route component={Page404} />
                 </Switch>
                 <Footer />

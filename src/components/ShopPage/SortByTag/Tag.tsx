@@ -11,6 +11,7 @@ interface ITagProps {
     selectedTags: string[]
 }
 
+
 export default class Tag extends React.Component<ITagProps, {}> {
     render() {
         let classNameTagRoot: string = '';

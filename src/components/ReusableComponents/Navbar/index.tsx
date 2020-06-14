@@ -28,7 +28,6 @@ const Navbar: React.FC<IProps> = inject('basketStore')(observer(
                 setSearchIsOpen(false)
             }
         };
-        { console.log('navbar render', searchIsOpen) }
         React.useEffect(() => {
             document.addEventListener('mousedown', handleCloseSearch)
             return () => document.removeEventListener('mousedown', handleCloseSearch);

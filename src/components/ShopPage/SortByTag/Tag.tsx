@@ -17,9 +17,7 @@ export default class Tag extends React.Component<ITagProps, {}> {
         let classNameDltBtn: string = '';
         if (this.props.selectedTags.indexOf(this.props.tag) !== -1) {
             classNameTagRoot += 'tagSelected'
-            // classNameDltBtn = classNameDltBtn
         } else {
-            // classNameTagRoot = classNameTagRoot
             classNameDltBtn += 'tagNotSelected'
         }
 

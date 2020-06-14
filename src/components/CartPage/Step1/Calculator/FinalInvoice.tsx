@@ -19,7 +19,6 @@ export default class FinalInvoice extends React.Component<IProps> {
             <Cost>{this.props.country !== '' ? `$${this.totalCost + shippingCost(this.props.country)}` : 'Please select your country'}</Cost>
             <Description>Shipped by domestic post and packed carefully </Description>
             <NextButton href='/step2'>NEXT</NextButton>
-            {console.log('country', this.totalCost)}
         </Root>
     }
 }

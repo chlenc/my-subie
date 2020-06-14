@@ -18,8 +18,6 @@ interface IProps {
     filteredGoods: IItem[]
 }
 
-// @inject('dataStore')
-// @observer
 export default class MainPage extends React.Component<IProps, {}> {
     scrollToTop() { scroll.scrollToTop() }
 
@@ -39,7 +37,6 @@ export default class MainPage extends React.Component<IProps, {}> {
             </div>
             <GoTopButton src={GOHEADERBUTTON} onClick={this.scrollToTop} />
         </Root>
-            // : <Loader />
     }
 }
 

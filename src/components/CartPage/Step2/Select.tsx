@@ -70,13 +70,3 @@ export default class Select extends React.Component<IProps, IState> {
         );
     }
 }
-
-// const Placeholder = styled.div`
-// margin-top: 3.5px;
-// font-family: 'GothamPro-Medium';
-// font-weight: normal;
-// font-size: 14px;
-// line-height: 138.2%;
-// color: #9D998E;
-// `
-

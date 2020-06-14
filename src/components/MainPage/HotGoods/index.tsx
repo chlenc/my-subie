@@ -1,8 +1,5 @@
-/**@jsx jsx*/
 import React from 'react'
 import styled from '@emotion/styled'
-import { css, jsx } from '@emotion/core'
-// import HotGoodsDesktop from './HotGoodsDesktop'
 import { inject, observer } from 'mobx-react'
 import { IItem, DataStore } from '../../../stores/DataStore'
 import Loader from 'react-loader-spinner'
@@ -31,7 +28,6 @@ export default class HotGoods extends React.Component<IProps> {
                             {hotGoods.map(good => <Product good={good} />)}
                         </Wrapper>
                         : <Slider
-                            // css
                             centerMode={false}
                             dots={false}
                             slidesToShow={screenWidth < 1280 && screenWidth > 768 ? 3 : 5}

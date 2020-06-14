@@ -8,18 +8,14 @@ import { animateScroll as scroll } from 'react-scroll'
 import SortByTagMobile from './SortByTag/SortByTagMobile'
 
 interface IProps {
-    // dataStore?: DataStore
     filteredGoods: IItem[]
 }
 
-// @inject('dataStore')
-// @observer
 export default class MainPage extends React.Component<IProps> {
     scrollToTop() { scroll.scrollToTop() }
 
     render() {
         const filteredGoods = this.props.filteredGoods
-        // const goods = this.props.dataStore!.goods
         return <Root>
             <Selectors>
                 <SortByModel />
@@ -28,7 +24,6 @@ export default class MainPage extends React.Component<IProps> {
             <FilterHandler />
             <FilteredGoods goods={filteredGoods} />
         </Root>
-        // : <Loader />
     }
 }
 

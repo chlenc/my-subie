@@ -36,8 +36,6 @@ export class DataStore extends SubStore {
         try {
           const goods = snapshot.val();
           this.goods = goods;
-          console.log(this.goods);
-          
         } catch (e) {
           console.error(e);
         }

@@ -11,12 +11,12 @@ interface IProps {
 @inject('basketStore')
 @observer
 export default class FinalInvoice extends React.Component<IProps> {
-    count = this.props.basketStore!.basketItems.length
-    totalCost = this.props.basketStore!.basketItems.reduce((acc: number, item: IBasketItems) => acc += item.cost, 0)
     render() {
+        const count = this.props.basketStore!.basketItems.length
+        const totalCost = this.props.basketStore!.basketItems.reduce((acc: number, item: IBasketItems) => acc += item.cost, 0)
         return <Root>
-            <Title>{`TOTAL [${this.count} items]`}</Title>
-            <Cost>{this.props.country !== '' ? `$${this.totalCost + shippingCost(this.props.country)}` : 'Please select your country'}</Cost>
+            <Title>{`TOTAL [${count} items]`}</Title>
+            <Cost>{this.props.country !== '' ? `$${totalCost + shippingCost(this.props.country)}` : 'Please select your country'}</Cost>
             <Description>Shipped by domestic post and packed carefully </Description>
             <NextButton href='/step2'>NEXT</NextButton>
         </Root>

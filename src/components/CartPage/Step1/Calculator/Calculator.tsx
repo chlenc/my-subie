@@ -4,21 +4,25 @@ import Select from '../Select'
 import { Option } from 'rc-select'
 import ShippingQuote from './ShippingQuote'
 import FinalInvoice from './FinalInvoice'
-
+import {inject, observer} from 'mobx-react'
+import {BasketStore} from '../../../../stores/BasketStore'
 
 interface IProps {
-
+    basketStore?: BasketStore
 }
 
 interface IState {
     country?: string
 }
 
+@inject('basketStore')
+@observer
 export default class Calculator extends React.Component<IProps, IState> {
     state: IState = { country: '' }
 
     handleChangeCountry = (country: string) => this.setState({ country });
     render() {
+        {console.log('render')}
         const { country } = this.state;
         return <Root>
             <Title>SHIP TO</Title>
